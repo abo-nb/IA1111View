@@ -10,106 +10,198 @@
 --bg:#131315;--card:#1b1b1f;--card2:#232329;--line:#2d2d34;
 --tx:#e9e9ec;--mut:#9b9ba4;
 --blue:#85B7EB;--teal:#5DCAA5;--amber:#FAC775;--red:#F09595;--purple:#AFA9EC;
+
+/* 字級基準：整體放大約 22%，以豎屏可讀性為準 */
+--fs:17px;--fs-sm:14.5px;--fs-h4:16px;--fs-h3:18.5px;--fs-h2:25px;
+--lh:1.85;--radius:14px;
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;line-height:1.8;font-size:14px;-webkit-font-smoothing:antialiased}
-.wrap{max-width:960px;margin:0 auto;padding:0 24px 100px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;line-height:var(--lh);font-size:var(--fs);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.wrap{max-width:920px;margin:0 auto;padding:0 clamp(18px,4vw,28px) 96px}
 
-.nav{position:sticky;top:0;z-index:20;background:#131315;border-bottom:1px solid var(--line)}
-.nav-in{max-width:960px;margin:0 auto;display:flex;gap:22px;align-items:center;height:50px;padding:0 24px;overflow-x:auto}
-.nav a{color:var(--mut);font-size:13px;text-decoration:none;white-space:nowrap;padding:4px 0;border-bottom:1px solid transparent}
-.nav a:hover{color:var(--tx);border-bottom-color:var(--teal)}
+.nav{position:sticky;top:0;z-index:20;background:rgba(19,19,21,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:920px;margin:0 auto;display:flex;gap:24px;align-items:center;min-height:56px;padding:0 clamp(18px,4vw,28px);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav a{color:var(--mut);font-size:var(--fs-sm);text-decoration:none;white-space:nowrap;padding:8px 0;border-bottom:1px solid transparent}
+.nav a:hover,.nav a:active{color:var(--tx);border-bottom-color:var(--teal)}
 
-section{scroll-margin-top:64px}
+section{scroll-margin-top:76px}
 
-.hero{padding:56px 0 32px;border-bottom:1px solid var(--line);margin-bottom:8px}
-.hero h1{font-size:28px;font-weight:500;letter-spacing:.5px}
-.hero p{color:var(--mut);font-size:13px;margin-top:10px;max-width:680px}
-.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
-.tag{font-size:12px;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+.hero{padding:54px 0 32px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.hero h1{font-size:clamp(27px,4.4vw,38px);font-weight:500;letter-spacing:.5px;line-height:1.35}
+.hero p{color:var(--mut);font-size:var(--fs-sm);margin-top:12px;max-width:680px;line-height:1.75}
+.hero .meta{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:var(--fs-sm);color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:5px 14px;line-height:1.6}
 
-.chap{display:flex;align-items:baseline;gap:14px;margin:64px 0 22px;padding-bottom:14px;border-bottom:1px solid var(--line)}
-.chap .no{font-size:12px;letter-spacing:2px;color:var(--teal);font-weight:500}
-.chap h2{font-size:21px;font-weight:500}
-.chap .sub{font-size:12px;color:var(--mut);margin-left:auto;text-align:right}
+.chap{display:flex;align-items:baseline;gap:14px;margin:62px 0 24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.chap .no{font-size:var(--fs-sm);letter-spacing:2px;color:var(--teal);font-weight:500}
+.chap h2{font-size:var(--fs-h2);font-weight:500;line-height:1.4}
+.chap .sub{font-size:var(--fs-sm);color:var(--mut);margin-left:auto;text-align:right;line-height:1.6;max-width:52%}
 
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:16px}
-.card h3{font-size:15px;font-weight:500;color:var(--blue);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.card h3::before{content:"";width:3px;height:14px;background:var(--blue);border-radius:2px;display:inline-block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;margin-bottom:18px}
+.card h3{font-size:var(--fs-h3);font-weight:500;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:10px;line-height:1.5}
+.card h3::before{content:"";width:4px;height:19px;background:var(--blue);border-radius:2px;display:inline-block;flex:0 0 auto}
 .card h3.t::before{background:var(--teal)}
 .card h3.t{color:var(--teal)}
 .card h3.a::before{background:var(--amber)}
 .card h3.a{color:var(--amber)}
 .card h3.p::before{background:var(--purple)}
 .card h3.p{color:var(--purple)}
-.card h4{font-size:13px;font-weight:500;color:#cfcfd6;margin:18px 0 8px}
+.card h4{font-size:var(--fs-h4);font-weight:500;color:#cfcfd6;margin:22px 0 10px;line-height:1.6}
 .card h4:first-of-type{margin-top:0}
 
-p{color:#dcdce2;margin-bottom:10px}
+p{color:#dcdce2;margin-bottom:12px}
 p:last-child{margin-bottom:0}
 
-table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
-th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-thead th{font-size:12px;color:var(--mut);font-weight:500;border-bottom:1px solid #3a3a42}
+table{width:100%;border-collapse:collapse;font-size:16px;margin:8px 0}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7}
+thead th{font-size:var(--fs-sm);color:var(--mut);font-weight:500;border-bottom:1px solid #3a3a42}
 tbody tr:last-child td{border-bottom:none}
 td.k{color:var(--teal);white-space:nowrap;font-weight:500}
 td.n{color:var(--amber);white-space:nowrap;font-weight:500}
-.small{font-size:12px;color:var(--mut)}
+.small{font-size:var(--fs-sm);color:var(--mut);line-height:1.7}
 
-.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;margin:10px 0}
-.flow span{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:6px 12px}
-.flow i{color:var(--mut);font-style:normal;font-size:12px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:16px;margin:12px 0}
+.flow span{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 14px;line-height:1.5}
+.flow i{color:var(--mut);font-style:normal;font-size:15px}
 
-.tip{border-left:3px solid var(--amber);background:rgba(250,199,117,.07);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;margin-top:14px;color:#dcdce2}
+.tip{border-left:3px solid var(--amber);background:rgba(250,199,117,.07);border-radius:0 8px 8px 0;padding:14px 18px;font-size:16px;margin-top:16px;color:#dcdce2;line-height:1.8}
 .tip b{color:var(--amber);font-weight:500}
-.warn{border-left:3px solid var(--red);background:rgba(240,149,149,.07);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;margin-top:14px;color:#dcdce2}
+.warn{border-left:3px solid var(--red);background:rgba(240,149,149,.07);border-radius:0 8px 8px 0;padding:14px 18px;font-size:16px;margin-top:16px;color:#dcdce2;line-height:1.8}
 .warn b{color:var(--red);font-weight:500}
-.note{border-left:3px solid var(--purple);background:rgba(175,169,236,.07);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;margin-top:14px;color:#dcdce2}
+.note{border-left:3px solid var(--purple);background:rgba(175,169,236,.07);border-radius:0 8px 8px 0;padding:14px 18px;font-size:16px;margin-top:16px;color:#dcdce2;line-height:1.8}
 .note b{color:var(--purple);font-weight:500}
 
-.mx{font-size:12px}
-.mx th{padding:8px 5px;text-align:center;border:1px solid var(--line);font-weight:500}
-.mx td{padding:9px 5px;text-align:center;border:1px solid var(--line);color:#c9c9d0;line-height:1.45}
+.mx{font-size:14.5px}
+.mx th{padding:10px 6px;text-align:center;border:1px solid var(--line);font-weight:500;font-size:14px}
+.mx td{padding:11px 7px;text-align:center;border:1px solid var(--line);color:#c9c9d0;line-height:1.5}
 .mx thead th{background:#26262d;color:var(--teal)}
 .mx tbody th{background:#1f1f25;color:var(--blue);white-space:nowrap}
 .mx td:hover{background:#26262d}
 
 .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.rolecol{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px}
-.rolecol .rh{font-size:12px;letter-spacing:1px;margin-bottom:10px;font-weight:500}
+.rolecol{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:16px}
+.rolecol .rh{font-size:13.5px;letter-spacing:1px;margin-bottom:10px;font-weight:500}
 .rolecol.b .rh{color:var(--blue)}
 .rolecol.t .rh{color:var(--teal)}
 .rolecol.a .rh{color:var(--amber)}
-.rolecol .ri{font-size:13px;padding:6px 0;border-bottom:1px dashed #33333b;color:#dcdce2}
+.rolecol .ri{font-size:16px;padding:8px 0;border-bottom:1px dashed #33333b;color:#dcdce2;line-height:1.6}
 .rolecol .ri:last-child{border-bottom:none}
-.rolecol .ri em{font-style:normal;color:var(--mut);font-size:11px;display:block}
+.rolecol .ri em{font-style:normal;color:var(--mut);font-size:12.5px;display:block}
 
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
-.box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-.box .bt{font-size:12px;letter-spacing:1px;color:var(--mut);margin-bottom:8px}
-.box .bv{font-size:13px;color:#dcdce2;line-height:1.7}
+.box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.box .bt{font-size:13.5px;letter-spacing:1px;color:var(--mut);margin-bottom:8px}
+.box .bv{font-size:16px;color:#dcdce2;line-height:1.75}
 
-.quote{border-left:2px solid #4a4a55;padding:2px 0 2px 16px;color:#b9b9c2;font-size:13px;margin:10px 0}
-.quote em{font-style:normal;color:var(--mut);font-size:12px;display:block;margin-top:4px}
+.quote{border-left:2px solid #4a4a55;padding:2px 0 2px 18px;color:#b9b9c2;font-size:16px;margin:12px 0;line-height:1.8}
+.quote em{font-style:normal;color:var(--mut);font-size:13.5px;display:block;margin-top:6px}
 
-ol,ul{padding-left:20px;color:#dcdce2}
-li{margin-bottom:6px}
+ol,ul{padding-left:24px;color:#dcdce2}
+li{margin-bottom:8px}
 
-.svgbox{max-width:680px;margin:8px auto 0}
+.svgbox{max-width:680px;margin:10px auto 0;display:block;height:auto}
 
-.final{background:#1d1d22;border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:16px}
-.final h3{font-size:15px;font-weight:500;color:var(--amber);margin-bottom:14px}
+.final{background:#1d1d22;border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin-top:18px}
+.final h3{font-size:var(--fs-h3);font-weight:500;color:var(--amber);margin-bottom:16px;line-height:1.5}
 
-@media (max-width:720px){
-.wrap{padding:0 16px 64px}
-.nav-in{padding:0 16px;gap:16px}
+/* 寬表格／圖表的橫向捲動容器（由頁尾腳本自動加上） */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0;padding-bottom:2px;scrollbar-width:thin;scrollbar-color:#3a3a42 transparent}
+.tw table{margin:0}
+.tw::-webkit-scrollbar{height:6px}
+.tw::-webkit-scrollbar-thumb{background:#3a3a42;border-radius:3px}
+.svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 0;padding-bottom:2px;scrollbar-width:thin;scrollbar-color:#3a3a42 transparent}
+.svgwrap svg{max-width:100%}
+.svgwrap::-webkit-scrollbar{height:6px}
+.svgwrap::-webkit-scrollbar-thumb{background:#3a3a42;border-radius:3px}
+
+/* 內文舉例 */
+.eg{border-left:2px solid #4a6a8a;background:rgba(133,183,235,.055);border-radius:0 8px 8px 0;padding:13px 16px;font-size:15.5px;color:#c9c9d2;margin-top:14px;line-height:1.8}
+.eg .lb{color:var(--blue);font-weight:500;margin-right:8px;letter-spacing:1px;font-size:13.5px}
+.eg b{color:var(--blue);font-weight:500}
+
+/* 快速重點小卡 */
+.qk{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:12px;margin:4px 0 18px}
+.qkc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.qkc .qt{font-size:12.5px;letter-spacing:1.2px;color:var(--teal);margin-bottom:8px;font-weight:500;line-height:1.5}
+.qkc .qb{font-size:15.5px;color:#dcdce2;line-height:1.72}
+.qkc .qb b{color:var(--amber);font-weight:500}
+.qkc.c2 .qt{color:var(--blue)}
+.qkc.c3 .qt{color:var(--purple)}
+.qkc.c4 .qt{color:var(--amber)}
+.qkrow{display:flex;align-items:baseline;gap:12px;margin:26px 0 12px}
+.qkrow .qn{font-size:13px;letter-spacing:2px;color:var(--mut)}
+.qkrow .qn b{color:var(--teal);font-weight:500}
+.qkrow .qd{font-size:14px;color:var(--mut);line-height:1.6}
+
+/* ============ 平板／窄桌面 ============ */
+@media (max-width:900px){
 .roles{grid-template-columns:1fr}
 .grid2{grid-template-columns:1fr}
-.chap{flex-wrap:wrap}
-.chap .sub{margin-left:0;width:100%;text-align:left}
-table,.mx{font-size:12px}
-th,td{padding:7px 5px}
+.chap .sub{max-width:100%}
 }
+
+/* ============ 豎屏手機 ============ */
+@media (max-width:760px){
+.wrap{padding-top:0;padding-bottom:72px;padding-left:max(15px,env(safe-area-inset-left));padding-right:max(15px,env(safe-area-inset-right))}
+.nav-in{padding-left:max(15px,env(safe-area-inset-left));padding-right:max(15px,env(safe-area-inset-right));gap:20px;min-height:54px}
+.nav a{font-size:15px}
+section{scroll-margin-top:70px}
+
+.hero{padding:32px 0 24px}
+.hero h1{font-size:clamp(26px,7.4vw,32px);line-height:1.4}
+.hero p{font-size:15px}
+.tag{font-size:14px;padding:5px 12px}
+
+.chap{flex-wrap:wrap;gap:6px;margin:44px 0 18px;padding-bottom:12px}
+.chap .no{font-size:13.5px;width:100%}
+.chap h2{font-size:22px;width:100%;line-height:1.45}
+.chap .sub{margin-left:0;width:100%;text-align:left;font-size:14px;margin-top:4px}
+
+.card{padding:18px 16px;border-radius:12px;margin-bottom:14px}
+.card h3{font-size:17.5px;gap:8px;margin-bottom:14px}
+.card h3::before{height:17px;width:3.5px}
+.card h4{font-size:15.5px;margin:20px 0 8px}
+
+table{font-size:15.5px}
+th,td{padding:10px 8px;line-height:1.65}
+td.k,td.n{white-space:normal}
+.mx{font-size:13.5px}
+.mx th,.mx thead th{padding:8px 4px;font-size:13px}
+.mx td{padding:9px 5px}
+
+.flow{font-size:15.5px;gap:8px}
+.flow span{padding:7px 12px}
+.flow i{font-size:14px}
+
+.tip,.warn,.note{padding:12px 14px;font-size:15.5px;line-height:1.8;margin-top:14px}
+.eg{padding:12px 13px;font-size:15px;line-height:1.78;margin-top:12px}
+.qk{grid-template-columns:1fr;gap:10px}
+.qkc{padding:13px 14px}
+.qkc .qb{font-size:15.5px}
+.qkrow{margin:22px 0 10px;flex-wrap:wrap;gap:6px}
+.rolecol .ri{font-size:15.5px}
+.box .bv{font-size:15.5px}
+.quote{font-size:15.5px}
+li{margin-bottom:7px}
+ol,ul{padding-left:22px}
+.final{padding:20px 18px}
+
+/* 圖表與寬表格：保留原尺寸、允許左右滑動，避免縮到看不清 */
+.svgwrap svg{min-width:520px}
+.tw table.wide{min-width:480px}
+.tw table.mx{min-width:600px}
+}
+
+/* ============ 極窄屏（<380px）微調 ============ */
+@media (max-width:380px){
+:root{--fs:16.5px}
+table{font-size:15px}
+th,td{padding:9px 6px}
+.card{padding:16px 14px}
+}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -121,6 +213,7 @@ th,td{padding:7px 5px}
 <a href="#ch4">CH4 環境</a>
 <a href="#people">人物總表</a>
 <a href="#errors">易錯清單</a>
+<a href="#cards">快速小卡</a>
 </div></div>
 
 <div class="wrap">
@@ -542,6 +635,7 @@ th,td{padding:7px 5px}
 <div class="box"><div class="bt">缺點</div><div class="bv">僵化、反應慢、壓抑創新、官僚主義</div></div>
 </div>
 <div class="tip"><b>「官僚」在管理學是中性詞</b>，指理性化的組織形式，不是罵人。</div>
+<div class="eg"><span class="lb">例</span>你去<b>戶政事務所</b>辦文件：抽號碼牌、填固定表格、承辦人照規定審核、誰也不能插隊——這就是韋伯講的官僚制在運作。它讓人覺得慢，但保證了「<b>換一個承辦人，結果一樣</b>」，這正是它被發明出來要解決的問題。</div>
 </div>
 
 <div class="card">
@@ -564,6 +658,7 @@ th,td{padding:7px 5px}
 <div class="warn"><b>校正</b>：我先前講「社會人／非正式組織／士氣」三項，那是<b>標準管理學</b>的整理，<b>不是課本原文</b>。課本 p16 明寫「造成生產力提升的因素有<b>二</b>」。<br>答簡答題請寫這兩項；「社會人、非正式組織」可作為補充說明，但別當成書上的清單。</div>
 <div class="note"><b>課本沒有「霍桑效應」這個詞</b>。它是後人對這個實驗的命名，用來解釋「被觀察就改變行為」。知道就好，答題時當補充。</div>
 <div class="tip"><b>反直覺但正確</b>：霍桑實驗的原始設計，<b>確實是基於科學管理的理念</b>。用舊典範的工具，挖出了舊典範的裂縫。</div>
+<div class="eg"><span class="lb">例</span>想像你是廠長：把燈調亮，產量上升；再調暗，產量<b>還是上升</b>——你原本想找「最亮多少產量最高」，結果發現<b>亮度根本不是變數</b>。<br>真正的原因是那六個女工<b>知道自己被挑出來、被主管盯著看</b>，所以更賣力。這就是為什麼結論會是「團體氣氛」與「感覺受重視」這兩項。</div>
 </div>
 
 <div class="card">
@@ -751,6 +846,7 @@ th,td{padding:7px 5px}
 </tbody>
 </table>
 <div class="warn"><b>必考陷阱</b>：科技<b>降低</b>進入障礙，結果是競爭<b>增加</b>，不是減少。門檻變低＝加入者變多。</div>
+<div class="eg"><span class="lb">例</span>智慧手機一出現，<b>數位相機、MP3、導航機、手電筒</b>全被整併掉——這是「縮短產品生命週期」；外送平台讓餐廳不必有店面也能做生意——這是「創造新的經營形式」；超商導入自助結帳，同一班人力少一半——這是「提升企業效率」。</div>
 
 <h4>社會文化環境：縱斷面 vs 橫斷面</h4>
 <table>
@@ -764,6 +860,7 @@ th,td{padding:7px 5px}
 </table>
 <div class="tip"><b>判斷口訣</b>：問自己「這是<b>同一群人變了</b>，還是<b>不同群人同時存在</b>？」前者縱斷面，後者橫斷面。</div>
 <div class="note"><b>教材核對</b>：投影片<b>沒有出現「縱斷面／橫斷面」這六個字</b>，原文是「同一個社會的文化或價值觀會<b>隨著時間</b>而發生變化」「社會愈來愈接受<b>次文化多元並陳</b>的現象」。<br>但你手抄的目錄有這兩個詞 → 應該是<b>教科書正文</b>的用語。<b>保留，照背。</b></div>
+<div class="eg"><span class="lb">例</span>手搖飲十年前流行「<b>全糖</b>」，現在「微糖、無糖」當道——同一群人、不同時間，這是<b>縱斷面</b>。同一條街上，傳統早餐店與健身餐盒店<b>同時存在</b>、各有各的客人——這是<b>橫斷面</b>。</div>
 
 <h4>人口統計：少子化與高齡化要分開記</h4>
 <table>
@@ -775,6 +872,7 @@ th,td{padding:7px 5px}
 </table>
 <p class="small" style="margin-top:8px">兩者合起來＝<b>人口紅利消失</b> → 勞動成本上升 ＋ 市場結構改變。</p>
 <div class="note"><b>教材核對</b>：投影片這節只有<b>表 4.1「老化指數統計表」</b>（民國 100–111 年，65 歲以上占比 <b>10.89% → 17.56%</b>，老化指數 <b>72.20 → 144.93</b>），<b>沒有「少子化」「高齡化」這兩個詞</b>。<br>但<b>表 4.1 本身就是考點</b>——你之前那道「哪個地區老化指數最高」的題，就是從這張表出的。<b>老化指數公式一定要會算。</b></div>
+<div class="eg"><span class="lb">例</span>小學<b>減班、併校、私校退場</b>，是少子化在教育部門的樣子；同一時間醫院開<b>長照中心</b>、旅行社推<b>銀髮團</b>、藥局加賣保健食品，是高齡化的商機。同一股人口變化，一邊在萎縮、一邊在長大。</div>
 </div>
 
 <div class="card">
@@ -792,27 +890,28 @@ th,td{padding:7px 5px}
 <h4>景氣對策信號（9–45 分，五種燈）</h4>
 <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0">
 <div style="flex:1;min-width:104px;background:rgba(226,75,74,.12);border:1px solid #a34a4a;border-radius:8px;padding:10px;text-align:center">
-<div style="color:#F09595;font-weight:500;font-size:13px">紅燈</div>
+<div style="color:#F09595;font-weight:500;font-size:15px">紅燈</div>
 <div class="small">38–45　過熱</div>
 </div>
 <div style="flex:1;min-width:104px;background:rgba(250,199,117,.10);border:1px solid #8a6a34;border-radius:8px;padding:10px;text-align:center">
-<div style="color:#FAC775;font-weight:500;font-size:13px">黃紅燈</div>
+<div style="color:#FAC775;font-weight:500;font-size:15px">黃紅燈</div>
 <div class="small">32–37　轉熱</div>
 </div>
 <div style="flex:1;min-width:104px;background:rgba(151,196,89,.10);border:1px solid #5d7a34;border-radius:8px;padding:10px;text-align:center">
-<div style="color:#97C459;font-weight:500;font-size:13px">綠燈</div>
+<div style="color:#97C459;font-weight:500;font-size:15px">綠燈</div>
 <div class="small">23–31　穩定</div>
 </div>
 <div style="flex:1;min-width:104px;background:rgba(133,183,235,.10);border:1px solid #4a6a8a;border-radius:8px;padding:10px;text-align:center">
-<div style="color:#85B7EB;font-weight:500;font-size:13px">黃藍燈</div>
+<div style="color:#85B7EB;font-weight:500;font-size:15px">黃藍燈</div>
 <div class="small">17–22　轉弱</div>
 </div>
 <div style="flex:1;min-width:104px;background:rgba(55,138,221,.12);border:1px solid #2f5f8a;border-radius:8px;padding:10px;text-align:center">
-<div style="color:#7FB3E8;font-weight:500;font-size:13px">藍燈</div>
+<div style="color:#7FB3E8;font-weight:500;font-size:15px">藍燈</div>
 <div class="small">9–16　低迷</div>
 </div>
 </div>
 <p class="small">分數區間各版教材可能微調，<b>以課本為準</b>；「紅＝過熱、綠＝穩定、藍＝低迷」的順序不會變。</p>
+<div class="eg"><span class="lb">例</span>藍燈（低迷）時：建商<b>延後推案</b>、企業<b>凍結徵才</b>、銀行<b>緊縮放款</b>；政府則降息、擴大公共支出——燈號不只是描述，它直接決定大家下一步動作。紅燈（過熱）時相反：央行升息、選擇性信用管制，踩剎車。</div>
 
 <h4>失業與通膨</h4>
 <table>
@@ -866,6 +965,7 @@ th,td{padding:7px 5px}
 </table>
 <div class="warn"><b>本章最經典的陷阱</b>：<b>獨佔性競爭 ≠ 獨占</b>。前者「很多家、產品有差異」，後者「只有一家」。<br>另外：<b>電力＝獨占</b>（不是寡占）；<b>電信＝寡占</b>（不是獨占）。</div>
 <div class="note"><b>教材核對</b>：投影片 p26 只給<b>定義</b>（完全競爭「家數眾多、產品近乎同質」／獨佔性競爭「廠商數多，不過產品差異化」／寡佔「數目少，決策互相牽制」／獨佔「僅單一廠商，沒有近似替代品」），<b>沒有舉任何產業例子</b>。<br>表上的「台灣例子」是我補的通用例，用來幫你判斷。<b>答題以定義特徵判斷，不要死記例子</b>——尤其「稻米市場」嚴格說有政府收購與進口配額，並非標準的完全競爭。</div>
+<div class="eg"><span class="lb">例</span>同一個夜市裡：五十家雞排攤賣幾乎一樣的東西、只能比價 → <b>完全競爭</b>；各家手搖飲有品牌與口味差異，貴五元還有人排隊 → <b>獨佔性競爭</b>；三家電信一降價全部跟進 → <b>寡占</b>；台電你別無選擇 → <b>獨占</b>。<br>判斷順序：<b>先數家數，再看產品有沒有差異</b>。</div>
 
 <h4>寡占的形成原因</h4>
 <table>
@@ -893,6 +993,7 @@ th,td{padding:7px 5px}
 </tbody>
 </table>
 <div class="warn"><b>易錯</b>：技術與財務支援是<b>中心 → 衛星</b>的<b>單向</b>流動。選項若寫「中心廠獲得較多財務技術支援」，方向就反了。</div>
+<div class="eg"><span class="lb">例</span><b>巨大機械（捷安特）</b>接到歐洲一張大單，把車架、輪組、變速器、塗裝分別下給幾十家衛星廠，自己只做<b>設計、品牌與最後組裝</b>。<br>衛星廠換到的是「<b>一張穩定的長約</b>」，中心廠換到的是「<b>不必自己養全部產能</b>」——雙方各拿到自己最缺的東西。<br>反過來看：衛星廠的技術與資金是<b>中心廠輔導來的</b>，不是衛星廠去支援中心廠。這就是為什麼選項把方向寫反時要抓出來。</div>
 </div>
 
 <div class="card">
@@ -907,6 +1008,7 @@ th,td{padding:7px 5px}
 </tbody>
 </table>
 <div class="tip"><b>辨識口訣</b>：<b>錢動＝金融、貨動＝製造、人動＝人資、顧客動＝市場。</b>看題幹強調的那個動作在移動什麼。</div>
+<div class="eg"><span class="lb">例</span>同一家公司的四個動作：去<b>美國、日本設廠</b> → 製造全球化；派<b>台灣工程師</b>過去支援、在當地招募 → 人力資源全球化；<b>外資買它的股票</b>、匯率一動成本就變 → 金融全球化；同一支手機在台北、東京、柏林<b>同步上市、規格價格一致</b> → 市場全球化。</div>
 <p class="small" style="margin-top:10px"><b>推力</b>：通訊與運輸成本下降、貿易自由化（WTO／FTA）、本國市場飽和、追求規模經濟、尋找低成本資源。</p>
 </div>
 
@@ -934,6 +1036,7 @@ th,td{padding:7px 5px}
 </div>
 <div class="tip"><b>判斷法</b>：問「這個動作是<b>讓自己配合環境</b>，還是<b>讓環境配合自己</b>？」前者被動，後者主動。<br><b>跨界角色的判準是「直接接觸外部」</b>，不是職位高低——研發工程師、產線作業員不算。</div>
 <div class="warn"><b>注意</b>：「切割部門成立子公司」<b>不在</b>課本列的被動適應四機制裡（屬組織重組）。</div>
+<div class="eg"><span class="lb">例</span>疫情期間：餐廳改做外送、服飾廠把產線改成口罩、旅行社改賣國旅——全都是「<b>改自己</b>」，環境一點都沒變好。<br>反過來，食品公會聯合向政府爭取調降貨物稅、藥廠爭取健保給付、建商公會反對囤房稅——這些是「<b>讓規則配合自己</b>」，屬主動影響。</div>
 </div>
 
 <div class="card">
@@ -1089,6 +1192,81 @@ th,td{padding:7px 5px}
 </div>
 </section>
 
+<section id="cards">
+<div class="chap"><span class="no">附錄 C</span><h2>快速重點小卡</h2><span class="sub">考前 10 分鐘，只掃這一頁</span></div>
+
+<p class="small" style="margin-bottom:16px">用法：<b>遮住右邊，只看標題回想內容</b>。想不起來的回前面對應章節，不要在這裡硬背。</p>
+
+<div class="qkrow"><span class="qn">CH 01</span><span class="qd">企業是什麼</span></div>
+<div class="qk">
+<div class="qkc"><div class="qt">生產要素</div><div class="qb"><b>四大類</b>：自然資源、人力資源、<b>資本設備</b>、企業家精神</div></div>
+<div class="qkc"><div class="qt">企業管理矩陣</div><div class="qb">企業功能 <b>6</b>（產銷人研財資）× 管理功能 <b>4</b>（規組領控）</div></div>
+<div class="qkc"><div class="qt">非營利組織</div><div class="qb">盈餘<b>不分配</b>、回流使命。<b>≠ 不賺錢</b></div></div>
+<div class="qkc"><div class="qt">控制四步</div><div class="qb">立標準 → 衡量 → 比較 → 改正（順序不可換）</div></div>
 </div>
+
+<div class="qkrow"><span class="qn">CH 02</span><span class="qd">管理是什麼</span></div>
+<div class="qk">
+<div class="qkc c2"><div class="qt">管理定義</div><div class="qb">運用<b>管理功能與資源</b>，進行<b>目標設定與達成</b>的過程</div></div>
+<div class="qkc c2"><div class="qt">效率</div><div class="qb"><b>資源的使用率</b>；把事做對</div></div>
+<div class="qkc c2"><div class="qt">效果</div><div class="qb"><b>目標達成的程度</b>；做對的事</div></div>
+<div class="qkc c2"><div class="qt">三技能</div><div class="qb">概念化／人際關係／技術。<b>人際關係三層都要</b></div></div>
+<div class="qkc c2"><div class="qt">十角色</div><div class="qb">人際 <b>3</b>、資訊 <b>3</b>、決策 <b>4</b>（興業家、談判者別漏）</div></div>
+<div class="qkc c2"><div class="qt">典範轉移</div><div class="qb">換的是「<b>什麼算成功</b>」，不是換人、換產品</div></div>
+</div>
+
+<div class="qkrow"><span class="qn">CH 03</span><span class="qd">理論演進</span></div>
+<div class="qk">
+<div class="qkc c3"><div class="qt">泰勒</div><div class="qb">唯一最佳方法、動作研究、差別計件、<b>經濟人</b>（由下往上）</div></div>
+<div class="qkc c3"><div class="qt">費堯</div><div class="qb">五功能＋十四原則，<b>由上往下</b>看整個組織</div></div>
+<div class="qkc c3"><div class="qt">韋伯</div><div class="qb">五特徵；第 2 項是清楚的<b>權力</b>體系；官僚是<b>中性詞</b></div></div>
+<div class="qkc c3"><div class="qt">霍桑</div><div class="qb">結論<b>兩項</b>：團體氣氛、感覺受重視</div></div>
+<div class="qkc c3"><div class="qt">系統理論</div><div class="qb">投入 → 處理 → 輸出 → <b>回饋</b>（沒有「再生」）</div></div>
+<div class="qkc c3"><div class="qt">權變</div><div class="qb">沒有最佳，<b>視情境</b>；組織分機械式／有機式</div></div>
+<div class="qkc c3"><div class="qt">台灣的管理資本主義</div><div class="qb">首條＝<b>國家資本主義</b>（台積電、中鋼）</div></div>
+<div class="qkc c3"><div class="qt">關係</div><div class="qb">程序正義／<b>尊尊</b>；分配正義／<b>親親</b></div></div>
+</div>
+
+<div class="qkrow"><span class="qn">CH 04</span><span class="qd">環境</span></div>
+<div class="qk">
+<div class="qkc c4"><div class="qt">環境三層</div><div class="qb">全球 → 總體（<b>間接</b>）→ 任務（<b>直接</b>）→ 組織</div></div>
+<div class="qkc c4"><div class="qt">科技三影響</div><div class="qb">縮短生命週期、新經營形式、提升效率</div></div>
+<div class="qkc c4"><div class="qt">縱斷 vs 橫斷</div><div class="qb"><b>時間軸</b>（同一群人變了）vs <b>群體軸</b>（不同群人並存）</div></div>
+<div class="qkc c4"><div class="qt">老化指數</div><div class="qb">65 歲以上 ÷ <b>15 歲以下</b> × 100</div></div>
+<div class="qkc c4"><div class="qt">景氣兩類</div><div class="qb">領先 <b>7</b> 項（股價、訂單、M1B）／同時 <b>6</b> 項（生產、薪資、貨運）</div></div>
+<div class="qkc c4"><div class="qt">五色燈</div><div class="qb">紅過熱、黃紅活絡、綠穩定、黃藍欠佳、<b>藍衰退</b></div></div>
+<div class="qkc c4"><div class="qt">市場四型</div><div class="qb">完全（同質）／獨佔性（異質）／寡占（少數）／獨占（一家）</div></div>
+<div class="qkc c4"><div class="qt">全球化</div><div class="qb"><b>錢</b>金融、<b>貨</b>製造、<b>人</b>人資、<b>顧客</b>市場</div></div>
+<div class="qkc c4"><div class="qt">被動 4</div><div class="qb">跨界角色、預測規劃、彈性結構、併購合資</div></div>
+<div class="qkc c4"><div class="qt">主動 3</div><div class="qb">廣告公關、政策性活動、商會</div></div>
+<div class="qkc c4"><div class="qt">機械 vs 有機</div><div class="qb">控制幅度：機械<b>窄</b>、有機<b>寬</b>；窄→多層級→高型</div></div>
+</div>
+
+<div class="final" style="margin-top:22px">
+<h3>最後三句</h3>
+<p>① 選擇題靠<b>關鍵詞分類</b>，簡答題靠<b>課本原句</b>——兩套要分開練。</p>
+<p>② 本書的「幾項」比一般教材少：生產要素 <b>4</b>、景氣指標 <b>2</b>、霍桑結論 <b>2</b>。看到「五項」「三類」先懷疑。</p>
+<p>③ 跨章題是常態：習題約 <b>2–3 成</b>來自其他章。答不出來先問「這考的是哪一章的框架」。</p>
+</div>
+</section>
+
+</div>
+<script>
+(function(){
+  document.querySelectorAll('table').forEach(function(t){
+    if(t.parentElement && t.parentElement.classList.contains('tw'))return;
+    var head=t.querySelector('thead tr');
+    var cols=head?head.children.length:0;
+    if(cols>=4)t.classList.add('wide');
+    var w=document.createElement('div');w.className='tw';
+    t.parentNode.insertBefore(w,t);w.appendChild(t);
+  });
+  document.querySelectorAll('svg.svgbox').forEach(function(s){
+    if(s.parentElement && s.parentElement.classList.contains('svgwrap'))return;
+    var w=document.createElement('div');w.className='svgwrap';
+    s.parentNode.insertBefore(w,s);w.appendChild(s);
+  });
+})();
+</script>
 </body>
 </html>
