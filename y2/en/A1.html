@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英文　Lessons 1–3 完整講義</title>
+<style>
+/* ==========================================================================
+   講義樣式（深色卡片式．豎屏優先）
+   - 調字級只改 :root 的 --fs 系列，其餘全部連動
+   - 新增區塊請沿用既有 class，不要另寫 inline font-size
+   - 表格與 SVG 的橫向捲動由頁尾腳本自動接管（.tw / .svgwrap）
+   ========================================================================== */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#131315;--card:#1b1b1f;--card2:#232329;--line:#2d2d34;
+--tx:#e9e9ec;--mut:#9b9ba4;
+--blue:#85B7EB;--teal:#5DCAA5;--amber:#FAC775;--red:#F09595;--purple:#AFA9EC;
+
+/* 字級基準：整體放大約 22%，以豎屏可讀性為準 */
+--fs:17px;--fs-sm:14.5px;--fs-h4:16px;--fs-h3:18.5px;--fs-h2:25px;
+--lh:1.85;--radius:14px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;line-height:var(--lh);font-size:var(--fs);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.wrap{max-width:920px;margin:0 auto;padding:0 clamp(18px,4vw,28px) 96px}
+
+.nav{position:sticky;top:0;z-index:20;background:rgba(19,19,21,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:920px;margin:0 auto;display:flex;gap:24px;align-items:center;min-height:56px;padding:0 clamp(18px,4vw,28px);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav a{color:var(--mut);font-size:var(--fs-sm);text-decoration:none;white-space:nowrap;padding:8px 0;border-bottom:1px solid transparent}
+.nav a:hover,.nav a:active{color:var(--tx);border-bottom-color:var(--teal)}
+
+section{scroll-margin-top:76px}
+
+.hero{padding:54px 0 32px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.hero h1{font-size:clamp(27px,4.4vw,38px);font-weight:500;letter-spacing:.5px;line-height:1.35}
+.hero p{color:var(--mut);font-size:var(--fs-sm);margin-top:12px;max-width:680px;line-height:1.75}
+.hero .meta{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:var(--fs-sm);color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:5px 14px;line-height:1.6}
+
+.chap{display:flex;align-items:baseline;gap:14px;margin:62px 0 24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.chap .no{font-size:var(--fs-sm);letter-spacing:2px;color:var(--teal);font-weight:500}
+.chap h2{font-size:var(--fs-h2);font-weight:500;line-height:1.4}
+.chap .sub{font-size:var(--fs-sm);color:var(--mut);margin-left:auto;text-align:right;line-height:1.6;max-width:52%}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;margin-bottom:18px}
+.card h3{font-size:var(--fs-h3);font-weight:500;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:10px;line-height:1.5}
+.card h3::before{content:"";width:4px;height:19px;background:var(--blue);border-radius:2px;display:inline-block;flex:0 0 auto}
+.card h3.t::before{background:var(--teal)}
+.card h3.t{color:var(--teal)}
+.card h3.a::before{background:var(--amber)}
+.card h3.a{color:var(--amber)}
+.card h3.p::before{background:var(--purple)}
+.card h3.p{color:var(--purple)}
+.card h4{font-size:var(--fs-h4);font-weight:500;color:#cfcfd6;margin:22px 0 10px;line-height:1.6}
+.card h4:first-of-type{margin-top:0}
+
+p{color:#dcdce2;margin-bottom:12px}
+p:last-child{margin-bottom:0}
+
+table{width:100%;border-collapse:collapse;font-size:16px;margin:8px 0}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7}
+thead th{font-size:var(--fs-sm);color:var(--mut);font-weight:500;border-bottom:1px solid #3a3a42}
+tbody tr:last-child td{border-bottom:none}
+td.k{color:var(--teal);white-space:nowrap;font-weight:500}
+td.n{color:var(--amber);white-space:nowrap;font-weight:500}
+.small{font-size:var(--fs-sm);color:var(--mut);line-height:1.7}
+
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:16px;margin:12px 0}
+.flow span{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 14px;line-height:1.5}
+.flow i{color:var(--mut);font-style:normal;font-size:15px}
+
+.tip{border-left:3px solid var(--amber);background:rgba(250,199,117,.07);border-radius:0 8px 8px 0;padding:14px 18px;font-size:16px;margin-top:16px;color:#dcdce2;line-height:1.8}
+.tip b{color:var(--amber);font-weight:500}
+.warn{border-left:3px solid var(--red);background:rgba(240,149,149,.07);border-radius:0 8px 8px 0;padding:14px 18px;font-size:16px;margin-top:16px;color:#dcdce2;line-height:1.8}
+.warn b{color:var(--red);font-weight:500}
+.note{border-left:3px solid var(--purple);background:rgba(175,169,236,.07);border-radius:0 8px 8px 0;padding:14px 18px;font-size:16px;margin-top:16px;color:#dcdce2;line-height:1.8}
+.note b{color:var(--purple);font-weight:500}
+
+.mx{font-size:14.5px}
+.mx th{padding:10px 6px;text-align:center;border:1px solid var(--line);font-weight:500;font-size:14px}
+.mx td{padding:11px 7px;text-align:center;border:1px solid var(--line);color:#c9c9d0;line-height:1.5}
+.mx thead th{background:#26262d;color:var(--teal)}
+.mx tbody th{background:#1f1f25;color:var(--blue);white-space:nowrap}
+.mx td:hover{background:#26262d}
+
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rolecol{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:16px}
+.rolecol .rh{font-size:13.5px;letter-spacing:1px;margin-bottom:10px;font-weight:500}
+.rolecol.b .rh{color:var(--blue)}
+.rolecol.t .rh{color:var(--teal)}
+.rolecol.a .rh{color:var(--amber)}
+.rolecol .ri{font-size:16px;padding:8px 0;border-bottom:1px dashed #33333b;color:#dcdce2;line-height:1.6}
+.rolecol .ri:last-child{border-bottom:none}
+.rolecol .ri em{font-style:normal;color:var(--mut);font-size:12.5px;display:block}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.box .bt{font-size:13.5px;letter-spacing:1px;color:var(--mut);margin-bottom:8px}
+.box .bv{font-size:16px;color:#dcdce2;line-height:1.75}
+
+.quote{border-left:2px solid #4a4a55;padding:2px 0 2px 18px;color:#b9b9c2;font-size:16px;margin:12px 0;line-height:1.8}
+.quote em{font-style:normal;color:var(--mut);font-size:13.5px;display:block;margin-top:6px}
+
+ol,ul{padding-left:24px;color:#dcdce2}
+li{margin-bottom:8px}
+
+.svgbox{max-width:680px;margin:10px auto 0;display:block;height:auto}
+
+.final{background:#1d1d22;border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin-top:18px}
+.final h3{font-size:var(--fs-h3);font-weight:500;color:var(--amber);margin-bottom:16px;line-height:1.5}
+
+/* 寬表格／圖表的橫向捲動容器（由頁尾腳本自動加上） */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0;padding-bottom:2px;scrollbar-width:thin;scrollbar-color:#3a3a42 transparent}
+.tw table{margin:0}
+.tw::-webkit-scrollbar{height:6px}
+.tw::-webkit-scrollbar-thumb{background:#3a3a42;border-radius:3px}
+.svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 0;padding-bottom:2px;scrollbar-width:thin;scrollbar-color:#3a3a42 transparent}
+.svgwrap svg{max-width:100%}
+.svgwrap::-webkit-scrollbar{height:6px}
+.svgwrap::-webkit-scrollbar-thumb{background:#3a3a42;border-radius:3px}
+
+/* 內文舉例 */
+.eg{border-left:2px solid #4a6a8a;background:rgba(133,183,235,.055);border-radius:0 8px 8px 0;padding:13px 16px;font-size:15.5px;color:#c9c9d2;margin-top:14px;line-height:1.8}
+.eg .lb{color:var(--blue);font-weight:500;margin-right:8px;letter-spacing:1px;font-size:13.5px}
+.eg b{color:var(--blue);font-weight:500}
+
+/* 快速重點小卡 */
+.qk{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:12px;margin:4px 0 18px}
+.qkc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.qkc .qt{font-size:12.5px;letter-spacing:1.2px;color:var(--teal);margin-bottom:8px;font-weight:500;line-height:1.5}
+.qkc .qb{font-size:15.5px;color:#dcdce2;line-height:1.72}
+.qkc .qb b{color:var(--amber);font-weight:500}
+.qkc.c2 .qt{color:var(--blue)}
+.qkc.c3 .qt{color:var(--purple)}
+.qkc.c4 .qt{color:var(--amber)}
+.qkrow{display:flex;align-items:baseline;gap:12px;margin:26px 0 12px}
+.qkrow .qn{font-size:13px;letter-spacing:2px;color:var(--mut)}
+.qkrow .qn b{color:var(--teal);font-weight:500}
+.qkrow .qd{font-size:14px;color:var(--mut);line-height:1.6}
+
+/* ============ 平板／窄桌面 ============ */
+@media (max-width:900px){
+.roles{grid-template-columns:1fr}
+.grid2{grid-template-columns:1fr}
+.chap .sub{max-width:100%}
+}
+
+/* ============ 豎屏手機 ============ */
+@media (max-width:760px){
+.wrap{padding-top:0;padding-bottom:72px;padding-left:max(15px,env(safe-area-inset-left));padding-right:max(15px,env(safe-area-inset-right))}
+.nav-in{padding-left:max(15px,env(safe-area-inset-left));padding-right:max(15px,env(safe-area-inset-right));gap:20px;min-height:54px}
+.nav a{font-size:15px}
+section{scroll-margin-top:70px}
+
+.hero{padding:32px 0 24px}
+.hero h1{font-size:clamp(26px,7.4vw,32px);line-height:1.4}
+.hero p{font-size:15px}
+.tag{font-size:14px;padding:5px 12px}
+
+.chap{flex-wrap:wrap;gap:6px;margin:44px 0 18px;padding-bottom:12px}
+.chap .no{font-size:13.5px;width:100%}
+.chap h2{font-size:22px;width:100%;line-height:1.45}
+.chap .sub{margin-left:0;width:100%;text-align:left;font-size:14px;margin-top:4px}
+
+.card{padding:18px 16px;border-radius:12px;margin-bottom:14px}
+.card h3{font-size:17.5px;gap:8px;margin-bottom:14px}
+.card h3::before{height:17px;width:3.5px}
+.card h4{font-size:15.5px;margin:20px 0 8px}
+
+table{font-size:15.5px}
+th,td{padding:10px 8px;line-height:1.65}
+td.k,td.n{white-space:normal}
+.mx{font-size:13.5px}
+.mx th,.mx thead th{padding:8px 4px;font-size:13px}
+.mx td{padding:9px 5px}
+
+.flow{font-size:15.5px;gap:8px}
+.flow span{padding:7px 12px}
+.flow i{font-size:14px}
+
+.tip,.warn,.note{padding:12px 14px;font-size:15.5px;line-height:1.8;margin-top:14px}
+.eg{padding:12px 13px;font-size:15px;line-height:1.78;margin-top:12px}
+.qk{grid-template-columns:1fr;gap:10px}
+.qkc{padding:13px 14px}
+.qkc .qb{font-size:15.5px}
+.qkrow{margin:22px 0 10px;flex-wrap:wrap;gap:6px}
+.rolecol .ri{font-size:15.5px}
+.box .bv{font-size:15.5px}
+.quote{font-size:15.5px}
+li{margin-bottom:7px}
+ol,ul{padding-left:22px}
+.final{padding:20px 18px}
+
+/* 圖表與寬表格：保留原尺寸、允許左右滑動，避免縮到看不清 */
+.svgwrap svg{min-width:520px}
+.tw table.wide{min-width:480px}
+.tw table.mx{min-width:600px}
+}
+
+/* ============ 極窄屏（<380px）微調 ============ */
+@media (max-width:380px){
+:root{--fs:16.5px}
+table{font-size:15px}
+th,td{padding:9px 6px}
+.card{padding:16px 14px}
+}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     導覽列：每個 section 一條
+     ============================================================ -->
+<div class="nav"><div class="nav-in">
+<a href="#u1">L1 Too Good To Go</a>
+<a href="#u2">L2 The Smart Cop</a>
+<a href="#u3">L3 Follow the Signs</a>
+<a href="#grammar">語法總表</a>
+<a href="#errors">易錯清單</a>
+<a href="#cards">快速小卡</a>
+</div></div>
+
+<div class="wrap">
+
+<!-- ============================================================
+     封面
+     ============================================================ -->
+<div class="hero">
+<h1>英文　Lessons 1–3 完整講義</h1>
+<p>三課合一的濃縮版：54 個核心單字按「用法」重排、15 個片語、6 個語法點逐一拆解，每課附閱讀理解與陷阱辨析。後續課次直接往後接。</p>
+<div class="meta">
+<span class="tag">現在完成進行式</span>
+<span class="tag">關係代名詞 who / which</span>
+<span class="tag">find + O + OC</span>
+<span class="tag">that 子句當受詞</span>
+<span class="tag">so that vs so…that</span>
+<span class="tag">54 核心單字</span>
+</div>
+<div class="tip" style="margin-top:20px"><b>單字表不是照字母排，是照「用法」分群</b>——同一群的字會一起考（同義、反義、搭配）。先看群名，再看字。<br>原則：<b>選擇題靠辨析，手寫題靠搭配。</b></div>
+<div class="warn" style="margin-top:14px"><b>原始檔案有三處 OCR 錯誤，已在本講義修正</b>：<br>① <b>Too Good To Go</b> 原譯「撿不得丟」→ 應為<b>「好到捨不得丟」</b>（too…to 句型：好到不能丟）。<br>② <b>Eataly</b> 原譯「義大利果」→ 是<b>義式美食市集品牌</b>，不是水果。<br>③ <b>bend</b> 原釋義「轉彎；轉彎」→ 應為 <b>n. 彎道／v. 彎曲、轉彎</b>。</div>
+</div>
+
+<!-- ============================================================
+     UNIT 1
+     ============================================================ -->
+<section id="u1">
+<div class="chap"><span class="no">LESSON 01</span><h2>Too Good To Go</h2><span class="sub">剩食問題 → App 機制 → 三贏</span></div>
+
+<div class="card">
+<h3>這課的骨架：一個「把浪費變成生意」的迴路</h3>
+<div class="flow">
+<span>餐廳每天丟掉大量可食用食物</span><i>→</i><span>打烊前把剩食裝成 magic bag</span><i>→</i><span>App 低價上架</span><i>→</i><span>顧客驚喜取貨</span><i>→</i><span>商家／顧客／環境三贏</span>
+</div>
+<p class="small" style="margin-top:10px">四個環節各有對應單字：<b>waste / leftover</b>（問題）→ <b>dump</b>（原本的處理）→ <b>discount / promote</b>（手法）→ <b>reduce / decrease</b>（結果）。背單字時把它掛回這條線上，比按字母背有效。</p>
+<div class="tip"><b>三贏要能各講一句</b>：商家＝少丟＝省處理成本又多一筆收入；顧客＝用低價吃到好食物；環境＝減少溫室氣體（greenhouse gas）。考簡答三邊都要寫。</div>
+</div>
+
+<div class="card">
+<h3 class="t">單字群 1　食物與浪費（問題端）</h3>
+<table>
+<thead><tr><th style="width:158px">單字</th><th style="width:132px">釋義</th><th>用法／考點</th></tr></thead>
+<tbody>
+<tr><td class="k">waste<br><span class="small">[west] n. / v.</span></td><td>浪費；廢料<br>浪費</td><td>當「浪費」<b>不可數</b>（a waste of time 例外，固定用法）；當「廢料」<b>可數</b>（industrial wastes）。動詞：waste time/money <b>on</b> sth</td></tr>
+<tr><td class="k">leftover<br><span class="small">[ˈlɛftˌovɚ] adj. / n.</span></td><td>剩下的<br>剩菜</td><td>當名詞<b>幾乎都用複數</b> leftovers。leftover food＝剩食（形容詞位置）</td></tr>
+<tr><td class="k">edible<br><span class="small">[ˈɛdəbəl] adj.</span></td><td>可食用的</td><td>反義 <b>inedible</b> 不可食用的。<b>-ible 字尾＝「能…的」</b>，同類：visible / possible</td></tr>
+<tr><td class="k">dump<br><span class="small">[dʌmp] v. / n.</span></td><td>丟棄<br>垃圾場</td><td>口語感強，比 discard 常用。名詞 the dump＝垃圾場（＝landfill）</td></tr>
+<tr><td class="k">chain<br><span class="small">[tʃen] n.</span></td><td>連鎖（商店）<br>鍊子</td><td>chain store／restaurant chain。<b>a chain of</b>＋複數名詞＝一連串</td></tr>
+<tr><td class="k">customer<br><span class="small">[ˈkʌstəmɚ] n.</span></td><td>顧客</td><td>反義 seller。別跟 <b>custom</b>（習俗／海關）搞混，兩字差一個 m 一個 r</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>一句話記這群</b>：原本 <b>edible</b> 的東西被 <b>dump</b>，就成了 <b>waste</b>；它其實只是 <b>leftover</b>。</div>
+</div>
+
+<div class="card">
+<h3 class="t">單字群 2　程度與數量（描述端）</h3>
+<table>
+<thead><tr><th style="width:158px">單字</th><th style="width:132px">釋義</th><th>用法／考點</th></tr></thead>
+<tbody>
+<tr><td class="k">amount<br><span class="small">[əˈmaʊnt] n.</span></td><td>數量，數額</td><td><b>只接不可數名詞</b>：a large amount of <b>food/money</b>。可數要用 <b>number</b></td></tr>
+<tr><td class="k">considerable<br><span class="small">[kənˈsɪdərəbəl] adj.</span></td><td>可觀的，相當大的</td><td>修飾「量」：a considerable amount of…。易混 <b>considerate</b>（體貼的）——見 L3 的三兄弟表</td></tr>
+<tr><td class="k">specific<br><span class="small">[spəˈsɪfɪk] adj.</span></td><td>特定的</td><td>反義 general。常考 <b>for a specific purpose</b>（為了特定目的）</td></tr>
+<tr><td class="k">normal<br><span class="small">[ˈnɔrməl] adj.</span></td><td>正常的</td><td>反義 unusual／abnormal。<b>return to normal</b>＝恢復正常</td></tr>
+<tr><td class="k">typically<br><span class="small">[ˈtɪpɪklɪ] adv.</span></td><td>通常，一般地</td><td>＝normally／usually，常放<b>句首</b>當轉折詞：Typically, restaurants…</td></tr>
+<tr><td class="k">similar<br><span class="small">[ˈsɪməlɚ] adj.</span></td><td>類似的</td><td><b>be similar to</b>（不是 with）。反義 different from</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>amount 這一格必考</b>：a large <b>amount</b> of <u>apples</u> ✗ → a large <b>number</b> of apples ✓。<br>口訣：<b>amount 配不可數、number 配可數、quantity 兩者皆可</b>。</div>
+</div>
+
+<div class="card">
+<h3 class="t">單字群 3　動作與方法（解方端）</h3>
+<table>
+<thead><tr><th style="width:158px">單字</th><th style="width:132px">釋義</th><th>用法／考點</th></tr></thead>
+<tbody>
+<tr><td class="k">reduce<br><span class="small">[rɪˈdus] v.t.</span></td><td>減少，降低</td><td><b>及物</b>：reduce costs。變化幅度用 <b>by</b>（減少了）、結果用 <b>to</b>（減到）</td></tr>
+<tr><td class="n">decrease<br><span class="small">[dɪˈkris] v. / n.</span></td><td>減少</td><td><b>不及物為主</b>：Sales decreased.。反義 increase。與 reduce 的分野＝「自己變少」vs「被弄少」</td></tr>
+<tr><td class="k">encourage<br><span class="small">[ɪnˈkɝɪdʒ] v.t.</span></td><td>鼓勵</td><td><b>encourage sb to V</b>。反義 discourage。名詞 encouragement <b>不可數</b></td></tr>
+<tr><td class="k">promote<br><span class="small">[prəˈmot] v.t.</span></td><td>推銷，宣傳<br>（也＝升遷）</td><td>一詞兩義是考點：promote a product（推銷）／be promoted to manager（升遷）</td></tr>
+<tr><td class="k">discount<br><span class="small">[ˈdɪsˌkaʊnt] n. / v.</span></td><td>折扣<br>打折</td><td><b>at a 30% discount</b>＝打七折。動詞 discount 20%＝打八折。中文「打八折」＝英文 20% off，方向相反</td></tr>
+<tr><td class="k">method<br><span class="small">[ˈmɛθəd] n.</span></td><td>方法</td><td>a method <b>of</b> V-ing。同義 approach／way（way 接 to V）</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>reduce 與 decrease 一句話分</b>：<b>reduce 是人去弄少</b>（及物，要有受詞）；<b>decrease 是自己變少</b>（不及物，主詞就是變化的東西）。</div>
+</div>
+
+<div class="card">
+<h3 class="p">字族：一組字一起記，比背四次省力</h3>
+<table>
+<thead><tr><th style="width:150px">原詞</th><th style="width:150px">派生詞</th><th>詞性與用法</th></tr></thead>
+<tbody>
+<tr><td class="k">reduce</td><td>reduction</td><td>n. a reduction <b>in</b> price（價格的下降）</td></tr>
+<tr><td class="k">encourage</td><td>encouragement</td><td>n. [U] words of encouragement</td></tr>
+<tr><td class="k">promote</td><td>promotion</td><td>n. sales promotion（促銷）／get a promotion（升遷）</td></tr>
+<tr><td class="k">typical</td><td>typically</td><td>adv. 通常；典型地</td></tr>
+<tr><td class="k">edible</td><td>inedible</td><td>adj. 反義字，<b>in- 表否定</b></td></tr>
+</tbody>
+</table>
+<div class="note"><b>課本沒列但解題常用</b>：waste → <b>wasteful</b>（浪費的）／<b>a waste of</b>（浪費了…）。看到空格前是 be 動詞、後面接 of，多半填 a waste of。</div>
+</div>
+
+<div class="card">
+<h3 class="a">片語 4 個：pick up 一次考三種意思</h3>
+<table>
+<thead><tr><th style="width:170px">片語</th><th style="width:110px">釋義</th><th>考點</th></tr></thead>
+<tbody>
+<tr><td class="k">pick up</td><td>買到</td><td>本課＝「（順路）買到」。另三義：<b>接人</b>（pick up the kids）、<b>撿起</b>、<b>好轉</b>（Business is picking up）</td></tr>
+<tr><td class="k">at present</td><td>目前</td><td>＝now／currently。<b>present 前不加 the</b>；at the present 是錯的</td></tr>
+<tr><td class="k">after all</td><td>畢竟</td><td>放句首或句尾，語氣＝「說到底」。別跟 <b>in the end</b>（最後）混</td></tr>
+<tr><td class="k">go to waste</td><td>浪費掉</td><td>固定搭配 <b>let sth go to waste</b>（讓…白白浪費）</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>pick up 的判題法</b>：後面接<b>人</b>＝接人；接<b>東西＋地點</b>＝撿起；接<b>生意／景氣</b>＝好轉；接<b>商品</b>＝買到。</div>
+</div>
+
+<div class="card">
+<h3>語法 1　現在完成進行式：動作「還在跑」</h3>
+<div class="flow">
+<span>S</span><i>＋</i><span>have / has been</span><i>＋</i><span>V-ing</span>
+</div>
+<svg class="svgbox" viewBox="0 0 680 206" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="206" rx="10" fill="#232329" stroke="#2d2d34"/>
+<text x="26" y="34" font-family="sans-serif" font-size="13" fill="#9FE1CB">have been V-ing：起點在過去，箭頭穿過 now 還在延伸</text>
+<line x1="60" y1="86" x2="560" y2="86" stroke="#4a4a55" stroke-width="2"/>
+<line x1="560" y1="86" x2="628" y2="86" stroke="#5DCAA5" stroke-width="2" stroke-dasharray="7 5"/>
+<path d="M622 80 L634 86 L622 92 Z" fill="#5DCAA5"/>
+<circle cx="190" cy="86" r="6" fill="#85B7EB"/>
+<circle cx="560" cy="86" r="6" fill="#FAC775"/>
+<text x="190" y="68" font-family="sans-serif" font-size="12" fill="#85B7EB" text-anchor="middle">since / for 起點</text>
+<text x="560" y="68" font-family="sans-serif" font-size="12" fill="#FAC775" text-anchor="middle">now</text>
+<text x="60" y="112" font-family="sans-serif" font-size="12" fill="#9b9ba4">過去</text>
+<text x="600" y="112" font-family="sans-serif" font-size="12" fill="#5DCAA5" text-anchor="middle">還沒停</text>
+<line x1="60" y1="166" x2="556" y2="166" stroke="#4a4a55" stroke-width="2"/>
+<path d="M556 160 L568 166 L556 172 Z" fill="#AFA9EC"/>
+<circle cx="190" cy="166" r="6" fill="#85B7EB"/>
+<circle cx="556" cy="166" r="6" fill="#AFA9EC"/>
+<text x="26" y="142" font-family="sans-serif" font-size="13" fill="#AFA9EC">have + p.p.：箭頭停在 now，只交代「完成了／累計多少」</text>
+<text x="576" y="170" font-family="sans-serif" font-size="12" fill="#AFA9EC">停</text>
+</svg>
+<table style="margin-top:16px">
+<thead><tr><th style="width:132px">時態</th><th style="width:150px">強調</th><th>例句</th></tr></thead>
+<tbody>
+<tr><td class="k">have been V-ing</td><td>過程持續</td><td>They <b>have been selling</b> leftover food for three years.（還在賣）</td></tr>
+<tr><td class="k">have + p.p.</td><td>結果、次數、總量</td><td>They <b>have sold</b> 10,000 magic bags so far.（賣掉一萬個，講總數）</td></tr>
+<tr><td class="n">兩者皆可</td><td>幾乎無差</td><td>I <b>have lived / have been living</b> here for ten years.</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>狀態動詞不能放進進行式</b>：know、own、belong、like、want、need、understand。<br>I <b>have been knowing</b> him ✗ → I <b>have known</b> him for years ✓。<br>判準：這個動詞<b>能不能「正在…中」</b>？不能的，就只能用完成式。</div>
+<div class="tip"><b>看到 for / since 先別急著選</b>——兩種完成式都接 for/since。決定答案的是句尾線索：出現 <b>so far / up to now / three times</b> → 選完成式；出現 <b>all day / lately / 強調持續</b> → 選完成進行式。</div>
+</div>
+
+<div class="card">
+<h3>語法 2　that 子句當受詞：什麼時候可以丟掉 that</h3>
+<div class="flow">
+<span>S</span><i>＋</i><span>V（think / say / know / find / believe）</span><i>＋</i><span>(that) ＋ S ＋ V</span>
+</div>
+<table style="margin-top:8px">
+<thead><tr><th style="width:180px">位置</th><th style="width:120px">that 可省？</th><th>例句</th></tr></thead>
+<tbody>
+<tr><td class="k">及物動詞後（受詞）</td><td><b>可省</b></td><td>I think <b>(that)</b> he is right.</td></tr>
+<tr><td class="n">句首當主詞</td><td><b>不可省</b></td><td><b>That</b> he lied surprised us.（不是 He lied surprised us）</td></tr>
+<tr><td class="n">同位語</td><td><b>不可省</b></td><td>the fact <b>that</b> he lied（不能省成 the fact he lied）</td></tr>
+<tr><td class="n">介系詞後</td><td><b>不可省</b></td><td>in <b>that</b> he lied（唯一可直接接的介系詞是 in）</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>兩個高頻錯</b>：<br>① <b>that 子句不能當介系詞的直接受詞</b>——I am sure <u>of that</u> he will come ✗ → I am sure <b>that</b> he will come ✓（of 直接刪掉）。<br>② <b>think 的否定要轉移</b>：中文說「我想他不會來」，英文說 <b>I don't think</b> he will come.（不是 I think he won't come.）</div>
+<div class="tip"><b>一個動作分辨</b>：把 that 拿掉，句子還讀得通 → 可省；讀起來像兩個句子硬黏 → 不可省。</div>
+</div>
+
+<div class="card">
+<h3 class="a">閱讀理解：這課會怎麼考</h3>
+<div class="flow">
+<span>現象：餐廳剩食</span><i>→</i><span>做法：magic bag</span><i>→</i><span>機制：低價＋神秘</span><i>→</i><span>結果：三贏</span>
+</div>
+<table style="margin-top:10px">
+<thead><tr><th style="width:190px">常考題型</th><th>答題關鍵</th></tr></thead>
+<tbody>
+<tr><td class="k">What is a magic bag?</td><td>打烊前把當天<b>未售出</b>的餐點裝成一袋，<b>顧客不知道內容物</b>——所以叫 magic／surprise</td></tr>
+<tr><td class="k">Why is it called "Too Good To Go"?</td><td>too…to 句型＝「好到不能丟」，即<b>食物還很好，不該被丟掉</b></td></tr>
+<tr><td class="k">Who benefits?</td><td>三邊都要寫：商家、顧客、環境（減少溫室氣體）</td></tr>
+<tr><td class="n">推論題（inference）</td><td>問「作者態度」時，答案通常是<b>正面支持</b>——文中出現 reduce、encourage、win-win 這類字就是線索</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>本課最容易被忽略的一句</b>：問題不是「食物不夠」，而是「食物被丟掉」。整課的邏輯起點是<b>分配</b>，不是<b>生產</b>。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     UNIT 2
+     ============================================================ -->
+<section id="u2">
+<div class="chap"><span class="no">LESSON 02</span><h2>The Smart Cop</h2><span class="sub">闖入 → 冷靜 → 暗號 → 識破 → 逮捕</span></div>
+
+<div class="card">
+<h3>這課的骨架：五個節拍，缺一個就讀不懂結局</h3>
+<div class="flow">
+<span>強盜持刀闖入</span><i>→</i><span>老婦冷靜配合</span><i>→</i><span>警察上門查看</span><i>→</i><span>老婦說出「暗號」</span><i>→</i><span>警察識破並逮捕</span>
+</div>
+<p class="small" style="margin-top:10px">這是一篇<b>懸疑短篇</b>，不是說明文。讀的時候要抓「誰知道什麼」：老婦知道丈夫已死、警察也知道，<b>只有強盜不知道</b>。整篇的張力就建立在這個資訊差上。</p>
+<div class="tip"><b>標題的 smart 不是指警察聰明，是指老婦</b>——她才是設局的人。標題反諷是這課最常考的一題。</div>
+</div>
+
+<div class="card">
+<h3 class="t">單字群 1　人物與場景</h3>
+<table>
+<thead><tr><th style="width:158px">單字</th><th style="width:132px">釋義</th><th>用法／考點</th></tr></thead>
+<tbody>
+<tr><td class="k">elderly<br><span class="small">[ˈɛldɚlɪ] adj.</span></td><td>上了年紀的</td><td>比 old <b>禮貌</b>。<b>the elderly</b>＝老人（集合名詞，動詞用複數）</td></tr>
+<tr><td class="k">widow<br><span class="small">[ˈwɪdo] n.</span></td><td>寡婦</td><td>男版是 <b>widower</b>（鰥夫）。<b>這課的關鍵字</b>：她是寡婦＝丈夫已死＝暗號成立</td></tr>
+<tr><td class="k">suburb<br><span class="small">[ˈsʌbɝb] n.</span></td><td>郊區</td><td>常用複數：<b>in the suburbs</b>。市區是 downtown／the city</td></tr>
+<tr><td class="k">porch<br><span class="small">[pɔrtʃ] n.</span></td><td>門廊</td><td>美式住宅前有台階的門廊。強盜是從這裡進來的</td></tr>
+<tr><td class="k">cop<br><span class="small">[kɑp] n.</span></td><td>警察（口語）</td><td>口語／新聞用，正式是 police officer。<b>標題用 cop 帶口語感</b></td></tr>
+<tr><td class="k">mask<br><span class="small">[mæsk] n.</span></td><td>口罩，面罩</td><td>此處＝<b>蒙面面罩</b>，不是醫療口罩（surgical mask）</td></tr>
+<tr><td class="k">dressed<br><span class="small">[drɛst] adj.</span></td><td>穿著…衣服的</td><td><b>be dressed in</b>＋衣服／顏色。dress up＝盛裝打扮</td></tr>
+<tr><td class="k">wooden<br><span class="small">[ˈwʊdn] adj.</span></td><td>木（製）的</td><td>名詞 wood。引申義＝<b>僵硬的</b>（a wooden smile），閱讀題可能考引申</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>場景三字連起來就是開場</b>：an <b>elderly widow</b> in the <b>suburbs</b>，坐在 <b>porch</b> 上——安靜、獨居、無援，這是懸疑小說的標準起手式。</div>
+</div>
+
+<div class="card">
+<h3 class="t">單字群 2　動作與心理（本課重心）</h3>
+<table>
+<thead><tr><th style="width:158px">單字</th><th style="width:132px">釋義</th><th>用法／考點</th></tr></thead>
+<tbody>
+<tr><td class="k">frightened<br><span class="small">[ˈfraɪtnd] adj.</span></td><td>感到害怕的</td><td><b>be frightened of</b>／<b>to V</b>。主詞是「人」</td></tr>
+<tr><td class="n">frightening<br><span class="small">adj.</span></td><td>令人害怕的</td><td>主詞是「事物」。<b>-ed 修人、-ing 修物</b>，與 bored/boring 同規則</td></tr>
+<tr><td class="k">robber<br><span class="small">[ˈrɑbɚ] n.</span></td><td>強盜</td><td>動詞 <b>rob</b>、名詞 <b>robbery</b>。rob sb <b>of</b> sth（搶走某人某物）</td></tr>
+<tr><td class="k">knock<br><span class="small">[nɑk] n. / v.</span></td><td>敲門（聲）<br>敲</td><td><b>knock at / on</b> the door。a knock at the door＝一陣敲門聲</td></tr>
+<tr><td class="k">remain<br><span class="small">[rɪˈmɪn] v.i.</span></td><td>保持，仍是<br>剩下</td><td><b>不完全不及物</b>：remain <b>silent / calm / a secret</b>。當「剩下」時<b>不用被動</b>：Much remains to be done</td></tr>
+<tr><td class="k">still<br><span class="small">[stɪl] adj.</span></td><td>靜止的，不動的</td><td><b>本課是形容詞</b>（remain still 保持不動）。<b>副詞 still＝仍然</b>，兩個詞性別混</td></tr>
+<tr><td class="k">whisper<br><span class="small">[ˈhwɪspɚ] v.</span></td><td>耳語，低聲說</td><td><b>in a whisper</b>＝低聲地。反義 shout</td></tr>
+<tr><td class="k">purse<br><span class="small">[pɝs] n.</span></td><td>錢包</td><td>美式＝女用皮包；英式＝小錢包。與 wallet（男用皮夾）有別</td></tr>
+<tr><td class="k">jewelry<br><span class="small">[ˈdʒuəlri] n.</span></td><td>珠寶</td><td><b>不可數</b>！a piece of jewelry。單件是 jewel</td></tr>
+<tr><td class="k">burst<br><span class="small">[bɝst] v.</span></td><td>突然衝進</td><td><b>burst into</b> the room。引申：burst into tears（突然哭）／burst out laughing</td></tr>
+<tr><td class="k">freeze<br><span class="small">[friz] v.</span></td><td>呆立不動<br>結冰</td><td>三態 <b>freeze-froze-frozen</b>。本課＝嚇到不敢動</td></tr>
+<tr><td class="k">drop<br><span class="small">[drɑp] v.</span></td><td>使掉落</td><td><b>及物</b>：drop the purse（讓錢包掉下）。fall 才是不及物</td></tr>
+<tr><td class="k">point<br><span class="small">[pɔɪnt] v.</span></td><td>指向</td><td><b>point at</b>（指著目標）／<b>point to</b>（指向方向）。point out＝指出</td></tr>
+<tr><td class="k">immediately<br><span class="small">[ɪˈmidɪətli] adv.</span></td><td>立即</td><td>＝right away／at once。形容詞 immediate</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>rob 與 steal 是萬年考題</b>：<b>rob ＋ 人／地點 ＋ of ＋ 物</b>；<b>steal ＋ 物 ＋ from ＋ 人</b>。<br>They <b>robbed</b> her <b>of</b> her purse. ＝ They <b>stole</b> her purse <b>from</b> her.<br>看到空格後面是人 → rob；後面是物 → steal。</div>
+</div>
+
+<div class="card">
+<h3 class="a">四組必辨析：一字之差就選錯</h3>
+<table>
+<thead><tr><th style="width:150px">對比</th><th style="width:190px">差異</th><th>例句</th></tr></thead>
+<tbody>
+<tr><td class="k">still adj. / adv.</td><td>形容詞＝靜止的<br>副詞＝仍然</td><td>She remained <b>still</b>.（不動）／She is <b>still</b> alive.（仍然）</td></tr>
+<tr><td class="k">remain / stay</td><td>remain 較正式，可接名詞<br>stay 多接形容詞／地點</td><td>He <b>remained</b> a teacher.（仍是老師）／He <b>stayed</b> home.</td></tr>
+<tr><td class="n">frightened / frightening</td><td>-ed 人感到<br>-ing 物令人</td><td>I was <b>frightened</b>.／The noise was <b>frightening</b>.</td></tr>
+<tr><td class="n">purse / wallet</td><td>女用提包／男用皮夾</td><td>She dropped her <b>purse</b>.</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>-ed / -ing 一句話判</b>：主詞是「人」或「有情緒的東西」→ -ed；主詞是「事件、東西、聲音」→ -ing。<b>Never say "I am boring" unless you really mean it.</b></div>
+</div>
+
+<div class="card">
+<h3 class="a">片語 5 個：be about to 是必考</h3>
+<table>
+<thead><tr><th style="width:170px">片語</th><th style="width:110px">釋義</th><th>考點</th></tr></thead>
+<tbody>
+<tr><td class="k">be about to V</td><td>正要…</td><td><b>不與時間副詞連用</b>：be about to leave <u>tomorrow</u> ✗。它本身就是「立刻、馬上」</td></tr>
+<tr><td class="k">just then</td><td>就在那時</td><td>敘事轉折詞，後面常接<b>過去簡單式</b>（不是過去完成式）</td></tr>
+<tr><td class="k">shout out</td><td>叫，喊</td><td>shout at sb（對某人生氣地喊）／shout to sb（朝某人喊話）</td></tr>
+<tr><td class="k">check up on</td><td>查看，調查</td><td>此處＝警察「上門查看」。另有 checkup（n. 健康檢查，一字）</td></tr>
+<tr><td class="k">get lost</td><td>走開！（口語）</td><td>口氣粗魯。另義＝迷路（I got lost.）</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>be about to 的陷阱</b>：題目若給「be about to … + tomorrow / next week」，一定錯，要改成 <b>be going to</b> 或 <b>will</b>。<b>about to ＝ 幾秒內就要發生</b>。</div>
+</div>
+
+<div class="card">
+<h3>語法 1　關係代名詞（人）：who / whom / that</h3>
+<div class="flow">
+<span>先行詞（人）</span><i>＋</i><span>who / that（當主詞）</span><i>＋</i><span>V</span>
+</div>
+<svg class="svgbox" viewBox="0 0 680 210" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="210" rx="10" fill="#232329" stroke="#2d2d34"/>
+<text x="30" y="56" font-family="sans-serif" font-size="15" fill="#e9e9ec">The woman</text>
+<rect x="146" y="34" width="272" height="32" rx="7" fill="rgba(93,202,165,.10)" stroke="#5DCAA5" stroke-width="1"/>
+<text x="156" y="56" font-family="sans-serif" font-size="15" fill="#5DCAA5">who lives next door</text>
+<text x="434" y="56" font-family="sans-serif" font-size="15" fill="#e9e9ec">is a widow.</text>
+<path d="M282 70 L282 92 L96 92 L96 74" fill="none" stroke="#FAC775" stroke-width="1.4" stroke-dasharray="5 4"/>
+<path d="M91 80 L96 70 L101 80 Z" fill="#FAC775"/>
+<text x="300" y="96" font-family="sans-serif" font-size="12" fill="#FAC775">形容詞子句，整個修飾 the woman</text>
+<line x1="30" y1="122" x2="650" y2="122" stroke="#2d2d34"/>
+<text x="30" y="150" font-family="sans-serif" font-size="13" fill="#85B7EB">主格：who / that ＋ 動詞</text>
+<text x="330" y="150" font-family="sans-serif" font-size="13" fill="#FAC775">受格：whom / that / 省略 ＋ 主詞</text>
+<text x="30" y="178" font-family="sans-serif" font-size="12" fill="#9b9ba4">the woman who lives here</text>
+<text x="330" y="178" font-family="sans-serif" font-size="12" fill="#9b9ba4">the woman (whom) I met</text>
+</svg>
+<table style="margin-top:16px">
+<thead><tr><th style="width:150px">關代角色</th><th style="width:200px">可用</th><th>例句</th></tr></thead>
+<tbody>
+<tr><td class="k">主格（當主詞）</td><td>who / that</td><td>The cop <b>who</b> came to the door was smart.</td></tr>
+<tr><td class="k">受格（當受詞）</td><td>whom / that / 省略</td><td>The man <b>(whom)</b> she saw ran away.</td></tr>
+<tr><td class="n">介系詞＋關代</td><td>只能用 whom</td><td>the officer <b>to whom</b> she spoke（不可用 who / that）</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>三個必考陷阱</b>：<br>① <b>動詞單複數看先行詞</b>，不看關代：the woman who <b>live</b>s／the women who <b>live</b>。<br>② <b>關代當主詞時不可省略</b>：The man <u>who</u> called me… 的 who 不能刪。<br>③ <b>先行詞重複</b>是錯的：the woman <u>who she</u> lives next door ✗（who 已代替 she）。</div>
+<div class="tip"><b>口語裡 who 可以代替 whom</b>（The man who I met），但<b>考試遇到「介系詞＋關代」一定選 whom</b>，這是唯一沒有灰色地帶的格子。</div>
+</div>
+
+<div class="card">
+<h3>語法 2　find + O + OC：補語決定意思</h3>
+<div class="flow">
+<span>find</span><i>＋</i><span>受詞 O</span><i>＋</i><span>受詞補語（adj. / V-ing / p.p. / N）</span>
+</div>
+<table style="margin-top:8px">
+<thead><tr><th style="width:120px">補語形式</th><th style="width:150px">意思</th><th>例句</th></tr></thead>
+<tbody>
+<tr><td class="k">＋ adj.</td><td>發現 O 是…的</td><td>She found the door <b>open</b>.</td></tr>
+<tr><td class="k">＋ V-ing</td><td>發現 O <b>正在</b>…（主動、進行）</td><td>He found the robber <b>standing</b> behind the door.</td></tr>
+<tr><td class="k">＋ p.p.</td><td>發現 O <b>被</b>…（被動、已完成）</td><td>She found her purse <b>stolen</b>.</td></tr>
+<tr><td class="k">＋ N.</td><td>發現 O 是…（身分）</td><td>I found him <b>a reliable man</b>.</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>find 不能接原形動詞</b>——這是與 see / hear / watch 最大的差別。<br>I found her <u>cry</u> ✗ → I found her <b>crying</b> ✓（正在哭）。<br>口訣：<b>find 後面沒有「原形」這個選項</b>，只能 adj / V-ing / p.p. / N。</div>
+<div class="tip"><b>V-ing 還是 p.p.？看「誰做動作」</b>：受詞<b>自己在做</b>→ V-ing（her crying）；受詞<b>被別人做</b>→ p.p.（her purse stolen）。</div>
+</div>
+
+<div class="card">
+<h3 class="p">閱讀理解：這課考「言外之意」</h3>
+<div class="quote">老婦對警察說：她「剛剛才跟先生通過電話，說了晚安」。<em>但她是寡婦——先生早已過世。這句話是講給強盜聽的，也是講給警察聽的暗號。</em></div>
+<table style="margin-top:6px">
+<thead><tr><th style="width:210px">常考題型</th><th>答題關鍵</th></tr></thead>
+<tbody>
+<tr><td class="k">Why did she mention her husband?</td><td>不是閒聊——是<b>暗示警察屋裡有外人</b>（她不可能剛跟亡夫通話）</td></tr>
+<tr><td class="k">Why did the cop understand?</td><td>因為<b>警察知道她丈夫已過世</b>（郊區鄰里間的熟識關係）</td></tr>
+<tr><td class="k">What kind of person is she?</td><td><b>calm / quick-minded / brave</b>——注意她全程<b>沒有反抗</b>，是靠機智</td></tr>
+<tr><td class="n">Why is the title "The Smart Cop"?</td><td>雙關：表面指警察，實際<b>真正 smart 的是老婦</b>；也可解為「警察聽懂了暗號」</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>懸疑類閱讀的通用解法</b>：先問「誰知道什麼、誰不知道什麼」，再問「哪一句話有兩層意思」。答案幾乎都藏在這兩處。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     UNIT 3
+     ============================================================ -->
+<section id="u3">
+<div class="chap"><span class="no">LESSON 03</span><h2>Follow the Signs</h2><span class="sub">非語言溝通 → 指示／警示／禁止 → 數位時代仍需要</span></div>
+
+<div class="card">
+<h3>這課的骨架：標示是一種「不用翻譯的語言」</h3>
+<div class="flow">
+<span>溝通不只靠語言</span><i>→</i><span>標示＝圖像化的訊息</span><i>→</i><span>三種功能：指路／提醒／禁止</span><i>→</i><span>顏色與形狀也有意義</span><i>→</i><span>數位時代仍不可取代</span>
+</div>
+<p class="small" style="margin-top:10px">本課的核心概念只有一個：<b>nonverbal communication</b>（非語言溝通）。所有細節——三角形、紅圈、箭頭、輪椅圖案——都是這個概念的<b>例子</b>，不是各自獨立的重點。</p>
+<div class="tip"><b>為什麼實體標示打不倒？</b>三個理由：<b>不用充電</b>（手機沒電還看得到）、<b>不用翻譯</b>（外國人一看就懂）、<b>反應最快</b>（開車時零點幾秒就要判斷）。考簡答寫這三點。</div>
+</div>
+
+<div class="card">
+<h3 class="t">單字群 1　概念核心（抽象名詞）</h3>
+<table>
+<thead><tr><th style="width:158px">單字</th><th style="width:132px">釋義</th><th>用法／考點</th></tr></thead>
+<tbody>
+<tr><td class="k">communication<br><span class="small">[kəˌmjunəˈkeʃən] n.</span></td><td>溝通，交流</td><td><b>不可數</b>。動詞 communicate <b>with</b> sb。<b>nonverbal communication</b>＝本課主題詞</td></tr>
+<tr><td class="k">nonverbal<br><span class="small">adj.</span></td><td>非言語的</td><td><b>non- 表否定</b>，同類：nonstop／nonsense／nonfiction</td></tr>
+<tr><td class="k">symbol<br><span class="small">[ˈsɪmbəl] n.</span></td><td>符號，象徵</td><td>動詞 <b>symbolize</b>＝象徵。a symbol <b>of</b> peace</td></tr>
+<tr><td class="k">purpose<br><span class="small">[ˈpɝpəs] n.</span></td><td>目的</td><td><b>on purpose</b>＝故意（對比 by accident）；<b>for the purpose of</b> V-ing</td></tr>
+<tr><td class="k">location<br><span class="small">[loˈkeʃən] n.</span></td><td>地點，位置</td><td>動詞 locate。be located <b>in</b>＝位於</td></tr>
+<tr><td class="k">consider<br><span class="small">[kənˈsɪdɚ] v.t.</span></td><td>考量，細想</td><td><b>consider V-ing</b>（考慮做）；<b>consider O (to be) N/adj.</b>（認為 O 是…）</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>consider 後面不能接 to V</b>：I am considering <u>to go</u> ✗ → I am considering <b>going</b> ✓。<br>但「認為」義可以：We consider him <b>(to be) a genius</b>.——差別在後面接的是<b>動作</b>還是<b>身分</b>。</div>
+</div>
+
+<div class="card">
+<h3 class="t">單字群 2　場所與物件（機場場景）</h3>
+<table>
+<thead><tr><th style="width:158px">單字</th><th style="width:132px">釋義</th><th>用法／考點</th></tr></thead>
+<tbody>
+<tr><td class="k">baggage<br><span class="small">[ˈbæɡɪdʒ] n.</span></td><td>行李</td><td><b>不可數</b>！a piece of baggage。同義 luggage 也不可數</td></tr>
+<tr><td class="k">cart<br><span class="small">[kɑrt] n.</span></td><td>手推車</td><td>此處＝<b>行李推車</b>（baggage cart）。美式 shopping cart＝購物車</td></tr>
+<tr><td class="k">exit<br><span class="small">[ˈɛksɪt] n. / v.</span></td><td>出口；離開</td><td>反義 <b>entrance</b>（入口）／enter。機場標示 Exit 常配綠色</td></tr>
+<tr><td class="k">rental<br><span class="small">[ˈrɛntl] n.</span></td><td>租賃，出租</td><td>car rental＝租車。動詞 rent</td></tr>
+<tr><td class="k">technology<br><span class="small">[tɛkˈnɑlədʒɪ] n.</span></td><td>科技，技術</td><td>可數／不可數皆可。形容詞 technological</td></tr>
+<tr><td class="k">scooter<br><span class="small">[ˈskutɚ] n.</span></td><td>（輕型）機車</td><td>也可指電動滑板車（e-scooter）</td></tr>
+<tr><td class="k">triangle<br><span class="small">[ˈtraɪˌæŋɡl] n.</span></td><td>三角形</td><td><b>tri- 表三</b>：tricycle／triple／triathlon。<b>紅三角＝警告</b>，本課重點</td></tr>
+<tr><td class="k">bend<br><span class="small">[bɛnd] n. / v.</span></td><td>彎道<br>彎曲，轉彎</td><td>三態 bend-bent-bent。<b>a bend in the road</b>＝路上的彎道</td></tr>
+<tr><td class="k">litter<br><span class="small">[ˈlɪtɚ] v. / n.</span></td><td>亂丟垃圾<br>垃圾</td><td>當名詞<b>不可數</b>。No Littering＝禁止亂丟垃圾</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>baggage 不可數，這題年年出現</b>：many <u>baggages</u> ✗ → <b>much baggage</b>／<b>a lot of baggage</b>／<b>two pieces of baggage</b> ✓。<br>同類不可數：luggage、furniture、equipment、information、advice、jewelry（L2 已出現）。</div>
+</div>
+
+<div class="card">
+<h3 class="p">單字群 3　形容詞與動詞（對比組）</h3>
+<div class="grid2">
+<div class="box"><div class="bt">DIGITAL</div><div class="bv">數位的<br><span class="small">a digital map／digital sign</span></div></div>
+<div class="box"><div class="bt">PHYSICAL</div><div class="bv">實體的，有形的<br><span class="small">a physical sign／physical store</span></div></div>
+</div>
+<table style="margin-top:14px">
+<thead><tr><th style="width:158px">單字</th><th style="width:132px">釋義</th><th>用法／考點</th></tr></thead>
+<tbody>
+<tr><td class="k">warn<br><span class="small">[wɔrn] v.</span></td><td>警告</td><td><b>warn sb of / about</b> sth；<b>warn sb to V</b>；<b>warn against</b> V-ing</td></tr>
+<tr><td class="k">decoration<br><span class="small">[ˌdɛkəˈreʃən] n.</span></td><td>裝飾（品）</td><td>動詞 decorate。可數（一個裝飾品）也可不可數（裝飾這件事）</td></tr>
+</tbody>
+</table>
+<div class="note"><b>跨課連結（很值得記）</b>：<b>consider</b>（L3 考量）→ <b>considerable</b>（L1 可觀的）→ <b>considerate</b>（體貼的）。<br>三個字長得像，意思差很遠。考題給 a ______ amount of → 選 considerable；給 It was ______ of you to help. → 選 considerate。</div>
+</div>
+
+<div class="card">
+<h3 class="a">片語 6 個：regardless of 與 run out of</h3>
+<table>
+<thead><tr><th style="width:170px">片語</th><th style="width:110px">釋義</th><th>考點</th></tr></thead>
+<tbody>
+<tr><td class="k">regardless of</td><td>無論，不管</td><td>後面接<b>名詞／V-ing</b>，不接 that 子句：regardless of <b>the weather</b></td></tr>
+<tr><td class="k">come across</td><td>遇見，發現</td><td>及物，不拆分：come across an old sign</td></tr>
+<tr><td class="k">run out of</td><td>用盡</td><td><b>人</b> run out of <b>物</b>；<b>物</b> runs out。<b>不用被動</b>：Our money <u>was run out</u> ✗</td></tr>
+<tr><td class="k">look out for</td><td>注意，當心</td><td>＝watch out for。look out!（單用）＝小心！</td></tr>
+<tr><td class="k">refer to</td><td>指的是</td><td>也＝「參考」（refer to the dictionary）。名詞 reference</td></tr>
+<tr><td class="k">rather than</td><td>而不是</td><td>前後<b>詞性對稱</b>：walk rather than <b>drive</b>（不寫 driving）</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>run out 的方向感</b>：主詞是「人」→ 後面要 <b>of</b>；主詞是「錢、時間、水」→ 後面什麼都不加。<b>We ran out of water.</b> ＝ <b>Our water ran out.</b></div>
+</div>
+
+<div class="card">
+<h3 class="a">禁止標示 10 個：其實只有三種句型</h3>
+<table>
+<thead><tr><th style="width:200px">標示</th><th style="width:130px">中文</th><th>句型</th></tr></thead>
+<tbody>
+<tr><td class="k">No Entry / Do Not Enter</td><td>禁止進入</td><td>兩種句型都對照得到</td></tr>
+<tr><td class="k">No Parking</td><td>禁止停車</td><td>No ＋ <b>V-ing</b></td></tr>
+<tr><td class="k">No Camping</td><td>禁止露營</td><td>No ＋ <b>V-ing</b></td></tr>
+<tr><td class="k">No Food or Drink</td><td>禁止飲食</td><td>No ＋ <b>名詞</b>（or 連接）</td></tr>
+<tr><td class="k">No Cellphone Use</td><td>禁止使用手機</td><td>No ＋ <b>名詞</b>（use 是名詞）</td></tr>
+<tr><td class="k">No U Turn</td><td>禁止迴轉</td><td>No ＋ <b>名詞</b></td></tr>
+<tr><td class="k">No Left Turn</td><td>禁止左轉</td><td>No ＋ <b>名詞</b></td></tr>
+<tr><td class="k">No Firecrackers</td><td>禁止燃放爆竹</td><td>No ＋ <b>名詞</b></td></tr>
+<tr><td class="k">No Picking Flowers</td><td>禁止採花</td><td>No ＋ <b>V-ing</b>（有受詞）</td></tr>
+<tr><td class="k">Keep Off the Grass</td><td>請勿踐踏草皮</td><td><b>Keep off</b> ＋ 名詞（不是 No 句型）</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>No 後面接什麼，看「動作」還是「東西」</b>：<b>No ＋ V-ing</b>（No Smoking 禁止抽菸）／<b>No ＋ 名詞</b>（No Smoking Area 禁菸區）。<br>最常錯的一格：<b>No Parking</b> ✓、<u>No Park</u> ✗——No 後面<b>不能接原形動詞</b>。</div>
+<div class="tip"><b>顏色與形狀也是考點</b>：<b>紅圈＋斜線</b>＝禁止；<b>紅三角</b>＝警告；<b>藍／綠方塊</b>＝指示、允許。<b>形狀比文字更早被讀懂</b>，這就是它「非語言」的意思。</div>
+</div>
+
+<div class="card">
+<h3>語法 1　關係代名詞（物）：which / that</h3>
+<div class="flow">
+<span>先行詞（物）</span><i>＋</i><span>which / that</span><i>＋</i><span>V 或 S＋V</span>
+</div>
+<table style="margin-top:8px">
+<thead><tr><th style="width:200px">情況</th><th style="width:170px">該用什麼</th><th>例句</th></tr></thead>
+<tbody>
+<tr><td class="k">一般（修飾物）</td><td>which / that 皆可</td><td>the sign <b>which / that</b> warns drivers</td></tr>
+<tr><td class="n">先行詞有最高級／序數／only／all</td><td><b>只能用 that</b></td><td>the <b>only</b> sign <b>that</b> I saw</td></tr>
+<tr><td class="n">先行詞同時含人與物</td><td><b>只能用 that</b></td><td>the people and signs <b>that</b> I saw</td></tr>
+<tr><td class="n">非限定用法（有逗號）</td><td><b>只能用 which</b></td><td>The sign<b>, which</b> is red, means "stop."</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>what 不能有先行詞</b>——這是關代單元最常見的錯。<br>the thing <u>what</u> he said ✗ → the thing <b>that</b> he said ✓／<b>what</b> he said ✓（去掉 the thing）。<br>記法：<b>what ＝ the thing(s) that</b>，本身就包含了先行詞，前面不能再放名詞。</div>
+<div class="tip"><b>逗號一出現，答案就變窄</b>：有逗號（非限定）→ 只能 which，不能用 that；沒逗號 → which / that 都行。這一條幾乎每次大考都出現。</div>
+</div>
+
+<div class="card">
+<h3>語法 2　so that（目的） vs so…that（結果）</h3>
+<svg class="svgbox" viewBox="0 0 680 250" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="250" rx="10" fill="#232329" stroke="#2d2d34"/>
+<text x="26" y="34" font-family="sans-serif" font-size="13" fill="#9FE1CB">A　so that ＋ 子句　＝　目的（為了…）</text>
+<text x="30" y="66" font-family="sans-serif" font-size="14" fill="#e9e9ec">He spoke slowly</text>
+<rect x="164" y="46" width="86" height="28" rx="6" fill="rgba(93,202,165,.14)" stroke="#5DCAA5" stroke-width="1"/>
+<text x="172" y="66" font-family="sans-serif" font-size="14" fill="#5DCAA5">so that</text>
+<text x="258" y="66" font-family="sans-serif" font-size="14" fill="#e9e9ec">everyone could understand.</text>
+<text x="30" y="90" font-family="sans-serif" font-size="12" fill="#9b9ba4">後面接完整子句，常配 can / could / will / would / may / might</text>
+<line x1="26" y1="108" x2="654" y2="108" stroke="#2d2d34"/>
+<text x="26" y="134" font-family="sans-serif" font-size="13" fill="#FAC775">B　so ＋ adj / adv ＋ that ＋ 子句　＝　結果（如此…以致於）</text>
+<text x="30" y="166" font-family="sans-serif" font-size="14" fill="#e9e9ec">He spoke</text>
+<rect x="112" y="146" width="122" height="28" rx="6" fill="rgba(250,199,117,.14)" stroke="#FAC775" stroke-width="1"/>
+<text x="120" y="166" font-family="sans-serif" font-size="14" fill="#FAC775">so slowly that</text>
+<text x="242" y="166" font-family="sans-serif" font-size="14" fill="#e9e9ec">everyone understood.</text>
+<text x="30" y="190" font-family="sans-serif" font-size="12" fill="#9b9ba4">so 與 that 之間一定有形容詞或副詞，缺了就錯</text>
+<text x="30" y="222" font-family="sans-serif" font-size="13" fill="#F09595">判題：空格後面接「子句」→ so that；空格後面接「形容詞」→ so … that</text>
+</svg>
+<table style="margin-top:16px">
+<thead><tr><th style="width:150px">結構</th><th style="width:130px">意思</th><th>例句</th></tr></thead>
+<tbody>
+<tr><td class="k">so that ＋ S ＋ V</td><td>以便，為了</td><td>Put up a sign <b>so that</b> people can find the exit.</td></tr>
+<tr><td class="k">so ＋ adj/adv ＋ that</td><td>如此…以致於</td><td>The sign was <b>so small that</b> nobody noticed it.</td></tr>
+<tr><td class="k">such ＋ (a/an) ＋ adj ＋ N ＋ that</td><td>如此…的（名詞）</td><td>It was <b>such a small sign that</b> nobody noticed it.</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>so 與 such 的分配</b>：後面接<b>形容詞／副詞</b>→ so；後面接<b>名詞</b>→ such。<br>so <u>a</u> small sign ✗ → <b>such a small sign</b> ✓／<b>so small a sign</b> ✓（後者是正式倒裝寫法）。</div>
+<div class="tip"><b>一句話記</b>：<b>so that 是「為了」，so…that 是「結果」</b>——中間夾了形容詞，就從目的變成結果。</div>
+</div>
+
+<div class="card">
+<h3 class="a">閱讀理解：這課的三個層次</h3>
+<div class="flow">
+<span>溝通</span><i>→</i><span>非語言溝通</span><i>→</i><span>標示</span><i>→</i><span>形狀＋顏色編碼</span><i>→</i><span>仍不可取代</span>
+</div>
+<table style="margin-top:10px">
+<thead><tr><th style="width:210px">常考題型</th><th>答題關鍵</th></tr></thead>
+<tbody>
+<tr><td class="k">What is the main idea?</td><td>標示是<b>跨越語言的溝通工具</b>，用圖像與顏色傳達指示、警告與禁止</td></tr>
+<tr><td class="k">Why are signs still needed?</td><td>不需電力、不需翻譯、反應速度最快（開車時來不及看手機）</td></tr>
+<tr><td class="k">What does a red triangle mean?</td><td><b>警告</b>（warning）；紅色圓圈加斜線＝<b>禁止</b>（prohibition）</td></tr>
+<tr><td class="n">What does "nonverbal" refer to?</td><td>不透過文字或口語的溝通方式——手勢、表情、圖示、顏色</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>本課最容易被寫錯的一題</b>：問「為什麼數位時代還需要實體標示」時，不要寫「因為有些人不會用手機」——那是<b>推測</b>。要寫文中支持的<b>三個功能性理由</b>。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     附錄 A：語法總表
+     ============================================================ -->
+<section id="grammar">
+<div class="chap"><span class="no">附錄 A</span><h2>六個語法點總表</h2><span class="sub">考前掃這一頁就夠</span></div>
+
+<div class="card">
+<h3>三課語法 — 結構 — 判準 — 陷阱</h3>
+<table>
+<thead><tr><th style="width:150px">語法點</th><th style="width:190px">結構</th><th>一句話判準</th><th style="width:170px">最常錯</th></tr></thead>
+<tbody>
+<tr><td class="k">現在完成進行式</td><td>have/has been ＋ V-ing</td><td>強調<b>過程持續</b>，常配 for / since / all day</td><td>狀態動詞誤用：have been knowing ✗</td></tr>
+<tr><td class="k">that 子句當受詞</td><td>V ＋ (that) ＋ S ＋ V</td><td>只有<b>及物動詞後</b>可省 that</td><td>句首主詞、同位語省 that ✗</td></tr>
+<tr><td class="k">關代（人）</td><td>先行詞(人) ＋ who/whom/that</td><td>當主詞用 who；當受詞可省</td><td>動詞單複數沒對齊先行詞</td></tr>
+<tr><td class="k">find ＋ O ＋ OC</td><td>find ＋ O ＋ adj/V-ing/p.p./N</td><td>V-ing＝主動進行；p.p.＝被動完成</td><td>接原形動詞 ✗</td></tr>
+<tr><td class="k">關代（物）</td><td>先行詞(物) ＋ which/that</td><td>有逗號只能 which；what 前不加先行詞</td><td>the thing what ✗</td></tr>
+<tr><td class="k">so that / so…that</td><td>so that ＋ 子句／so ＋ adj ＋ that</td><td>後面接子句→so that；接形容詞→so…that</td><td>so a small sign ✗（要 such）</td></tr>
+</tbody>
+</table>
+<div class="note"><b>六個語法點其實只有三組邏輯</b>：①「時間」＝完成進行式；②「句子嵌句子」＝that 子句、關代、find＋OC；③「因果」＝so that／so…that。用這三組去歸位，比背六條規則穩。</div>
+</div>
+</section>
+
+<!-- ============================================================
+     附錄 B：易錯清單
+     ============================================================ -->
+<section id="errors">
+<div class="chap"><span class="no">附錄 B</span><h2>易錯清單</h2><span class="sub">考前掃這一頁</span></div>
+
+<div class="final">
+<h3>高頻陷阱（27 條）</h3>
+<ol>
+<li><b>amount</b> 只配不可數名詞；可數要用 <b>number</b>。a large amount of apples ✗。</li>
+<li><b>considerable</b>＝可觀的（修飾量），<b>considerate</b>＝體貼的。兩字差一個字母，意思無關。</li>
+<li><b>reduce</b> 是及物（人去弄少），<b>decrease</b> 多為不及物（自己變少）。</li>
+<li><b>discount 30%</b> 是「打七折」，不是「打三折」——中文與英文的折扣方向相反。</li>
+<li><b>leftovers</b> 當名詞幾乎都用複數；<b>waste</b> 當「浪費」不可數。</li>
+<li><b>pick up</b> 有四義：買到／接人／撿起／好轉。看後面接什麼判斷。</li>
+<li><b>at present</b> 不加 the；<b>for the present</b> 才是「暫時」。</li>
+<li>狀態動詞（know / own / belong / like）<b>不能用進行式</b>：have been knowing ✗。</li>
+<li>看到 <b>so far / three times / up to now</b> → 選<b>完成式</b>，不是完成進行式。</li>
+<li><b>that 子句當句首主詞或同位語時不可省略</b>；只有及物動詞後的受詞 that 可省。</li>
+<li>「我想他不會來」要寫 <b>I don't think he will come.</b>——否定轉移到 think。</li>
+<li><b>rob ＋ 人 ＋ of ＋ 物</b>；<b>steal ＋ 物 ＋ from ＋ 人</b>。看空格後面接什麼。</li>
+<li><b>frightened</b> 修飾人（感到害怕），<b>frightening</b> 修飾事物（令人害怕）。</li>
+<li><b>still</b> 當形容詞＝靜止的，當副詞＝仍然。remain still 是形容詞用法。</li>
+<li><b>remain</b> 當「剩下」時不用被動：is remained ✗。</li>
+<li><b>jewelry / baggage / luggage / furniture / equipment</b> 都是不可數，要加 a piece of。</li>
+<li><b>be about to</b> 不與 tomorrow / next week 等未來時間副詞連用。</li>
+<li><b>drop</b> 是及物（drop the purse），<b>fall</b> 才是不及物。</li>
+<li>關代當主詞時，<b>子句動詞的單複數由先行詞決定</b>：the women who live。</li>
+<li><b>「介系詞＋關代」只能用 whom</b>（人）或 which（物），不能用 who / that。</li>
+<li><b>find 後面不能接原形動詞</b>：found her cry ✗ → found her crying ✓。</li>
+<li><b>what 前面不能有先行詞</b>：the thing what ✗ → the thing that／what ✓。</li>
+<li><b>有逗號的非限定用法只能用 which</b>，不能用 that。</li>
+<li>先行詞有<b>最高級、序數、only、all</b>，或同時含人與物 → <b>只能用 that</b>。</li>
+<li><b>so that</b> 表目的（後面接完整子句）；<b>so…that</b> 表結果（中間要有形容詞／副詞）。</li>
+<li><b>so ＋ 形容詞</b>；<b>such ＋ (a/an) ＋ 形容詞 ＋ 名詞</b>。so a small sign ✗。</li>
+<li><b>No ＋ V-ing 或 名詞</b>，不能接原形動詞：No Park ✗ → No Parking ✓。</li>
+</ol>
+</div>
+</section>
+
+<!-- ============================================================
+     附錄 C：快速小卡
+     ============================================================ -->
+<section id="cards">
+<div class="chap"><span class="no">附錄 C</span><h2>快速重點小卡</h2><span class="sub">考前 10 分鐘，只掃這一頁</span></div>
+
+<div class="qkrow"><span class="qn">L1 <b>Too Good To Go</b></span><span class="qd">問題不是食物不夠，是食物被丟掉</span></div>
+<div class="qk">
+<div class="qkc"><div class="qt">三贏</div><div class="qb">商家省成本＋多收入／顧客低價／環境少<b>溫室氣體</b></div></div>
+<div class="qkc c2"><div class="qt">magic bag</div><div class="qb">打烊前剩食裝袋，<b>顧客不知道內容物</b>，所以叫 magic</div></div>
+<div class="qkc c3"><div class="qt">語法</div><div class="qb"><b>have been V-ing</b> 過程持續；<b>have p.p.</b> 講總量</div></div>
+<div class="qkc c4"><div class="qt">片語</div><div class="qb">pick up 買到／at present 目前／after all 畢竟／go to waste 浪費掉</div></div>
+</div>
+
+<div class="qkrow"><span class="qn">L2 <b>The Smart Cop</b></span><span class="qd">真正 smart 的是老婦，不是警察</span></div>
+<div class="qk">
+<div class="qkc"><div class="qt">暗號</div><div class="qb">她說「剛跟先生說晚安」，但她是<b>寡婦</b>——丈夫已死</div></div>
+<div class="qkc c2"><div class="qt">關鍵字</div><div class="qb"><b>widow</b>／<b>elderly</b>／<b>suburb</b>／<b>porch</b> 撐起整個開場</div></div>
+<div class="qkc c3"><div class="qt">語法</div><div class="qb">關代 <b>who</b>（人）；<b>find ＋ O ＋ V-ing／p.p.</b>（不接原形）</div></div>
+<div class="qkc c4"><div class="qt">片語</div><div class="qb">be about to 正要／just then 就在那時／check up on 查看</div></div>
+</div>
+
+<div class="qkrow"><span class="qn">L3 <b>Follow the Signs</b></span><span class="qd">標示是不用翻譯的語言</span></div>
+<div class="qk">
+<div class="qkc"><div class="qt">三類標示</div><div class="qb">指路／提醒／禁止。<b>紅圈＝禁止、紅三角＝警告</b></div></div>
+<div class="qkc c2"><div class="qt">為何仍需要</div><div class="qb">不用充電、不用翻譯、<b>反應最快</b></div></div>
+<div class="qkc c3"><div class="qt">語法</div><div class="qb">關代 <b>which/that</b>（物）；<b>so that</b> 目的 vs <b>so…that</b> 結果</div></div>
+<div class="qkc c4"><div class="qt">片語</div><div class="qb">regardless of 無論／run out of 用盡／rather than 而不是</div></div>
+</div>
+
+<div class="final">
+<h3>最後 5 條（進考場前只記這些）</h3>
+<ol>
+<li><b>amount</b> 配不可數、<b>number</b> 配可數。</li>
+<li>狀態動詞<b>不用進行式</b>：have known ✓、have been knowing ✗。</li>
+<li><b>rob 人 of 物／steal 物 from 人</b>。</li>
+<li><b>find ＋ O ＋ V-ing（主動）／p.p.（被動）</b>，沒有原形。</li>
+<li><b>so that 後接子句（目的）、so ＋ adj ＋ that（結果）</b>。</li>
+</ol>
+</div>
+</section>
+
+</div>
+
+<!-- ============================================================
+     頁尾腳本：自動把每個 table 包進 .tw、每個 svg.svgbox 包進 .svgwrap
+     ⚠ 不要刪，也不要手動包
+     ============================================================ -->
+<script>
+(function(){
+  document.querySelectorAll('table').forEach(function(t){
+    if(t.parentElement && t.parentElement.classList.contains('tw'))return;
+    var head=t.querySelector('thead tr');
+    var cols=head?head.children.length:0;
+    if(cols>=4)t.classList.add('wide');
+    var w=document.createElement('div');w.className='tw';
+    t.parentNode.insertBefore(w,t);w.appendChild(t);
+  });
+  document.querySelectorAll('svg.svgbox').forEach(function(s){
+    if(s.parentElement && s.parentElement.classList.contains('svgwrap'))return;
+    var w=document.createElement('div');w.className='svgwrap';
+    s.parentNode.insertBefore(w,s);w.appendChild(s);
+  });
+})();
+</script>
+</body>
+</html>
