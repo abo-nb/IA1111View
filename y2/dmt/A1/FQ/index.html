@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>多媒體概論　問答題標準答案庫（CH1–CH2）</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#131315;--card:#1b1b1f;--card2:#232329;--line:#2d2d34;
+--tx:#e9e9ec;--mut:#9b9ba4;
+--blue:#85B7EB;--teal:#5DCAA5;--amber:#FAC775;--red:#F09595;--purple:#AFA9EC;
+--fs:17px;--fs-sm:14.5px;--fs-h3:18.5px;--fs-h2:25px;
+--lh:1.85;--radius:14px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;line-height:var(--lh);font-size:var(--fs);-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 clamp(18px,4vw,28px) 96px}
+
+.nav{position:sticky;top:0;z-index:20;background:rgba(19,19,21,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:920px;margin:0 auto;display:flex;gap:22px;align-items:center;min-height:56px;padding:0 clamp(18px,4vw,28px);overflow-x:auto;scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav a{color:var(--mut);font-size:var(--fs-sm);text-decoration:none;white-space:nowrap;padding:8px 0;border-bottom:1px solid transparent}
+.nav a:hover{color:var(--tx);border-bottom-color:var(--teal)}
+
+section{scroll-margin-top:76px}
+.hero{padding:50px 0 30px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.hero h1{font-size:clamp(26px,4.2vw,36px);font-weight:500;line-height:1.35}
+.hero p{color:var(--mut);font-size:var(--fs-sm);margin-top:12px;max-width:680px;line-height:1.8}
+
+.chap{display:flex;align-items:baseline;gap:14px;margin:56px 0 22px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.chap .no{font-size:var(--fs-sm);letter-spacing:2px;color:var(--teal);font-weight:500}
+.chap h2{font-size:var(--fs-h2);font-weight:500;line-height:1.4}
+.chap .sub{font-size:var(--fs-sm);color:var(--mut);margin-left:auto;text-align:right;line-height:1.6;max-width:52%}
+
+.q{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin-bottom:14px}
+.qh{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}
+.qn{font-size:13px;color:var(--teal);border:1px solid rgba(93,202,165,.45);background:rgba(93,202,165,.10);border-radius:999px;padding:2px 10px;flex:0 0 auto;margin-top:3px;letter-spacing:.5px}
+.qt{font-size:var(--fs-h3);font-weight:500;color:#e9e9ec;line-height:1.55;flex:1}
+.pts{font-size:13px;color:var(--mut);flex:0 0 auto;margin-top:5px;white-space:nowrap}
+
+.kp{border-left:3px solid var(--amber);background:rgba(250,199,117,.07);border-radius:0 8px 8px 0;padding:12px 16px;font-size:15.5px;line-height:1.8;color:#dcdce2;margin-bottom:10px}
+.kp b{color:var(--amber);font-weight:500;display:block;font-size:13.5px;letter-spacing:1px;margin-bottom:4px}
+.kp ol{padding-left:20px;margin:0}
+.kp li{margin-bottom:2px}
+
+.ans{border-left:3px solid var(--teal);background:rgba(93,202,165,.07);border-radius:0 8px 8px 0;padding:13px 16px;font-size:16px;line-height:1.85;color:#dcdce2}
+.ans b{color:var(--teal);font-weight:500}
+.ans em{font-style:normal;color:var(--mut);font-size:13.5px;display:block;margin-top:8px;border-top:1px dashed #33333b;padding-top:7px}
+
+.hook{font-size:15px;color:#b9b9c2;line-height:1.8;margin-top:10px;padding-left:2px}
+.hook b{color:var(--purple);font-weight:500}
+
+.tpl{background:var(--card2);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-top:18px}
+.tpl h3{font-size:var(--fs-h3);font-weight:500;color:var(--blue);margin-bottom:14px}
+.tpl .row{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed #33333b;font-size:16px;line-height:1.75}
+.tpl .row:last-child{border-bottom:none}
+.tpl .row b{color:var(--blue);flex:0 0 132px;font-weight:500;font-size:15px;line-height:1.75}
+table{width:100%;border-collapse:collapse;font-size:15.5px;margin:6px 0}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7}
+thead th{font-size:var(--fs-sm);color:var(--mut);font-weight:500}
+td.k{color:var(--teal);white-space:nowrap;font-weight:500}
+
+.warn{border-left:3px solid var(--red);background:rgba(240,149,149,.07);border-radius:0 8px 8px 0;padding:13px 16px;font-size:15.5px;line-height:1.8;color:#dcdce2;margin-top:14px}
+.warn b{color:var(--red);font-weight:500}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0;padding-bottom:2px;scrollbar-width:thin;scrollbar-color:#3a3a42 transparent}
+.tw table{margin:0}
+.tw::-webkit-scrollbar{height:6px}
+.tw::-webkit-scrollbar-thumb{background:#3a3a42;border-radius:3px}
+.svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 0;padding-bottom:2px}
+.svgwrap svg{max-width:100%}
+</style>
+</head>
+<body>
+
+<div class="nav"><div class="nav-in">
+<a href="#howto">怎麼用</a>
+<a href="#ch1">CH1 多媒體基礎</a>
+<a href="#ch2">CH2 文字媒體</a>
+<a href="#tpl">答題模板</a>
+</div></div>
+
+<div class="wrap">
+
+<div class="hero">
+<h1>問答題標準答案庫</h1>
+<p>CH1–CH2　共 20 題。每題三段：<b>評分點</b>（老師手上那張清單）、<b>答案</b>（可直接背，粗體就是得分關鍵詞）、<b>鉤子</b>（記不住時的回憶線索）。</p>
+</div>
+
+<section id="howto">
+<div class="chap"><span class="no">使用說明</span><h2>問答題的給分規則</h2><span class="sub">先懂規則，再背答案</span></div>
+
+<div class="tpl">
+<h3>三條鐵律</h3>
+<div class="row"><b>① 意思對不算分</b><span>閱卷看的是「關鍵詞有沒有出現」。寫得通順但少了關鍵詞，一樣零分。</span></div>
+<div class="row"><b>② 先數要點再寫</b><span>定義題數「動作有幾個」、原因題找「數字＋比較＋結論」、比較題分「A／B／差在哪」。要點數對了，才不會漏。</span></div>
+<div class="row"><b>③ 寧可多寫一個</b><span>不會倒扣。不確定時把相關的關鍵詞都寫上，但要用編號或分號隔開，讓老師一眼看到。</span></div>
+</div>
+
+<div class="warn"><b>本科問答題最常失分的三個地方（先記這三條，比背答案有效）</b><br>① 「字型」寫成「<b>字形</b>」——教材的術語是字型（Font），寫錯詞直接不給分。<br>② ASCII 答「<b>8 位元</b>」——問「用幾個位元編碼」要答 <b>7</b>；只有問「佔多少空間」才答 1 byte。<br>③ WWW 答「<b>超文件</b>」——要答 <b>超媒體</b>。超文件是零件，不是成品。</div>
+</section>
+
+<!-- ============================ CH1 ============================ -->
+<section id="ch1">
+<div class="chap"><span class="no">CH 01</span><h2>多媒體基礎</h2><span class="sub">8 題</span></div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q1</span><span class="qt">請寫出「多媒體」的定義。</span><span class="pts">5 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>結合多種傳播資訊媒介</li><li>用電腦或其他電子化方式製作</li><li>發佈出去</li></ol></div>
+<div class="ans">結合<b>多種傳播資訊媒介</b>（文字、圖形、圖片、影像、影片、動畫、音樂、聲音、交談等），藉由<b>電腦或其他電子化的方式</b>來<b>製作</b>，並<b>發佈</b>出去。<em>三個動作缺一不可；只寫「傳遞訊息」是目的，不是定義。</em></div>
+<div class="hook"><b>鉤子：</b>素材 → 製作 → 發佈。三段式，少一段就只是素材庫。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q2</span><span class="qt">多媒體包含哪些元素？請全部列出。</span><span class="pts">5 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>文字、圖形、圖片、影像</li><li>影片、動畫</li><li>音樂、聲音</li><li>交談</li></ol></div>
+<div class="ans"><b>文字、圖形、圖片、影像、影片、動畫、音樂、聲音、交談</b>，共九類。<em>漏一項扣分。「交談」最常被漏掉——它指的是互動，不是內容。</em></div>
+<div class="hook"><b>鉤子：</b>前八個是「內容」，第九個「交談」是「操控」。數到八就停手的人，會掉最後一分。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q3</span><span class="qt">多媒體的五個本質（為什麼需要多媒體）是什麼？</span><span class="pts">5 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>傳遞訊息</li><li>單一媒介傳遞之訊息會有所不足</li><li>結合數種或多種訊息媒介</li><li>得以同時接收到不同感官的訊息</li><li>動作即為訊息</li></ol></div>
+<div class="ans">① <b>傳遞訊息</b>　② <b>單一媒介不足</b>　③ <b>結合數種媒介</b>　④ <b>同時接收不同感官的訊息</b>　⑤ <b>動作即為訊息</b>。<em>第五條最常漏，意思是「怎麼動」本身也承載語意。</em></div>
+<div class="hook"><b>鉤子：</b>目的（傳訊息）→ 問題（單一不夠）→ 解法（結合）→ 好處（多感官）→ 額外（動作也是訊息）。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q4</span><span class="qt">什麼是「互動式多媒體」？</span><span class="pts">3 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>關鍵詞：自行設定、操控</li></ol></div>
+<div class="ans">讓使用者得以<b>自行設定並操控</b>的多媒體。<em>只有這一句，關鍵詞就是「自行設定並操控」，寫到就有分。</em></div>
+<div class="hook"><b>鉤子：</b>能點、能選、能拖 = 互動式。多媒體是「給你看」，互動式是「讓你動」。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q5</span><span class="qt">什麼是「超媒體」（Hypermedia）？</span><span class="pts">4 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>多媒體提供了連結各訊息元件的架構</li><li>使用者透過連結取得更多訊息</li></ol></div>
+<div class="ans">多媒體提供了<b>連結各訊息元件的架構</b>，使用者得以進行互動，並<b>透過連結而獲得更多的訊息</b>。<em>關鍵詞是「連結各訊息元件的架構」。</em></div>
+<div class="hook"><b>鉤子：</b>互動式 = 能操控；超媒體 = 能操控「而且能跳」。多了「連結架構」四個字就是超媒體。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q6</span><span class="qt">請說明「超媒體」與「超文件」的關係，並回答：全球資訊網（WWW）屬於哪一種？</span><span class="pts">8 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>超媒體＝連結各訊息元件的架構</li><li>超文件＝超媒體<b>內所包含的文件</b>，文字或符號成為關鍵或索引</li><li>點出「零件 vs 成品」的關係</li><li>WWW 屬於<b>超媒體</b></li></ol></div>
+<div class="ans">超媒體是多媒體提供了<b>連結各訊息元件的架構</b>；超文件是超媒體<b>內所包含的文件</b>，其中<b>文字或符號成為關鍵或索引</b>，可搜尋並連結到其他文件、影片、聲音、圖像。所以<b>超文件是零件，超媒體是成品</b>。WWW 是<b>由超文件組成的超媒體</b>，屬於<b>超媒體</b>。<em>「零件／成品」那句一定要寫，那是 8 分裡最關鍵的一項。</em></div>
+<div class="hook"><b>鉤子：</b>教材原句「由 A 組成的 B」→ <b>B 包含 A</b>。媒體是箱子，文件是箱子裡的東西。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q7</span><span class="qt">多媒體應用軟體可分為哪幾類？請列舉類別並各舉一例。</span><span class="pts">5 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>文字編輯（Word）</li><li>音訊編輯（Audition、GoldWave）</li><li>圖像編輯（Photoshop、Illustrator）</li><li>視訊剪輯（Premiere、會聲會影）</li><li>視訊特效（After Effects）／動畫製作（Maya、Blender）／多媒體整合（Unity、Director）</li></ol></div>
+<div class="ans">文字編輯、音訊編輯、圖像編輯、<b>視訊剪輯</b>、<b>視訊特效</b>、動畫製作、多媒體整合（另有光碟燒錄、轉檔播放）。<em>例：Word／Audition／Photoshop／Premiere／After Effects／Maya／Unity。列到五類以上並各附一例即可拿滿。</em></div>
+<div class="hook"><b>鉤子：</b>After Effects 同時屬於「視訊特效」與「2D 動畫」——它是唯一跨兩類的，考題愛從這裡出。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q8</span><span class="qt">CPU 與 GPU 在處理多媒體資料時有何不同？為什麼 3D 渲染與影片編解碼要交給 GPU？</span><span class="pts">4 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>CPU 負責通用邏輯運算，核心數少</li><li>GPU 有大量小核心，專門做大量重複的平行運算</li><li>3D 渲染與編解碼可切成大量相同的小工作</li></ol></div>
+<div class="ans">CPU 負責<b>通用邏輯運算</b>，核心數少但每顆都強；GPU 擁有<b>大量小核心</b>，專門處理<b>大量重複的平行運算</b>（如每個像素、每個頂點）。3D 渲染與影片編解碼剛好可以切成幾百萬份同時做，所以交給 GPU 才有效率。<em>不要寫「GPU 是比較快的 CPU」——那不是理由。</em></div>
+<div class="hook"><b>鉤子：</b>CPU 是「幾個博士」，GPU 是「幾千個工人」。搬磚不需要博士，需要人多。</div>
+</div>
+
+</section>
+
+<!-- ============================ CH2 ============================ -->
+<section id="ch2">
+<div class="chap"><span class="no">CH 02</span><h2>文字媒體</h2><span class="sub">12 題</span></div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q9</span><span class="qt">什麼是「文字媒體」？人類知識的來源約有多少比例來自閱讀？</span><span class="pts">4 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>文字媒體是人類用來記錄語言的符號系統</li><li>目的在傳達資訊和顯示資料</li><li>約 <b>80%</b> 來自閱讀</li></ol></div>
+<div class="ans">文字媒體是<b>人類用來記錄語言的符號系統</b>，目的在<b>傳達資訊和顯示資料</b>，也是人類文明社會產生的標誌。人類知識的來源約有 <b>80%</b> 來自閱讀。<em>「80%」是唯一會考的數字，其餘可以只寫第一句。</em></div>
+<div class="hook"><b>鉤子：</b>文字最舊，但資訊密度最高——所以八成知識還是靠讀來的。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q10</span><span class="qt">文字輸入有哪四種方式？請各舉一例。</span><span class="pts">5 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>鍵盤輸入（再分字音、字根）</li><li>手寫輸入（手寫板、觸控螢幕）</li><li>語音輸入</li><li>文字掃描（OCR）</li></ol></div>
+<div class="ans">① <b>鍵盤輸入</b>：英文與數字直接打，中文再分<b>字音輸入</b>（注音）與<b>字根輸入</b>（倉頡、大易）　② <b>手寫輸入</b>：手寫板或觸控螢幕，經辨識軟體轉成文字　③ <b>語音輸入</b>：把口音的類比資料轉成數位資料，與預存樣本比對　④ <b>文字掃描</b>：掃描器把紙本轉成圖，再以 <b>OCR</b> 辨識成文字。<em>四項都要有，缺一項扣一分。</em></div>
+<div class="hook"><b>鉤子：</b>手打、手寫、嘴巴、掃描——人體的四個輸出管道。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q11</span><span class="qt">「字音輸入」與「字根輸入」有何不同？各舉一例。</span><span class="pts">4 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>字音＝依<b>讀音</b>輸入，例：注音</li><li>字根＝依<b>字形</b>拆解輸入，例：倉頡、大易</li></ol></div>
+<div class="ans"><b>字音輸入</b>是依照字的<b>讀音</b>來輸入，例如<b>注音</b>；<b>字根輸入</b>是把字<b>拆解成形</b>來輸入，例如<b>倉頡、大易</b>。<em>方向不要顛倒——考題很愛把「倉頡是字音輸入」寫成選項。</em></div>
+<div class="hook"><b>鉤子：</b>注音看「聲音」，倉頡看「長相」。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q12</span><span class="qt">什麼是 ASCII？它使用幾個位元？可表示多少個符號？</span><span class="pts">5 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>美國標準資訊交換碼</li><li><b>7 位元</b></li><li><b>128</b> 個符號（2⁷）</li><li>A＝65（41h）</li></ol></div>
+<div class="ans">ASCII 是<b>美國標準資訊交換碼</b>，使用 <b>7 個位元</b>編碼，可表示 <b>128</b> 個符號（2⁷＝128）。例如 <b>A＝65＝41h</b>、a＝97＝61h。<em>問「佔多少空間」才答 1 byte（第 8 位元當同位檢查位）；問「用幾個位元編碼」答 7。</em></div>
+<div class="hook"><b>鉤子：</b>7 位元、128 個符號、A 是 65。三個數字綁在一起背。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q13</span><span class="qt">EBCDIC 與 ISO8859 各有什麼特性？</span><span class="pts">5 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>EBCDIC：<b>8 位元</b>、256 字元、<b>IBM</b> 發展</li><li>EBCDIC 的 'A' 與 ASCII 不同（11000001）</li><li>ISO8859：<b>8 位元</b>、歐洲語系用</li><li>ISO8859 的 0～127 與 ASCII <b>完全相同</b></li></ol></div>
+<div class="ans"><b>EBCDIC</b> 是 <b>IBM</b> 發展的擴展式 BCD 碼，<b>8 位元</b>、可表示 <b>256</b> 個字元，比 ASCII 多 128 個；同一個字母的值與 ASCII <b>不同</b>（'A'＝11000001）。<b>ISO8859</b> 也是 8 位元，供<b>歐洲語系</b>使用，其 <b>0～127 的部分與 ASCII 完全相同</b>，之後依國家語系不同。<em>考點在對比：EBCDIC 連前 128 個都不一樣，ISO8859 前 128 個一樣。</em></div>
+<div class="hook"><b>鉤子：</b>EBCDIC 是「換一套語言」，ISO8859 是「ASCII 往後接」。一個全換、一個只加尾巴。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q14</span><span class="qt">什麼是 Big-5 碼？它有何特性？</span><span class="pts">4 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>資策會 <b>1985</b> 公布</li><li><b>繁體中文</b>內碼</li><li>每字 <b>2 bytes</b>，由兩個位元組「組合」而成</li></ol></div>
+<div class="ans">Big-5（大五碼）是<b>資策會於 1985 年公布</b>的<b>繁體中文</b>內碼，每個字佔 <b>2 bytes</b>，由<b>兩個位元組組合</b>成一個字。<em>關鍵是「組合」——這正是它會亂碼的原因，也是它與 Unicode「定長」的差別。</em></div>
+<div class="hook"><b>鉤子：</b>1985、資策會、繁體、2 bytes、組合。五個關鍵詞。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q15</span><span class="qt">為什麼中文系統需要用兩個位元組（2 bytes）來表示一個中文字？</span><span class="pts">5 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>1 byte ＝ 2⁸ ＝ <b>256</b> 種組合</li><li>常用漢字有 <b>6763</b> 個</li><li>256 ＜ 6763，<b>裝不下</b></li><li>所以用 2 bytes（16 bits）</li></ol></div>
+<div class="ans">因為 <b>1 byte 只有 2⁸＝256 種組合</b>，而<b>常用漢字就有 6763 個</b>，<b>256 遠少於 6763，裝不下</b>，所以中文系統改用<b>兩個位元組（16 bits）</b>來表示一個中文字。<em>這題一定要寫出 256 和 6763 兩個數字，只寫「字太多」拿不到分。</em></div>
+<div class="hook"><b>鉤子：</b>256 個抽屜，要放 6763 件東西。抽屜不夠，只能兩層疊起來用。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q16</span><span class="qt">Unicode 為什麼被稱為「定長式編碼系統」？它解決了什麼問題？</span><span class="pts">6 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>由 <b>UTC</b> 制訂，<b>16 位元</b>，可表示 <b>65,536</b> 個字</li><li>處理時把兩個位元組<b>同時處理</b>，不是加以組合</li><li>從第 1 到第 16 個位元<b>全部拿來使用</b>，不區分高低位元組</li><li>因此每個字長度固定 → 解決<b>錯位（亂碼）</b>問題</li><li>前 128 個字元與 ASCII 相同</li></ol></div>
+<div class="ans">Unicode（萬國碼）由 <b>UTC</b> 制訂，採 <b>16 位元</b>，可表示 <b>65,536</b> 個字。它在處理時是將兩個位元組<b>同時處理，而不是加以組合</b>——從第 1 到第 16 個位元<b>全部拿來使用</b>，<b>不區分為高低兩個位元</b>，因此每個字長度固定，稱為<b>定長式編碼</b>。<br>它解決了 Big-5 這類「組合式」編碼的<b>錯位與亂碼</b>問題：電腦不必再猜某個位元組是「一個字」還是「半個字」。另外，<b>前 128 個字元與 ASCII 相同</b>。<em>「同時處理／不加以組合／不區分高低」是教材原句，寫進去最保險。</em></div>
+<div class="hook"><b>鉤子：</b>Big-5 是「兩個位元組拼起來」（會錯位），Unicode 是「16 格一次讀完」（不會錯位）。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q17</span><span class="qt">「字體」、「字型」、「樣式」三者有何不同？</span><span class="pts">5 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>字體（Typeface）＝<b>圖形化的字元</b></li><li>字型（Font）＝<b>固定大小</b>的字元集合，大小以<b>點</b>表示</li><li>樣式（Style）＝粗體、斜體、底線、框線</li></ol></div>
+<div class="ans"><b>字體</b>（Typeface）是<b>圖形化的字元</b>，也就是字的「長相」；<b>字型</b>（Font）是<b>固定大小的字元集合</b>，其大小以<b>點（point）</b>來表示；<b>樣式</b>（Style）則是粗體、斜體、底線、框線等變化。<em>「新細明體」是字體；「12 點新細明體」才是字型。考試不要寫成「字形」，教材的術語是「字型」。</em></div>
+<div class="hook"><b>鉤子：</b>字體是「臉」，字型是「這個尺寸的臉」，樣式是「這張臉的表情」。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q18</span><span class="qt">點陣字（Bitmap Font）與描邊字（Outline Font）有何不同？一個 24×24 點的中文字型佔多少記憶體？</span><span class="pts">8 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>點陣字＝用<b>點陣圖案</b>表示字形；描邊字＝用<b>數學公式算座標</b>產生</li><li>點陣字放大有<b>鋸齒</b>；描邊字任意縮放<b>平順</b></li><li>點陣字資料量<b>大</b>但顯示<b>快</b>；描邊字資料量<b>小</b>但需<b>運算</b></li><li>計算：24×24÷8＝<b>72 bytes</b></li></ol></div>
+<div class="ans"><b>點陣字</b>是用<b>點陣圖案</b>來表示字形，放大後會出現<b>鋸齒狀</b>，<b>資料量大</b>（解析度越高越浪費空間）但<b>顯示速度快</b>，常用於手機、PDA 等 LCD 螢幕。<b>描邊字</b>（向量字型）是用<b>數學公式計算座標</b>來產生文字，<b>任意縮放都保持平順</b>，<b>資料量小</b>可節省記憶體，但顯示時<b>需要即時運算</b>，常用於印刷與一般字型集（如 TrueType 的細明體、標楷體）。<br>計算：<b>24 × 24 ＝ 576 個點</b>，每點 1 bit，<b>576 ÷ 8 ＝ 72 bytes</b>。<em>換成 32×32 就是 32×32÷8＝128 bytes。算法是「點數 ÷ 8」，因為 8 bits ＝ 1 byte。</em></div>
+<div class="hook"><b>鉤子：</b>點陣是「一張小圖」（放大就糊），描邊是「一套公式」（放大重算）。計算永遠是「長×寬÷8」。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q19</span><span class="qt">TXT、DOC、PDF 三種文字檔案格式各有何特性？</span><span class="pts">4 分</span></div>
+<div class="kp"><b>評分點</b><ol><li>TXT：純文字，<b>不能</b>放多媒體</li><li>DOC：Microsoft Word 的文件格式，<b>可</b>搭配影像、圖表</li><li>PDF：<b>Adobe Acrobat</b> 開發，需 Acrobat Reader 觀看，<b>可</b>加影像圖表</li></ol></div>
+<div class="ans"><b>.TXT</b> 是 Windows 的<b>純文字</b>格式，<b>不能</b>放入影像等多媒體內容；<b>.DOC</b> 是 <b>Microsoft Word</b> 儲存的文件格式，<b>可以</b>搭配影像、圖表；<b>.PDF</b> 由 <b>Adobe Acrobat</b> 開發，需以 <b>Acrobat Reader</b> 觀看，同樣<b>可以</b>加入影像與圖表。<em>考點就是「哪一個不能放多媒體」→ TXT。</em></div>
+<div class="hook"><b>鉤子：</b>TXT 只有字，DOC 和 PDF 都能裝圖。</div>
+</div>
+
+<div class="q">
+<div class="qh"><span class="qn">Q20</span><span class="qt">電子化文件有哪三個要求？PDF 為什麼能滿足這些要求？</span><span class="pts">5 分</span></div>
+<div class="kp"><b>評分點</b><ol><li><b>安全與限制</b>（具法定契約效力）</li><li><b>交換與傳遞</b>（透過網路與資料庫）</li><li><b>可攜性與正確度</b>（跨平台正確顯示）</li><li>PDF 不受<b>平台、字體、軟體、版本</b>影響</li></ol></div>
+<div class="ans">電子化文件有三個要求：① <b>安全與限制</b>——文件不只是文字的集合，需具備<b>法定契約效力</b>；② <b>交換與傳遞</b>——可透過<b>網路與資料庫</b>傳送，改善搜尋與傳遞效率；③ <b>可攜性與正確度</b>——能<b>跨平台正確顯示</b>，克服軟硬體限制。<br>PDF 之所以能滿足，是因為它<b>不受平台、字體、軟體和版本的影響</b>，能保有最初的檔案內容。<em>「平台、字體、軟體、版本」這四項要寫全，那是簡答的給分點。</em></div>
+<div class="hook"><b>鉤子：</b>安全、傳遞、可攜——三件事；PDF 贏在「四不受」。</div>
+</div>
+
+</section>
+
+<!-- ============================ 模板 ============================ -->
+<section id="tpl">
+<div class="chap"><span class="no">附錄</span><h2>三種題型的答題模板</h2><span class="sub">不會寫時，套這三個框</span></div>
+
+<div class="tpl">
+<h3>① 定義題（問「什麼是…」）</h3>
+<div class="row"><b>結構</b><span>是什麼 → 有哪幾個要點 → 補一句用途或例子</span></div>
+<div class="row"><b>例</b><span>「多媒體是結合多種傳播資訊媒介，用電腦或電子化方式製作，並發佈出去。」</span></div>
+<div class="row"><b>注意</b><span>先數要點。定義裡有幾個動作／幾個條件，就寫幾個，一個都不能少。</span></div>
+</div>
+
+<div class="tpl">
+<h3>② 原因題（問「為什麼…」）</h3>
+<div class="row"><b>結構</b><span>現象 → <b>數字</b> → 比較 → 結論（因為…所以…）</span></div>
+<div class="row"><b>例</b><span>「1 byte 只有 256 種組合，而常用漢字有 6763 個，256 少於 6763 裝不下，所以中文用 2 bytes。」</span></div>
+<div class="row"><b>注意</b><span>原因題的分数幾乎都在<b>數字</b>上。沒有數字，寫得再順也拿不到分。</span></div>
+</div>
+
+<div class="tpl">
+<h3>③ 比較題（問「A 與 B 有何不同」）</h3>
+<div class="row"><b>結構</b><span>A 是什麼 → B 是什麼 → <b>差在哪</b>（至少兩項差異）</span></div>
+<div class="row"><b>例</b><span>「點陣字用點陣圖案表示，放大有鋸齒、資料量大但顯示快；描邊字用數學公式算座標，放大平順、資料量小但需運算。」</span></div>
+<div class="row"><b>注意</b><span>只分別定義、沒寫「差在哪」，通常只拿一半分。差異要成對寫（A 如何、B 如何）。</span></div>
+</div>
+
+<div class="tpl">
+<h3>最後一招：真的想不起來時</h3>
+<div class="row"><b>步驟 1</b><span>先把題目裡的<b>名詞定義</b>寫出來，通常就有基本分。</span></div>
+<div class="row"><b>步驟 2</b><span>再寫「它的<b>用途</b>或<b>例子</b>」，例如「例如注音就是字音輸入」。</span></div>
+<div class="row"><b>步驟 3</b><span>最後補一句<b>與相近概念的差別</b>。三步寫完，通常能拿到一半以上的分，絕不空白。</span></div>
+</div>
+</section>
+
+
+
+</div>
+<script>
+(function(){
+  document.querySelectorAll('table').forEach(function(t){
+    if(t.parentElement && t.parentElement.classList.contains('tw'))return;
+    var w=document.createElement('div');w.className='tw';
+    t.parentNode.insertBefore(w,t);w.appendChild(t);
+  });
+  document.querySelectorAll('svg.svgbox').forEach(function(s){
+    if(s.parentElement && s.parentElement.classList.contains('svgwrap'))return;
+    var w=document.createElement('div');w.className='svgwrap';
+    s.parentNode.insertBefore(w,s);w.appendChild(s);
+  });
+})();
+</script>
+</body>
+</html>
