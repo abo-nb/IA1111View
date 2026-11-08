@@ -53,6 +53,15 @@ section{scroll-margin-top:76px}
 .card h3.a{color:var(--amber)}
 .card h3.p::before{background:var(--purple)}
 .card h3.p{color:var(--purple)}
+
+/* 內容時效標籤：常青／僅考試／教材有誤 */
+.flag{font-size:12.5px;line-height:1.5;padding:3px 10px;border-radius:999px;border:1px solid;margin-left:auto;flex:0 0 auto;white-space:nowrap;font-weight:500;letter-spacing:.3px}
+.flag.ev{color:var(--teal);border-color:rgba(93,202,165,.5);background:rgba(93,202,165,.10)}
+.flag.ex{color:var(--amber);border-color:rgba(250,199,117,.5);background:rgba(250,199,117,.10)}
+.flag.bd{color:var(--red);border-color:rgba(240,149,149,.5);background:rgba(240,149,149,.10)}
+.legend{display:flex;flex-direction:column;gap:10px;margin-top:18px;font-size:var(--fs-sm);color:var(--mut);line-height:1.75}
+.legend div{display:flex;align-items:flex-start;gap:10px}
+.legend .flag{margin-left:0;flex:0 0 auto;margin-top:2px}
 .card h4{font-size:var(--fs-h4);font-weight:500;color:#cfcfd6;margin:22px 0 10px;line-height:1.6}
 .card h4:first-of-type{margin-top:0}
 
@@ -251,6 +260,11 @@ th,td{padding:9px 6px}
 <span class="tag">內容感知</span>
 <span class="tag">圖層混合模式</span>
 </div>
+<div class="legend">
+<div><span class="flag ev">常青</span><span>到現在仍然正確、值得真懂。複習時花時間在這裡。</span></div>
+<div><span class="flag ex">僅考試</span><span>軟體已停產、載體已淘汰、或數字早已變動。只記「題目會怎麼問」，不要花時間學操作。</span></div>
+<div><span class="flag bd">教材有誤</span><span>教材本身寫錯或前後矛盾。照考試答，但要知道真相，紅框內有說明。</span></div>
+</div>
 <div class="tip" style="margin-top:20px"><b>本講義已用教材原文逐頁核對</b>（2026-11-08）。凡與原文不符、或教材本身有誤之處，已用<span style="color:var(--red)"><b>紅色「校正」</b></span>框標出，並說明「該寫什麼、不要寫什麼」。<br>原則：<b>規格與數字照教材背，觀念用理解推。</b></div>
 </div>
 
@@ -261,7 +275,7 @@ th,td{padding:9px 6px}
 <div class="chap"><span class="no">CH 01</span><h2>多媒體基礎</h2><span class="sub">定義 → 本質 → 互動與超媒體 → 軟硬體</span></div>
 
 <div class="card">
-<h3>多媒體的定義（教材原句）</h3>
+<h3>多媒體的定義（教材原句）<span class="flag ev">常青</span></h3>
 <div class="flow">
 <span>結合多種傳播資訊媒介</span><i>→</i><span>用電腦或電子化方式製作</span><i>→</i><span>發佈出去</span>
 </div>
@@ -280,7 +294,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">多媒體的五個本質（為什麼需要多媒體）</h3>
+<h3 class="t">多媒體的五個本質（為什麼需要多媒體）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:170px">本質</th><th>意思</th></tr></thead>
 <tbody>
@@ -295,27 +309,28 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">四層遞進：多媒體 → 互動式 → 超媒體 → 超文件</h3>
-<svg class="svgbox" viewBox="0 0 680 200" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
-<rect x="0" y="0" width="680" height="200" rx="10" fill="#232329" stroke="#2d2d34"/>
-<rect x="24" y="30" width="134" height="46" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
-<text x="91" y="53" font-family="sans-serif" font-size="14" fill="#B5D4F4" text-anchor="middle" dominant-baseline="central">多媒體</text>
-<text x="91" y="94" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle">多種媒介並置</text>
-<text x="174" y="53" font-family="sans-serif" font-size="14" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">→</text>
-<rect x="190" y="30" width="134" height="46" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
-<text x="257" y="53" font-family="sans-serif" font-size="14" fill="#9FE1CB" text-anchor="middle" dominant-baseline="central">互動式多媒體</text>
-<text x="257" y="94" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle">使用者可操控</text>
-<text x="340" y="53" font-family="sans-serif" font-size="14" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">→</text>
-<rect x="356" y="30" width="134" height="46" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
-<text x="423" y="53" font-family="sans-serif" font-size="14" fill="#FAC775" text-anchor="middle" dominant-baseline="central">超媒體</text>
-<text x="423" y="94" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle">元件之間有連結</text>
-<text x="506" y="53" font-family="sans-serif" font-size="14" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">→</text>
-<rect x="522" y="30" width="134" height="46" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
-<text x="589" y="53" font-family="sans-serif" font-size="14" fill="#AFA9EC" text-anchor="middle" dominant-baseline="central">超文件</text>
-<text x="589" y="94" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle">文字即索引</text>
-<text x="340" y="140" font-family="sans-serif" font-size="13" fill="#9b9ba4" text-anchor="middle">往右＝多一層「使用者控制」或「連結架構」</text>
-<text x="340" y="170" font-family="sans-serif" font-size="13" fill="#9FE1CB" text-anchor="middle">WWW ＝ 由超文件組成的超媒體</text>
+<h3 class="a">三層遞進＋一個零件：多媒體 → 互動式 → 超媒體<span class="flag ev">常青</span></h3>
+<svg class="svgbox" viewBox="0 0 680 230" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="230" rx="10" fill="#232329" stroke="#2d2d34"/>
+<rect x="40" y="48" width="170" height="56" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="125" y="70" font-family="sans-serif" font-size="14" fill="#B5D4F4" text-anchor="middle" dominant-baseline="central">多媒體</text>
+<text x="125" y="90" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">多種媒介並置</text>
+<text x="232" y="76" font-family="sans-serif" font-size="14" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">→</text>
+<rect x="255" y="48" width="170" height="56" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="340" y="70" font-family="sans-serif" font-size="14" fill="#9FE1CB" text-anchor="middle" dominant-baseline="central">互動式多媒體</text>
+<text x="340" y="90" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">＋使用者可操控</text>
+<text x="447" y="76" font-family="sans-serif" font-size="14" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">→</text>
+<rect x="470" y="48" width="170" height="56" rx="8" fill="#1b1b1f" stroke="#FAC775"/>
+<text x="555" y="70" font-family="sans-serif" font-size="14" fill="#FAC775" text-anchor="middle" dominant-baseline="central">超媒體</text>
+<text x="555" y="90" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">＋元件間有連結架構</text>
+<line x1="555" y1="108" x2="555" y2="148" stroke="#AFA9EC" stroke-width="1.5" stroke-dasharray="4 4"/>
+<rect x="470" y="150" width="170" height="56" rx="8" fill="#1b1b1f" stroke="#AFA9EC" stroke-dasharray="5 4"/>
+<text x="555" y="170" font-family="sans-serif" font-size="14" fill="#AFA9EC" text-anchor="middle" dominant-baseline="central">超文件</text>
+<text x="555" y="190" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">＝超媒體裡的文件</text>
+<text x="40" y="168" font-family="sans-serif" font-size="13" fill="#F09595">不是第四層</text>
+<text x="40" y="192" font-family="sans-serif" font-size="13" fill="#9b9ba4">它是超媒體「裡面」的一種文件</text>
 </svg>
+<p class="small" style="margin-top:10px">教材把這四個詞放在同一節講，但只有<b>前三個</b>是「一層比一層高級」。超文件不是第四層，而是超媒體的<b>組成零件</b>。</p>
 <table>
 <thead><tr><th style="width:170px">名詞</th><th>教材定義</th></tr></thead>
 <tbody>
@@ -324,11 +339,13 @@ th,td{padding:9px 6px}
 <tr><td class="k">超文件 Hypertext</td><td>超媒體<b>內所包含的文件</b>中，文字或符號成為關鍵或索引，可搜尋並連到其他文件、影片、聲音、圖像</td></tr>
 </tbody>
 </table>
-<div class="warn"><b>「WWW 屬於哪一種？」答超媒體，不要答超文件。</b><br>教材原句是「全球資訊網（WWW）也就是由<b>超文件</b>組成的<b>超媒體</b>」。超文件是零件，超媒體是成品。</div>
+<div class="warn"><b>「WWW 屬於哪一種？」答超媒體，不要答超文件。</b><br>教材原句是「全球資訊網（WWW）也就是由<b>超文件</b>組成的<b>超媒體</b>」。超文件是零件，超媒體是成品。<br><b>但「涵蓋範圍最廣」要答多媒體，不是超媒體。</b>範圍與層級是反方向——條件加得越多，層級越高、範圍越小。<br>多媒體 ⊃ 互動式多媒體 ⊃ 超媒體（範圍由大到小，層級由低到高）。</div>
+<div class="note"><b>範圍 vs 層級，兩題一定要分清楚：</b><br>「<b>層級最高</b>／最複雜／條件最多」→ <b>超媒體</b>（要同時滿足：多媒介＋可操控＋有連結架構）<br>「<b>涵蓋範圍最廣</b>／能包含其他三者」→ <b>多媒體</b><br>這是「內涵越多、外延越小」：交通工具 ⊃ 車 ⊃ 汽車 ⊃ 跑車。跑車最高級，但交通工具涵蓋最廣。</div>
+<div class="note"><b>為什麼超文件不可能是最高級？兩個理由：</b><br>① 定義上它就是「超媒體<b>內所包含的文件</b>」——被包含的東西不可能大於容器。<br>② 它只用到<b>文字</b>；超媒體能同時裝影片、聲音、圖像。功能更少、範圍更窄，當然更低階。<br>考試若真的按教材順序問「多媒體→互動式多媒體→超媒體→<u>？</u>」，填超文件；但只要問「哪個最大」，答超媒體。</div>
 </div>
 
 <div class="card">
-<h3 class="t">多媒體軟體七大類（考「這個軟體屬於哪一類」）</h3>
+<h3 class="t">多媒體軟體七大類（考「這個軟體屬於哪一類」）<span class="flag ex">僅考試</span></h3>
 <table>
 <thead><tr><th style="width:120px">類別</th><th>代表軟體</th><th style="width:150px">判準</th></tr></thead>
 <tbody>
@@ -347,7 +364,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3>多媒體硬體四類</h3>
+<h3>多媒體硬體四類<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:130px">類別</th><th>包含</th><th style="width:170px">負責</th></tr></thead>
 <tbody>
@@ -369,14 +386,14 @@ th,td{padding:9px 6px}
 <div class="chap"><span class="no">CH 02</span><h2>文字媒體</h2><span class="sub">文字的地位 → 輸入方式 → 編碼系統 → 字體與字型 → 電子文件</span></div>
 
 <div class="card">
-<h3>文字的定義與地位</h3>
+<h3>文字的定義與地位<span class="flag ev">常青</span></h3>
 <div class="quote">文字媒體是人類用來記錄語言的符號系統，目的在傳達資訊和顯示資料，也是人類文明社會產生的標誌。<br>凡是人們用來傳遞訊息、表達一定意義的圖畫和符號，都可以稱為文字。<em>文字媒體 2-1（原文）</em></div>
 <p>教材給的關鍵數字：<b>人類知識的來源約有 80% 來自閱讀</b>。所以文字雖然是最「舊」的媒介，資訊密度仍然最高。</p>
 <div class="tip"><b>80% 這個數字是考點</b>。問「人類知識來源約有多少比例來自閱讀」→ 答 80%。</div>
 </div>
 
 <div class="card">
-<h3 class="t">四種文字輸入方式</h3>
+<h3 class="t">四種文字輸入方式<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:130px">方式</th><th>怎麼做</th><th style="width:150px">例子</th></tr></thead>
 <tbody>
@@ -390,7 +407,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">編碼系統總表（本章最高頻考點）</h3>
+<h3 class="a">編碼系統總表（本章最高頻考點）<span class="flag bd">教材有誤</span></h3>
 <table>
 <thead><tr><th style="width:110px">編碼</th><th style="width:100px">位元</th><th style="width:110px">容量</th><th>重點</th></tr></thead>
 <tbody>
@@ -408,7 +425,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="p">定長式編碼：Unicode 為什麼解決了「衝碼」</h3>
+<h3 class="p">定長式編碼：Unicode 為什麼解決了「衝碼」<span class="flag ev">常青</span></h3>
 <svg class="svgbox" viewBox="0 0 680 220" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="680" height="220" rx="10" fill="#232329" stroke="#2d2d34"/>
 <text x="24" y="34" font-family="sans-serif" font-size="13" fill="#FAC775">Big-5：兩個位元組「組合」</text>
@@ -428,7 +445,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3>字體 vs 字型（最愛考的兩個名詞）</h3>
+<h3>字體 vs 字型（最愛考的兩個名詞）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:120px">名詞</th><th style="width:120px">英文</th><th>定義</th></tr></thead>
 <tbody>
@@ -441,7 +458,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">點陣字 vs 描邊字（＋記憶體計算）</h3>
+<h3 class="t">點陣字 vs 描邊字（＋記憶體計算）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:110px">項目</th><th>點陣字 Bitmap Font</th><th>描邊字 Outline Font（向量字型）</th></tr></thead>
 <tbody>
@@ -457,7 +474,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3>文字檔案格式</h3>
+<h3>文字檔案格式<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:100px">格式</th><th>開發者／性質</th><th style="width:170px">能不能放多媒體</th></tr></thead>
 <tbody>
@@ -469,7 +486,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="p">電子化文件的三個要求</h3>
+<h3 class="p">電子化文件的三個要求<span class="flag ev">常青</span></h3>
 <div class="roles">
 <div class="rolecol b"><div class="rh">安全與限制</div><div class="ri">法定契約效力<em>文件不只是文字集合</em></div></div>
 <div class="rolecol t"><div class="rh">交換與傳遞</div><div class="ri">透過網路與資料庫<em>改善搜尋與傳遞效率</em></div></div>
@@ -487,7 +504,7 @@ th,td{padding:9px 6px}
 <div class="chap"><span class="no">CH 03</span><h2>色彩學與數位影像</h2><span class="sub">色彩三屬性 → 色彩模式 → 像素與解析度 → 色彩深度 → 點陣／向量 → 壓縮與格式</span></div>
 
 <div class="card">
-<h3>色彩三屬性（每年必考）</h3>
+<h3>色彩三屬性（每年必考）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:110px">屬性</th><th style="width:120px">英文</th><th>定義</th><th style="width:180px">怎麼變</th></tr></thead>
 <tbody>
@@ -502,7 +519,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">加色法 RGB vs 減色法 CMYK</h3>
+<h3 class="a">加色法 RGB vs 減色法 CMYK<span class="flag ev">常青</span></h3>
 <svg class="svgbox" viewBox="0 0 680 210" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="680" height="210" rx="10" fill="#232329" stroke="#2d2d34"/>
 <rect x="20" y="24" width="300" height="160" rx="8" fill="#0d0d10" stroke="#3a3a42"/>
@@ -526,7 +543,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">六種色彩模式總表</h3>
+<h3 class="t">六種色彩模式總表<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:110px">模式</th><th>組成</th><th style="width:170px">關鍵特性</th></tr></thead>
 <tbody>
@@ -543,7 +560,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">三個 P：ppi、dpi、ppm（極愛考）</h3>
+<h3 class="a">三個 P：ppi、dpi、ppm（極愛考）<span class="flag bd">教材有誤</span></h3>
 <table>
 <thead><tr><th style="width:110px">單位</th><th style="width:190px">全名</th><th>用在哪</th></tr></thead>
 <tbody>
@@ -558,7 +575,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">檔案大小怎麼算（計算題必背）</h3>
+<h3 class="t">檔案大小怎麼算（計算題必背）<span class="flag ev">常青</span></h3>
 <div class="flow">
 <span>像素總量</span><i>×</i><span>每像素位元組</span><i>＝</i><span>檔案大小</span>
 </div>
@@ -577,7 +594,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3>色彩深度階梯</h3>
+<h3>色彩深度階梯<span class="flag bd">教材有誤</span></h3>
 <svg class="svgbox" viewBox="0 0 680 230" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="680" height="230" rx="10" fill="#232329" stroke="#2d2d34"/>
 <rect x="40" y="180" width="60" height="20" fill="#4a4a55"/>
@@ -615,7 +632,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">點陣圖 vs 向量圖（四項對照）</h3>
+<h3 class="t">點陣圖 vs 向量圖（四項對照）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:110px">項目</th><th>點陣圖 Bitmap</th><th>向量圖 Vector</th></tr></thead>
 <tbody>
@@ -630,7 +647,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="p">影像壓縮的原理</h3>
+<h3 class="p">影像壓縮的原理<span class="flag ev">常青</span></h3>
 <div class="quote">人類利用眼睛天生的限制，就是無法分辨高亮度變動下的確切強度，很難察覺兩張近似影像間的些許差異，因此部分影像資料在壓縮前後是容許有少許失真的。<em>影像處理關鍵技巧 3-2（原文）</em></div>
 <table>
 <thead><tr><th style="width:150px">類型</th><th style="width:150px">代表格式</th><th>特性</th></tr></thead>
@@ -644,7 +661,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">八種圖像格式（考「哪個格式有什麼特性」）</h3>
+<h3 class="a">八種圖像格式（考「哪個格式有什麼特性」）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:90px">格式</th><th style="width:120px">壓縮</th><th style="width:130px">色彩</th><th>關鍵特性</th></tr></thead>
 <tbody>
@@ -663,7 +680,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="p">補充：美的形式八項（考名詞配對）</h3>
+<h3 class="p">補充：美的形式八項（考名詞配對）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:100px">原則</th><th>一句話</th></tr></thead>
 <tbody>
@@ -689,7 +706,7 @@ th,td{padding:9px 6px}
 <div class="chap"><span class="no">CH 04</span><h2>聲音媒體</h2><span class="sub">聲波三量 → 數位化 → 品質對照 → 聲道 → 格式</span></div>
 
 <div class="card">
-<h3>三個基本物理量</h3>
+<h3>三個基本物理量<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:110px">名詞</th><th style="width:100px">英文</th><th>定義</th><th style="width:110px">單位</th></tr></thead>
 <tbody>
@@ -702,7 +719,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">數位化的兩支箭頭</h3>
+<h3 class="a">數位化的兩支箭頭<span class="flag ev">常青</span></h3>
 <div class="grid2">
 <div class="box"><div class="bt">取樣頻率 Sampling Rate</div><div class="bv">每秒取<b>幾個點</b>。<br>越高越能忠實呈現原音。<br><span class="small">例：DVD 為 48000 Hz</span></div></div>
 <div class="box"><div class="bt">取樣解析度 Sampling Resolution</div><div class="bv">每個點用<b>幾個 bit</b> 記錄振幅強度。<br>8 bits ＝ 2⁸ ＝ 256 種強度。<br><span class="small">位元數越高，越能表現細微強弱</span></div></div>
@@ -711,7 +728,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">聲音品質對照表（四列必背）</h3>
+<h3 class="t">聲音品質對照表（四列必背）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:110px">項目</th><th>DV／DVD</th><th>CD</th><th>收音機</th><th>電話</th></tr></thead>
 <tbody>
@@ -724,7 +741,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3>三種聲道呈現</h3>
+<h3>三種聲道呈現<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:130px">形式</th><th>說明</th></tr></thead>
 <tbody>
@@ -737,7 +754,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">錄音的硬體流程（五步）</h3>
+<h3 class="t">錄音的硬體流程（五步）<span class="flag ev">常青</span></h3>
 <div class="flow">
 <span>聲學訊號<br>（空氣振動）</span><i>→</i><span>麥克風<br>（換能器）</span><i>→</i><span>前級放大器</span><i>→</i><span>ADC<br>類比／數位</span><i>→</i><span>數位音訊檔</span>
 </div>
@@ -746,7 +763,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3>麥克風與耳機</h3>
+<h3>麥克風與耳機<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:130px">分類</th><th>種類與特性</th></tr></thead>
 <tbody>
@@ -761,7 +778,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">八種音訊格式（考「誰開發、壓不壓縮」）</h3>
+<h3 class="a">八種音訊格式（考「誰開發、壓不壓縮」）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:90px">格式</th><th style="width:150px">開發者</th><th style="width:110px">壓縮</th><th>關鍵特性</th></tr></thead>
 <tbody>
@@ -788,14 +805,14 @@ th,td{padding:9px 6px}
 <div class="chap"><span class="no">CH 05</span><h2>視訊媒體</h2><span class="sub">視覺暫留 → 三大廣播標準 → HDTV → 視訊格式 → 製作流程</span></div>
 
 <div class="card">
-<h3>視覺暫留：視訊為什麼會「動」</h3>
+<h3>視覺暫留：視訊為什麼會「動」<span class="flag ev">常青</span></h3>
 <div class="quote">當眼睛觀看物體時，會將正對著瞳孔的物體影像，投射在眼球後部的視網膜。不論物體是否仍留在原處，這個影像都能保留<b>十六分之一秒鐘</b>，過了十六分之一秒，影像會自動消失。<em>多媒體概論（原文）</em></div>
 <p>所以只要每秒播放超過 16 張連續影像，大腦就會把它接成「動」的。這也是動畫與視訊共同的原理。</p>
 <div class="tip"><b>1/16 秒（0.0625 秒）是考點</b>。換算成影格率就是「至少要 16 fps 才不會閃」——這也是為什麼早期電影用 24 fps、電視用 25／29.97 fps。</div>
 </div>
 
 <div class="card">
-<h3 class="a">三大廣播標準（每年必考，數字要全對）</h3>
+<h3 class="a">三大廣播標準（每年必考，數字要全對）<span class="flag ev">常青</span></h3>
 <svg class="svgbox" viewBox="0 0 680 190" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="680" height="190" rx="10" fill="#232329" stroke="#2d2d34"/>
 <text x="24" y="34" font-family="sans-serif" font-size="13" fill="#9b9ba4">掃描線數</text>
@@ -823,7 +840,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">掃描方式：交錯 vs 循序</h3>
+<h3 class="t">掃描方式：交錯 vs 循序<span class="flag ev">常青</span></h3>
 <div class="grid2">
 <div class="box"><div class="bt">交錯掃描 Interlacing</div><div class="bv">一個畫面拆成上下兩個<b>圖場 Field</b> 輪流掃。<br>NTSC 用這個。<br><span class="small">省頻寬，但快速動態會有橫紋</span></div></div>
 <div class="box"><div class="bt">循序掃描 Progressive</div><div class="bv">一次掃完一整張。<br><b>液晶螢幕</b>用這個。<br><span class="small">畫面穩定，代號 p（720p／1080p）</span></div></div>
@@ -832,7 +849,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="p">HDTV 的兩種主流規格</h3>
+<h3 class="p">HDTV 的兩種主流規格<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:130px">規格</th><th style="width:170px">掃描線</th><th style="width:170px">畫面大小</th><th>比例</th></tr></thead>
 <tbody>
@@ -844,7 +861,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">八種視訊格式</h3>
+<h3 class="a">八種視訊格式<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:110px">格式</th><th style="width:150px">開發者</th><th>關鍵特性</th></tr></thead>
 <tbody>
@@ -862,7 +879,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">影片製作流程（三階段）</h3>
+<h3 class="t">影片製作流程（三階段）<span class="flag ev">常青</span></h3>
 <div class="flow">
 <span>前置作業<br>企劃→劇本→分鏡圖→製片設計</span><i>→</i><span>拍攝作業<br>排演→攝影／收音</span><i>→</i><span>後製作業<br>剪輯→特效→音樂與音效</span><i>→</i><span>出品發行</span>
 </div>
@@ -878,14 +895,14 @@ th,td{padding:9px 6px}
 <div class="chap"><span class="no">CH 06</span><h2>動畫與虛擬實境</h2><span class="sub">動畫原理 → 2D／3D → VR 三要素 → 三種 VR</span></div>
 
 <div class="card">
-<h3>動畫的定義（與視訊的差別只有一句）</h3>
+<h3>動畫的定義（與視訊的差別只有一句）<span class="flag ev">常青</span></h3>
 <p>動畫（Animation）的概念<b>與視訊相似</b>，都是把一張張圖像連續放映產生「會動」的效果。差別在於：動畫特別指<b>單格方式拍攝或製作</b>的影片，包括平面圖像、立體模型、木偶，以及電腦製作的內容。</p>
 <p>俗稱的<b>卡通（Cartoon）</b>也是動畫的一種類型——以漫畫形式、<b>賽璐珞片</b>製作拍攝而成。</p>
 <div class="tip"><b>一句話分辨</b>：視訊是「<b>拍</b>連續的畫面」，動畫是「<b>做</b>連續的畫面」。卡通是動畫的一種，不是動畫的同義詞。</div>
 </div>
 
 <div class="card">
-<h3 class="t">2D 與 3D 動畫</h3>
+<h3 class="t">2D 與 3D 動畫<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:130px">類型</th><th>作法</th><th style="width:190px">代表</th></tr></thead>
 <tbody>
@@ -898,7 +915,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">VR 的定義與三要素（3I，必背）</h3>
+<h3 class="a">VR 的定義與三要素（3I，必背）<span class="flag ev">常青</span></h3>
 <div class="quote">虛擬實境（Virtual Reality）就是結合聲音、影像、繪圖及文字等多媒體技術，創造一個環境讓使用者有「身歷其境」的感覺。設計製作虛擬實境需要具備三個要素：<b>融入（Immersion）、互動（Interaction）及想像（Imagination）</b>。<em>多媒體概論（原文）</em></div>
 <svg class="svgbox" viewBox="0 0 680 250" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="680" height="250" rx="10" fill="#232329" stroke="#2d2d34"/>
@@ -918,7 +935,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">三種虛擬實境（最愛考的辨析題）</h3>
+<h3 class="a">三種虛擬實境（最愛考的辨析題）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:100px">類型</th><th style="width:130px">別名</th><th>能做什麼</th><th style="width:180px">製作方式</th></tr></thead>
 <tbody>
@@ -932,7 +949,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="p">VR 的軟體與輸出格式</h3>
+<h3 class="p">VR 的軟體與輸出格式<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:150px">用途</th><th>軟體／格式</th></tr></thead>
 <tbody>
@@ -953,7 +970,7 @@ th,td{padding:9px 6px}
 <div class="chap"><span class="no">CH 07</span><h2>AR／VR 的應用展望</h2><span class="sub">AR vs VR → AR 三特點 → 設備 → 四大應用 → 市場</span></div>
 
 <div class="card">
-<h3>AR vs VR：一句話分辨</h3>
+<h3>AR vs VR：一句話分辨<span class="flag ev">常青</span></h3>
 <svg class="svgbox" viewBox="0 0 680 170" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="680" height="170" rx="10" fill="#232329" stroke="#2d2d34"/>
 <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
@@ -977,7 +994,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">AR 的定義與三特點（簡答必寫）</h3>
+<h3 class="a">AR 的定義與三特點（簡答必寫）<span class="flag ev">常青</span></h3>
 <div class="quote">擴增實境（Augmented Reality，簡稱 AR）透過攝影機影像計算與圖像技術，在螢幕上將虛擬資訊重疊於真實世界進行互動，結合虛擬化技術來觀察世界。<em>Lesson AR/VR 的應用展望（原文）</em></div>
 <table>
 <thead><tr><th style="width:190px">特點</th><th>意思</th></tr></thead>
@@ -991,7 +1008,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">四種 AR 互動設備</h3>
+<h3 class="t">四種 AR 互動設備<span class="flag ev">常青</span></h3>
 <div class="roles">
 <div class="rolecol b"><div class="rh">運算裝置</div><div class="ri">手提電腦／電腦<em>早期 AR 卡片的搭配</em></div></div>
 <div class="rolecol t"><div class="rh">行動裝置</div><div class="ri">智慧型手機／平板<em>目前最普及</em></div></div>
@@ -1000,7 +1017,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">HMD 六大代表（考配對）</h3>
+<h3 class="a">HMD 六大代表（考配對）<span class="flag ex">僅考試</span></h3>
 <table>
 <thead><tr><th style="width:190px">產品</th><th style="width:150px">廠商</th><th>型態</th></tr></thead>
 <tbody>
@@ -1016,7 +1033,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">四大應用領域（考「這個案例屬於哪一類」）</h3>
+<h3 class="t">四大應用領域（考「這個案例屬於哪一類」）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:130px">領域</th><th>AR 在做什麼</th></tr></thead>
 <tbody>
@@ -1030,7 +1047,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="p">創新應用與市場數字</h3>
+<h3 class="p">創新應用與市場數字<span class="flag ex">僅考試</span></h3>
 <table>
 <thead><tr><th style="width:150px">案例</th><th>內容</th></tr></thead>
 <tbody>
@@ -1051,7 +1068,7 @@ th,td{padding:9px 6px}
 <div class="chap"><span class="no">CH 08</span><h2>PS 實作一：選取與修補</h2><span class="sub">選取局部 → 局部調整 → 消除雜物 → 移動景物 → 輸出準備</span></div>
 
 <div class="card">
-<h3>本章五個學習提要（就是考題大綱）</h3>
+<h3>本章五個學習提要（就是考題大綱）<span class="flag ev">常青</span></h3>
 <ol>
 <li>選取局部範圍</li>
 <li>局部調整與修補影像</li>
@@ -1063,7 +1080,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">選取工具三家族（快速鍵也要記）</h3>
+<h3 class="a">選取工具三家族（快速鍵也要記）<span class="flag ev">常青</span></h3>
 <svg class="svgbox" viewBox="0 0 680 200" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="680" height="200" rx="10" fill="#232329" stroke="#2d2d34"/>
 <rect x="240" y="20" width="200" height="38" rx="8" fill="#1b1b1f" stroke="#85B7EB"/>
@@ -1098,7 +1115,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">魔術棒的三個關鍵設定</h3>
+<h3 class="t">魔術棒的三個關鍵設定<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:150px">設定</th><th>作用</th></tr></thead>
 <tbody>
@@ -1111,7 +1128,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3>局部調整：色相／飽和度</h3>
+<h3>局部調整：色相／飽和度<span class="flag ev">常青</span></h3>
 <p>教材的例子：一張葉子該轉紅的水杉照片，因為相機誤判，拍起來<b>飽和度不夠、灰灰的</b>。</p>
 <div class="flow">
 <span>開啟「色相／飽和度」</span><i>→</i><span>編輯列選「紅色」</span><i>→</i><span>提高飽和度</span><i>→</i><span>紅葉變鮮明</span>
@@ -1120,7 +1137,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">修補三工具（考「該用哪一個」）</h3>
+<h3 class="a">修補三工具（考「該用哪一個」）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:170px">工具</th><th>怎麼用</th><th style="width:150px">適用</th></tr></thead>
 <tbody>
@@ -1133,7 +1150,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">內容感知填滿：清掉畫面裡的遊客</h3>
+<h3 class="t">內容感知填滿：清掉畫面裡的遊客<span class="flag ev">常青</span></h3>
 <div class="flow">
 <span>圈選要移除的物件</span><i>→</i><span>編輯 → 填滿</span><i>→</i><span>內容：內容感知</span><i>→</i><span>Photoshop 用周圍像素推理補滿</span>
 </div>
@@ -1142,7 +1159,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">內容感知移動：換構圖不用重拍</h3>
+<h3 class="a">內容感知移動：換構圖不用重拍<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:150px">選項</th><th>設定與作用</th></tr></thead>
 <tbody>
@@ -1155,7 +1172,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">輸出前：影像尺寸對話框的五個區塊</h3>
+<h3 class="a">輸出前：影像尺寸對話框的五個區塊<span class="flag ev">常青</span></h3>
 <svg class="svgbox" viewBox="0 0 680 200" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="680" height="200" rx="10" fill="#232329" stroke="#2d2d34"/>
 <rect x="24" y="24" width="300" height="72" rx="8" fill="#1b1b1f" stroke="#85B7EB"/>
@@ -1180,7 +1197,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">重新取樣六種演算法（考「哪個適合放大／縮小」）</h3>
+<h3 class="a">重新取樣六種演算法（考「哪個適合放大／縮小」）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:180px">運算方式</th><th>原理</th><th style="width:140px">最適合</th></tr></thead>
 <tbody>
@@ -1196,7 +1213,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">輸出解析度對照表（必背）</h3>
+<h3 class="t">輸出解析度對照表（必背）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:230px">輸出裝置</th><th>輸出解析度</th></tr></thead>
 <tbody>
@@ -1221,13 +1238,13 @@ th,td{padding:9px 6px}
 <div class="chap"><span class="no">CH 09</span><h2>PS 實作二：色彩調整與圖層模式</h2><span class="sub">動態模糊 → 混合模式 → 網點 → 去背 → 色階 → 放射模糊</span></div>
 
 <div class="card">
-<h3>這個練習在做什麼（一句話）</h3>
+<h3>這個練習在做什麼（一句話）<span class="flag ev">常青</span></h3>
 <p>把一張<b>靜態的單車照片</b>，用「<b>動態模糊 ＋ 彩色網屏 ＋ 圖層混合模式 ＋ 圖層遮色片 ＋ 純色填滿</b>」做成一張有速度感的視覺創作，最後加上文字並輸出成網頁用 JPG。</p>
 <div class="tip"><b>整份流程的邏輯</b>：<b>模糊</b>製造動感 → <b>網點</b>製造質感 → <b>混合模式</b>把圖層疊出層次 → <b>遮色片</b>把主角挖回來 → <b>色階</b>把主角拉亮 → <b>純色塊</b>補畫面 → <b>文字</b>收尾。</div>
 </div>
 
 <div class="card">
-<h3 class="a">圖層混合模式（考「哪個模式讓什麼變亮／變暗」）</h3>
+<h3 class="a">圖層混合模式（考「哪個模式讓什麼變亮／變暗」）<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:130px">模式</th><th>效果</th><th style="width:190px">本練習用在哪</th></tr></thead>
 <tbody>
@@ -1241,7 +1258,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">兩個濾鏡：動態模糊與彩色網屏</h3>
+<h3 class="t">兩個濾鏡：動態模糊與彩色網屏<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:210px">濾鏡路徑</th><th style="width:210px">設定值</th><th>作用</th></tr></thead>
 <tbody>
@@ -1253,7 +1270,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="p">黑白調整圖層的六個色版數值</h3>
+<h3 class="p">黑白調整圖層的六個色版數值<span class="flag ex">僅考試</span></h3>
 <table>
 <thead><tr><th style="width:110px">色版</th><th style="width:110px">數值</th><th>作用</th></tr></thead>
 <tbody>
@@ -1270,7 +1287,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">鋼筆去背五步（考流程順序）</h3>
+<h3 class="a">鋼筆去背五步（考流程順序）<span class="flag ev">常青</span></h3>
 <div class="flow">
 <span>鋼筆描封閉路徑</span><i>→</i><span>直接選取工具修錨點</span><i>→</i><span>路徑視窗存「路徑 1」</span><i>→</i><span>製作選取範圍（羽化 1）</span><i>→</i><span>選取並遮住</span><i>→</i><span>輸出至圖層遮色片</span>
 </div>
@@ -1288,7 +1305,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">色階與放射狀模糊</h3>
+<h3 class="t">色階與放射狀模糊<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:190px">項目</th><th style="width:180px">設定</th><th>作用</th></tr></thead>
 <tbody>
@@ -1300,7 +1317,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="p">純色填滿圖層做色塊</h3>
+<h3 class="p">純色填滿圖層做色塊<span class="flag ev">常青</span></h3>
 <div class="flow">
 <span>圖層 → 新增填滿圖層 → 純色</span><i>→</i><span>移到目標圖層下方</span><i>→</i><span>混合模式改覆蓋／加亮顏色</span><i>→</i><span>用路徑選取工具調形狀</span>
 </div>
@@ -1309,7 +1326,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3>存檔流程</h3>
+<h3>存檔流程<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:190px">步驟</th><th>動作</th></tr></thead>
 <tbody>
@@ -1331,7 +1348,7 @@ th,td{padding:9px 6px}
 <div class="chap"><span class="no">CH 10</span><h2>PS 實作三：製作 GIF 動畫</h2><span class="sub">準備素材 → 疊圖層 → 時間軸 → 設定秒數 → 轉存 GIF</span></div>
 
 <div class="card">
-<h3 class="a">八個步驟（考流程順序）</h3>
+<h3 class="a">八個步驟（考流程順序）<span class="flag ex">僅考試</span></h3>
 <svg class="svgbox" viewBox="0 0 680 250" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="680" height="250" rx="10" fill="#232329" stroke="#2d2d34"/>
 <rect x="24" y="24" width="150" height="44" rx="8" fill="#1b1b1f" stroke="#85B7EB"/>
@@ -1369,7 +1386,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="t">三個關鍵設定（為什麼一定要這樣做）</h3>
+<h3 class="t">三個關鍵設定（為什麼一定要這樣做）<span class="flag ex">僅考試</span></h3>
 <table>
 <thead><tr><th style="width:190px">設定</th><th>為什麼</th></tr></thead>
 <tbody>
@@ -1382,7 +1399,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="p">GIF 為什麼能做動畫？</h3>
+<h3 class="p">GIF 為什麼能做動畫？<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:150px">項目</th><th>GIF</th><th>MP4／MPEG</th></tr></thead>
 <tbody>
@@ -1404,7 +1421,7 @@ th,td{padding:9px 6px}
 <div class="chap"><span class="no">附錄 A</span><h2>數字考點總表</h2><span class="sub">所有會考的數字，一次背完</span></div>
 
 <div class="card">
-<h3 class="a">編碼與字元</h3>
+<h3 class="a">編碼與字元<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:200px">項目</th><th>數字</th></tr></thead>
 <tbody>
@@ -1421,7 +1438,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">色彩與影像</h3>
+<h3 class="a">色彩與影像<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:200px">項目</th><th>數字</th></tr></thead>
 <tbody>
@@ -1442,7 +1459,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">聲音</h3>
+<h3 class="a">聲音<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:120px">規格</th><th style="width:130px">取樣頻率</th><th style="width:110px">位元數</th><th>聲道</th></tr></thead>
 <tbody>
@@ -1456,7 +1473,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">視訊</h3>
+<h3 class="a">視訊<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:120px">規格</th><th style="width:110px">掃描線</th><th style="width:100px">每秒影格</th><th style="width:70px">比例</th><th>地區</th></tr></thead>
 <tbody>
@@ -1471,7 +1488,7 @@ th,td{padding:9px 6px}
 </div>
 
 <div class="card">
-<h3 class="a">AR／VR</h3>
+<h3 class="a">AR／VR<span class="flag ev">常青</span></h3>
 <table>
 <thead><tr><th style="width:200px">項目</th><th>內容</th></tr></thead>
 <tbody>
