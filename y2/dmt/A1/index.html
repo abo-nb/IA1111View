@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>多媒體概論　完整講義（CH1–CH10）</title>
+<style>
+/* ==========================================================================
+   講義樣式（深色卡片式．豎屏優先）
+   - 調字級只改 :root 的 --fs 系列，其餘全部連動
+   - 新增區塊請沿用既有 class，不要另寫 inline font-size
+   - 表格與 SVG 的橫向捲動由頁尾腳本自動接管（.tw / .svgwrap）
+   ========================================================================== */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#131315;--card:#1b1b1f;--card2:#232329;--line:#2d2d34;
+--tx:#e9e9ec;--mut:#9b9ba4;
+--blue:#85B7EB;--teal:#5DCAA5;--amber:#FAC775;--red:#F09595;--purple:#AFA9EC;
+
+/* 字級基準：整體放大約 22%，以豎屏可讀性為準 */
+--fs:17px;--fs-sm:14.5px;--fs-h4:16px;--fs-h3:18.5px;--fs-h2:25px;
+--lh:1.85;--radius:14px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;line-height:var(--lh);font-size:var(--fs);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.wrap{max-width:920px;margin:0 auto;padding:0 clamp(18px,4vw,28px) 96px}
+
+.nav{position:sticky;top:0;z-index:20;background:rgba(19,19,21,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:920px;margin:0 auto;display:flex;gap:24px;align-items:center;min-height:56px;padding:0 clamp(18px,4vw,28px);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav a{color:var(--mut);font-size:var(--fs-sm);text-decoration:none;white-space:nowrap;padding:8px 0;border-bottom:1px solid transparent}
+.nav a:hover,.nav a:active{color:var(--tx);border-bottom-color:var(--teal)}
+
+section{scroll-margin-top:76px}
+
+.hero{padding:54px 0 32px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.hero h1{font-size:clamp(27px,4.4vw,38px);font-weight:500;letter-spacing:.5px;line-height:1.35}
+.hero p{color:var(--mut);font-size:var(--fs-sm);margin-top:12px;max-width:680px;line-height:1.75}
+.hero .meta{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:var(--fs-sm);color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:5px 14px;line-height:1.6}
+
+.chap{display:flex;align-items:baseline;gap:14px;margin:62px 0 24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.chap .no{font-size:var(--fs-sm);letter-spacing:2px;color:var(--teal);font-weight:500}
+.chap h2{font-size:var(--fs-h2);font-weight:500;line-height:1.4}
+.chap .sub{font-size:var(--fs-sm);color:var(--mut);margin-left:auto;text-align:right;line-height:1.6;max-width:52%}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;margin-bottom:18px}
+.card h3{font-size:var(--fs-h3);font-weight:500;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:10px;line-height:1.5}
+.card h3::before{content:"";width:4px;height:19px;background:var(--blue);border-radius:2px;display:inline-block;flex:0 0 auto}
+.card h3.t::before{background:var(--teal)}
+.card h3.t{color:var(--teal)}
+.card h3.a::before{background:var(--amber)}
+.card h3.a{color:var(--amber)}
+.card h3.p::before{background:var(--purple)}
+.card h3.p{color:var(--purple)}
+.card h4{font-size:var(--fs-h4);font-weight:500;color:#cfcfd6;margin:22px 0 10px;line-height:1.6}
+.card h4:first-of-type{margin-top:0}
+
+p{color:#dcdce2;margin-bottom:12px}
+p:last-child{margin-bottom:0}
+
+table{width:100%;border-collapse:collapse;font-size:16px;margin:8px 0}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7}
+thead th{font-size:var(--fs-sm);color:var(--mut);font-weight:500;border-bottom:1px solid #3a3a42}
+tbody tr:last-child td{border-bottom:none}
+td.k{color:var(--teal);white-space:nowrap;font-weight:500}
+td.n{color:var(--amber);white-space:nowrap;font-weight:500}
+.small{font-size:var(--fs-sm);color:var(--mut);line-height:1.7}
+
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:16px;margin:12px 0}
+.flow span{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 14px;line-height:1.5}
+.flow i{color:var(--mut);font-style:normal;font-size:15px}
+
+.tip{border-left:3px solid var(--amber);background:rgba(250,199,117,.07);border-radius:0 8px 8px 0;padding:14px 18px;font-size:16px;margin-top:16px;color:#dcdce2;line-height:1.8}
+.tip b{color:var(--amber);font-weight:500}
+.warn{border-left:3px solid var(--red);background:rgba(240,149,149,.07);border-radius:0 8px 8px 0;padding:14px 18px;font-size:16px;margin-top:16px;color:#dcdce2;line-height:1.8}
+.warn b{color:var(--red);font-weight:500}
+.note{border-left:3px solid var(--purple);background:rgba(175,169,236,.07);border-radius:0 8px 8px 0;padding:14px 18px;font-size:16px;margin-top:16px;color:#dcdce2;line-height:1.8}
+.note b{color:var(--purple);font-weight:500}
+
+.mx{font-size:14.5px}
+.mx th{padding:10px 6px;text-align:center;border:1px solid var(--line);font-weight:500;font-size:14px}
+.mx td{padding:11px 7px;text-align:center;border:1px solid var(--line);color:#c9c9d0;line-height:1.5}
+.mx thead th{background:#26262d;color:var(--teal)}
+.mx tbody th{background:#1f1f25;color:var(--blue);white-space:nowrap}
+.mx td:hover{background:#26262d}
+
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rolecol{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:16px}
+.rolecol .rh{font-size:13.5px;letter-spacing:1px;margin-bottom:10px;font-weight:500}
+.rolecol.b .rh{color:var(--blue)}
+.rolecol.t .rh{color:var(--teal)}
+.rolecol.a .rh{color:var(--amber)}
+.rolecol .ri{font-size:16px;padding:8px 0;border-bottom:1px dashed #33333b;color:#dcdce2;line-height:1.6}
+.rolecol .ri:last-child{border-bottom:none}
+.rolecol .ri em{font-style:normal;color:var(--mut);font-size:12.5px;display:block}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.box .bt{font-size:13.5px;letter-spacing:1px;color:var(--mut);margin-bottom:8px}
+.box .bv{font-size:16px;color:#dcdce2;line-height:1.75}
+
+.quote{border-left:2px solid #4a4a55;padding:2px 0 2px 18px;color:#b9b9c2;font-size:16px;margin:12px 0;line-height:1.8}
+.quote em{font-style:normal;color:var(--mut);font-size:13.5px;display:block;margin-top:6px}
+
+ol,ul{padding-left:24px;color:#dcdce2}
+li{margin-bottom:8px}
+
+.svgbox{max-width:680px;margin:10px auto 0;display:block;height:auto}
+
+.final{background:#1d1d22;border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin-top:18px}
+.final h3{font-size:var(--fs-h3);font-weight:500;color:var(--amber);margin-bottom:16px;line-height:1.5}
+
+/* 寬表格／圖表的橫向捲動容器（由頁尾腳本自動加上） */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0;padding-bottom:2px;scrollbar-width:thin;scrollbar-color:#3a3a42 transparent}
+.tw table{margin:0}
+.tw::-webkit-scrollbar{height:6px}
+.tw::-webkit-scrollbar-thumb{background:#3a3a42;border-radius:3px}
+.svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 0;padding-bottom:2px;scrollbar-width:thin;scrollbar-color:#3a3a42 transparent}
+.svgwrap svg{max-width:100%}
+.svgwrap::-webkit-scrollbar{height:6px}
+.svgwrap::-webkit-scrollbar-thumb{background:#3a3a42;border-radius:3px}
+
+/* 內文舉例 */
+.eg{border-left:2px solid #4a6a8a;background:rgba(133,183,235,.055);border-radius:0 8px 8px 0;padding:13px 16px;font-size:15.5px;color:#c9c9d2;margin-top:14px;line-height:1.8}
+.eg .lb{color:var(--blue);font-weight:500;margin-right:8px;letter-spacing:1px;font-size:13.5px}
+.eg b{color:var(--blue);font-weight:500}
+
+/* 快速重點小卡 */
+.qk{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:12px;margin:4px 0 18px}
+.qkc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.qkc .qt{font-size:12.5px;letter-spacing:1.2px;color:var(--teal);margin-bottom:8px;font-weight:500;line-height:1.5}
+.qkc .qb{font-size:15.5px;color:#dcdce2;line-height:1.72}
+.qkc .qb b{color:var(--amber);font-weight:500}
+.qkc.c2 .qt{color:var(--blue)}
+.qkc.c3 .qt{color:var(--purple)}
+.qkc.c4 .qt{color:var(--amber)}
+.qkrow{display:flex;align-items:baseline;gap:12px;margin:26px 0 12px}
+.qkrow .qn{font-size:13px;letter-spacing:2px;color:var(--mut)}
+.qkrow .qn b{color:var(--teal);font-weight:500}
+.qkrow .qd{font-size:14px;color:var(--mut);line-height:1.6}
+
+/* ============ 平板／窄桌面 ============ */
+@media (max-width:900px){
+.roles{grid-template-columns:1fr}
+.grid2{grid-template-columns:1fr}
+.chap .sub{max-width:100%}
+}
+
+/* ============ 豎屏手機 ============ */
+@media (max-width:760px){
+.wrap{padding-top:0;padding-bottom:72px;padding-left:max(15px,env(safe-area-inset-left));padding-right:max(15px,env(safe-area-inset-right))}
+.nav-in{padding-left:max(15px,env(safe-area-inset-left));padding-right:max(15px,env(safe-area-inset-right));gap:20px;min-height:54px}
+.nav a{font-size:15px}
+section{scroll-margin-top:70px}
+
+.hero{padding:32px 0 24px}
+.hero h1{font-size:clamp(26px,7.4vw,32px);line-height:1.4}
+.hero p{font-size:15px}
+.tag{font-size:14px;padding:5px 12px}
+
+.chap{flex-wrap:wrap;gap:6px;margin:44px 0 18px;padding-bottom:12px}
+.chap .no{font-size:13.5px;width:100%}
+.chap h2{font-size:22px;width:100%;line-height:1.45}
+.chap .sub{margin-left:0;width:100%;text-align:left;font-size:14px;margin-top:4px}
+
+.card{padding:18px 16px;border-radius:12px;margin-bottom:14px}
+.card h3{font-size:17.5px;gap:8px;margin-bottom:14px}
+.card h3::before{height:17px;width:3.5px}
+.card h4{font-size:15.5px;margin:20px 0 8px}
+
+table{font-size:15.5px}
+th,td{padding:10px 8px;line-height:1.65}
+td.k,td.n{white-space:normal}
+.mx{font-size:13.5px}
+.mx th,.mx thead th{padding:8px 4px;font-size:13px}
+.mx td{padding:9px 5px}
+
+.flow{font-size:15.5px;gap:8px}
+.flow span{padding:7px 12px}
+.flow i{font-size:14px}
+
+.tip,.warn,.note{padding:12px 14px;font-size:15.5px;line-height:1.8;margin-top:14px}
+.eg{padding:12px 13px;font-size:15px;line-height:1.78;margin-top:12px}
+.qk{grid-template-columns:1fr;gap:10px}
+.qkc{padding:13px 14px}
+.qkc .qb{font-size:15.5px}
+.qkrow{margin:22px 0 10px;flex-wrap:wrap;gap:6px}
+.rolecol .ri{font-size:15.5px}
+.box .bv{font-size:15.5px}
+.quote{font-size:15.5px}
+li{margin-bottom:7px}
+ol,ul{padding-left:22px}
+.final{padding:20px 18px}
+
+/* 圖表與寬表格：保留原尺寸、允許左右滑動，避免縮到看不清 */
+.svgwrap svg{min-width:520px}
+.tw table.wide{min-width:480px}
+.tw table.mx{min-width:600px}
+}
+
+/* ============ 極窄屏（<380px）微調 ============ */
+@media (max-width:380px){
+:root{--fs:16.5px}
+table{font-size:15px}
+th,td{padding:9px 6px}
+.card{padding:16px 14px}
+}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     導覽列：每個 section 一條，新增章節就往後加一條 <a>
+     ============================================================ -->
+<div class="nav"><div class="nav-in">
+<a href="#ch1">CH1 多媒體基礎</a>
+<a href="#ch2">CH2 文字媒體</a>
+<a href="#ch3">CH3 色彩與影像</a>
+<a href="#ch4">CH4 聲音媒體</a>
+<a href="#ch5">CH5 視訊媒體</a>
+<a href="#ch6">CH6 動畫與VR</a>
+<a href="#ch7">CH7 AR·VR應用</a>
+<a href="#ch8">CH8 選取與修補</a>
+<a href="#ch9">CH9 色彩與圖層</a>
+<a href="#ch10">CH10 GIF動畫</a>
+<a href="#numbers">數字總表</a>
+<a href="#errors">易錯清單</a>
+<a href="#cards">快速小卡</a>
+</div></div>
+
+<div class="wrap">
+
+<!-- ============================================================
+     封面：標題 + 一句話說明 + 標籤牆 + 教材核對聲明
+     ============================================================ -->
+<div class="hero">
+<h1>多媒體概論　完整講義</h1>
+<p>整合 7 份教材：多媒體概論（90 頁）、文字媒體（28 頁）、影像處理關鍵技巧（45 頁）、數位多媒體影像細部處理（46 頁）、W8 色彩調整與圖層模式、Photoshop 製作 GIF 動畫（10 頁）、AR/VR 的應用展望（25 頁）。前七章是觀念與規格，後三章是 Photoshop 實作。</p>
+<div class="meta">
+<span class="tag">色彩三屬性</span>
+<span class="tag">編碼系統</span>
+<span class="tag">色彩深度</span>
+<span class="tag">ppi ／ dpi ／ ppm</span>
+<span class="tag">廣播標準</span>
+<span class="tag">音訊格式</span>
+<span class="tag">影像格式</span>
+<span class="tag">VR 三要素</span>
+<span class="tag">內容感知</span>
+<span class="tag">圖層混合模式</span>
+</div>
+<div class="tip" style="margin-top:20px"><b>本講義已用教材原文逐頁核對</b>（2026-11-08）。凡與原文不符、或教材本身有誤之處，已用<span style="color:var(--red)"><b>紅色「校正」</b></span>框標出，並說明「該寫什麼、不要寫什麼」。<br>原則：<b>規格與數字照教材背，觀念用理解推。</b></div>
+</div>
+
+<!-- ============================================================
+     CH1
+     ============================================================ -->
+<section id="ch1">
+<div class="chap"><span class="no">CH 01</span><h2>多媒體基礎</h2><span class="sub">定義 → 本質 → 互動與超媒體 → 軟硬體</span></div>
+
+<div class="card">
+<h3>多媒體的定義（教材原句）</h3>
+<div class="flow">
+<span>結合多種傳播資訊媒介</span><i>→</i><span>用電腦或電子化方式製作</span><i>→</i><span>發佈出去</span>
+</div>
+<p class="small" style="margin-top:10px">教材列舉的元素有九類：<b>文字、圖形、圖片、影像、影片、動畫、音樂、聲音、交談</b>。考「多媒體包含哪些元素」時，九類要能背出來——「交談」最容易被漏掉，它指的就是互動。</p>
+<table>
+<thead><tr><th style="width:130px">元素</th><th>屬於</th><th style="width:120px">本講義</th></tr></thead>
+<tbody>
+<tr><td class="k">文字</td><td>符號系統，一切語言的基礎</td><td>CH2</td></tr>
+<tr><td class="k">圖形／圖片／影像</td><td>靜態視覺</td><td>CH3</td></tr>
+<tr><td class="k">音樂／聲音</td><td>聽覺</td><td>CH4</td></tr>
+<tr><td class="k">影片</td><td>連續影像（實拍）</td><td>CH5</td></tr>
+<tr><td class="k">動畫</td><td>連續影像（逐格製作）</td><td>CH6</td></tr>
+<tr><td class="n">交談</td><td>互動性，不是內容而是「操控」</td><td>CH1</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3 class="t">多媒體的五個本質（為什麼需要多媒體）</h3>
+<table>
+<thead><tr><th style="width:170px">本質</th><th>意思</th></tr></thead>
+<tbody>
+<tr><td class="k">傳遞訊息</td><td>媒體的存在目的就是傳訊息，不是為了好看</td></tr>
+<tr><td class="k">單一媒介不足</td><td>只用文字講「夕陽」，比不上直接給一張照片</td></tr>
+<tr><td class="k">結合數種媒介</td><td>把多種媒介放進同一個載體</td></tr>
+<tr><td class="k">同時接收不同感官</td><td>眼睛與耳朵可以並行處理，資訊量加倍</td></tr>
+<tr><td class="n">動作即為訊息</td><td>動態本身承載語意：手勢、轉場、動畫節奏都是訊息</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>「動作即為訊息」是最容易被忽略的一條</b>。它說的是：不只有「畫面上有什麼」算訊息，「怎麼動」也算。所以按鈕按下去要有回饋、轉場要有方向感。</div>
+</div>
+
+<div class="card">
+<h3 class="a">四層遞進：多媒體 → 互動式 → 超媒體 → 超文件</h3>
+<svg class="svgbox" viewBox="0 0 680 200" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="200" rx="10" fill="#232329" stroke="#2d2d34"/>
+<rect x="24" y="30" width="134" height="46" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="91" y="53" font-family="sans-serif" font-size="14" fill="#B5D4F4" text-anchor="middle" dominant-baseline="central">多媒體</text>
+<text x="91" y="94" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle">多種媒介並置</text>
+<text x="174" y="53" font-family="sans-serif" font-size="14" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">→</text>
+<rect x="190" y="30" width="134" height="46" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="257" y="53" font-family="sans-serif" font-size="14" fill="#9FE1CB" text-anchor="middle" dominant-baseline="central">互動式多媒體</text>
+<text x="257" y="94" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle">使用者可操控</text>
+<text x="340" y="53" font-family="sans-serif" font-size="14" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">→</text>
+<rect x="356" y="30" width="134" height="46" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="423" y="53" font-family="sans-serif" font-size="14" fill="#FAC775" text-anchor="middle" dominant-baseline="central">超媒體</text>
+<text x="423" y="94" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle">元件之間有連結</text>
+<text x="506" y="53" font-family="sans-serif" font-size="14" fill="#9b9ba4" text-anchor="middle" dominant-baseline="central">→</text>
+<rect x="522" y="30" width="134" height="46" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="589" y="53" font-family="sans-serif" font-size="14" fill="#AFA9EC" text-anchor="middle" dominant-baseline="central">超文件</text>
+<text x="589" y="94" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle">文字即索引</text>
+<text x="340" y="140" font-family="sans-serif" font-size="13" fill="#9b9ba4" text-anchor="middle">往右＝多一層「使用者控制」或「連結架構」</text>
+<text x="340" y="170" font-family="sans-serif" font-size="13" fill="#9FE1CB" text-anchor="middle">WWW ＝ 由超文件組成的超媒體</text>
+</svg>
+<table>
+<thead><tr><th style="width:170px">名詞</th><th>教材定義</th></tr></thead>
+<tbody>
+<tr><td class="k">互動式多媒體</td><td>讓使用者得以<b>自行設定並操控</b>的多媒體</td></tr>
+<tr><td class="k">超媒體 Hypermedia</td><td>多媒體提供了<b>連結各訊息元件的架構</b>，使用者透過連結取得更多訊息</td></tr>
+<tr><td class="k">超文件 Hypertext</td><td>超媒體<b>內所包含的文件</b>中，文字或符號成為關鍵或索引，可搜尋並連到其他文件、影片、聲音、圖像</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>「WWW 屬於哪一種？」答超媒體，不要答超文件。</b><br>教材原句是「全球資訊網（WWW）也就是由<b>超文件</b>組成的<b>超媒體</b>」。超文件是零件，超媒體是成品。</div>
+</div>
+
+<div class="card">
+<h3 class="t">多媒體軟體七大類（考「這個軟體屬於哪一類」）</h3>
+<table>
+<thead><tr><th style="width:120px">類別</th><th>代表軟體</th><th style="width:150px">判準</th></tr></thead>
+<tbody>
+<tr><td class="k">文字編輯</td><td>Microsoft Word、Windows 記事本、Adobe Acrobat</td><td>處理字</td></tr>
+<tr><td class="k">音訊編輯</td><td>GoldWave、Sound Forge、Adobe Audition、Vegas Pro、GarageBand、Pro Tools</td><td>波形</td></tr>
+<tr><td class="k">圖像編輯</td><td>點陣：Photoshop、PhotoImpact、Fireworks、Painter　向量：Illustrator、CorelDRAW、Inkscape　網頁美工：Figma、Canva、Wix、Webflow</td><td>像素或路徑</td></tr>
+<tr><td class="k">視訊剪輯</td><td>Premiere Pro、Vegas Video、Avid、會聲會影、威力導演、Movie Maker、Final Cut Pro、iMovie</td><td>時間軸排片段</td></tr>
+<tr><td class="k">視訊特效</td><td>After Effects、Combustion、Apple Motion、Shake</td><td>加效果</td></tr>
+<tr><td class="k">動畫製作</td><td>3D：Maya、3ds Max、Blender、Cinema 4D　2D：Adobe Animate、After Effects、Toon Boom Harmony</td><td>逐格或關鍵影格</td></tr>
+<tr><td class="k">多媒體整合</td><td>Unity、Director、AuthorWare</td><td>把上面全部串起來</td></tr>
+<tr><td class="k">光碟／燒錄</td><td>Encore DVD、DVD Studio Pro、拍拍燒、Nero、Roxio Toast</td><td>輸出成載體</td></tr>
+<tr><td class="k">轉檔／播放</td><td>TMPGEnc、MPEG Encoder、CDex　播放：Windows Media Player、QuickTime、RealPlayer、PowerDVD</td><td>換格式／播出來</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>After Effects 被教材列在兩個類別</b>：既在「視訊特效」，也在「2D 動畫軟體」。題目問「剪輯」→ 不是它；問「特效」或「2D 動畫」→ 都可以是它。看到 After Effects 先看題目問的是哪一類。</div>
+</div>
+
+<div class="card">
+<h3>多媒體硬體四類</h3>
+<table>
+<thead><tr><th style="width:130px">類別</th><th>包含</th><th style="width:170px">負責</th></tr></thead>
+<tbody>
+<tr><td class="k">輸入設備</td><td>網路攝影機 Webcam、麥克風、掃描器、觸控螢幕</td><td>真實世界 → 數位訊號</td></tr>
+<tr><td class="k">輸出設備</td><td>顯示器、投影機、揚聲器、耳機</td><td>數位資料 → 人可感知</td></tr>
+<tr><td class="k">處理核心</td><td>CPU、GPU</td><td>加速 3D 渲染與影音編解碼</td></tr>
+<tr><td class="k">儲存與傳輸</td><td>SSD、RAM、HDMI、USB</td><td>大檔快速讀取與傳送</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>GPU 不是「比較快的 CPU」</b>：它專門做大量重複的平行運算（像素、頂點），所以 3D 渲染與影片編解碼丟給它；CPU 負責通用邏輯。考「哪個負責 3D 渲染」→ GPU。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     CH2
+     ============================================================ -->
+<section id="ch2">
+<div class="chap"><span class="no">CH 02</span><h2>文字媒體</h2><span class="sub">文字的地位 → 輸入方式 → 編碼系統 → 字體與字型 → 電子文件</span></div>
+
+<div class="card">
+<h3>文字的定義與地位</h3>
+<div class="quote">文字媒體是人類用來記錄語言的符號系統，目的在傳達資訊和顯示資料，也是人類文明社會產生的標誌。<br>凡是人們用來傳遞訊息、表達一定意義的圖畫和符號，都可以稱為文字。<em>文字媒體 2-1（原文）</em></div>
+<p>教材給的關鍵數字：<b>人類知識的來源約有 80% 來自閱讀</b>。所以文字雖然是最「舊」的媒介，資訊密度仍然最高。</p>
+<div class="tip"><b>80% 這個數字是考點</b>。問「人類知識來源約有多少比例來自閱讀」→ 答 80%。</div>
+</div>
+
+<div class="card">
+<h3 class="t">四種文字輸入方式</h3>
+<table>
+<thead><tr><th style="width:130px">方式</th><th>怎麼做</th><th style="width:150px">例子</th></tr></thead>
+<tbody>
+<tr><td class="k">鍵盤輸入法</td><td>英文與阿拉伯數字直接打；中文再分<b>字音輸入</b>（注音）與<b>字根輸入</b>（大易、倉頡）</td><td>注音、倉頡</td></tr>
+<tr><td class="k">手寫輸入</td><td>手寫板或觸控螢幕寫字，經辨識軟體轉成電腦文字</td><td>蒙恬筆</td></tr>
+<tr><td class="k">語音輸入</td><td>把口音的類比資料轉成數位資料，與預存聲音樣本比對後執行</td><td>語音辨識</td></tr>
+<tr><td class="k">文字掃描</td><td>掃描器把紙本轉成圖，再 OCR 辨識成文字</td><td>OCR</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>字音 ≠ 字根，方向不要顛倒。</b><br>字音輸入＝<b>注音</b>（照讀音打）；字根輸入＝<b>倉頡、大易</b>（拆字形打）。考題很愛把「倉頡是字音輸入」寫成選項。</div>
+</div>
+
+<div class="card">
+<h3 class="a">編碼系統總表（本章最高頻考點）</h3>
+<table>
+<thead><tr><th style="width:110px">編碼</th><th style="width:100px">位元</th><th style="width:110px">容量</th><th>重點</th></tr></thead>
+<tbody>
+<tr><td class="k">ASCII</td><td>7 位元</td><td>128 符號</td><td>美國標準資訊交換碼。A=65（41h）、B=66、b=98、@=64、$=36、?=63</td></tr>
+<tr><td class="k">EBCDIC</td><td>8 位元</td><td>256 字元</td><td>IBM 發展的「擴展式 BCD 碼」，比 ASCII 多 128 個字元。'A'=11000001</td></tr>
+<tr><td class="k">ISO8859</td><td>8 位元</td><td>—</td><td>歐洲語系用。<b>0～127 與 ASCII 完全相同</b>，之後依國家語系不同</td></tr>
+<tr><td class="k">Big-5 大五碼</td><td>2 bytes／字</td><td>—</td><td>資策會 <b>1985</b> 公布，繁體中文內碼。兩個位元組「組合」成一個字</td></tr>
+<tr><td class="k">GB 國標碼</td><td>2 bytes／字</td><td>7445 字符</td><td>簡體中文。<b>1981/5/1</b> 實施，含 6763 漢字 + 709 符號</td></tr>
+<tr><td class="n">Unicode 萬國碼</td><td>16 位元</td><td>65,536 字</td><td>UTC 制訂，<b>定長式編碼</b>，前 128 個字元與 ASCII 相同</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>教材內部有兩處不一致，這裡先講清楚：</b><br>① 多媒體概論 p15 寫 ASCII 是「<b>8 位元</b>」的字元編碼系統；文字媒體 p5 寫「<b>7 個位元</b>即可包含所有所需資訊，共 128 個符號」。<br>→ 考「ASCII 用幾個位元編碼」答 <b>7</b>；考「ASCII 佔多少空間」答 <b>1 byte</b>（8 位元，最高位元當檢查位）。<br>② 文字媒體 p22 習題把「A=41h，Z 的二進位」答成 <b>01000010</b>，那是 <b>42h＝'B'</b>。正確是 <b>5A＝01011010</b>（A=65，Z=65+25=90）。</div>
+<div class="note"><b>為什麼中文一定要 2 bytes？</b> 1 byte 只有 2⁸＝256 種組合，而常用漢字就有 6763 個，裝不下。所以中文系統用兩個位元組（16 bits）表示一個中文字。</div>
+<div class="warn"><b>GB 碼的數字對不起來，這裡先講清楚</b>：教材寫「共收集了 <b>7445</b> 個圖形字符，其中有 <b>6763</b> 個漢字和各種符號 <b>709</b> 個」——但 6763＋709＝7472，不是 7445。<br>→ 考題問「GB 碼共幾個圖形字符」答 <b>7445</b>；問「幾個漢字」答 <b>6763</b>。<b>不要自己相加</b>，照教材的數字填。</div>
+</div>
+
+<div class="card">
+<h3 class="p">定長式編碼：Unicode 為什麼解決了「衝碼」</h3>
+<svg class="svgbox" viewBox="0 0 680 220" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="220" rx="10" fill="#232329" stroke="#2d2d34"/>
+<text x="24" y="34" font-family="sans-serif" font-size="13" fill="#FAC775">Big-5：兩個位元組「組合」</text>
+<rect x="24" y="50" width="140" height="42" rx="6" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="94" y="71" font-family="sans-serif" font-size="12" fill="#B5D4F4" text-anchor="middle" dominant-baseline="central">高位元組</text>
+<rect x="172" y="50" width="140" height="42" rx="6" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="242" y="71" font-family="sans-serif" font-size="12" fill="#B5D4F4" text-anchor="middle" dominant-baseline="central">低位元組</text>
+<text x="330" y="71" font-family="sans-serif" font-size="14" fill="#9b9ba4" dominant-baseline="central">→ 一個字</text>
+<text x="24" y="118" font-family="sans-serif" font-size="12" fill="#F09595">風險：位元組若與前後字元「撞在一起」就變亂碼</text>
+<text x="24" y="152" font-family="sans-serif" font-size="13" fill="#9FE1CB">Unicode：16 個位元一次處理</text>
+<rect x="24" y="168" width="288" height="34" rx="6" fill="#1b1b1f" stroke="#5DCAA5"/>
+<text x="168" y="185" font-family="sans-serif" font-size="12" fill="#9FE1CB" text-anchor="middle" dominant-baseline="central">1 ─────────── 16 位元（不切高低）</text>
+<text x="330" y="185" font-family="sans-serif" font-size="13" fill="#9FE1CB" dominant-baseline="central">→ 定長，不衝突</text>
+</svg>
+<p class="small" style="margin-top:8px">教材原句：「Unicode 編碼在處理時，是將兩個位元組<b>同時處理</b>，而不是加以組合，也就是從 1 到第 16 個位元全部拿來使用，而不是區分為高低兩個位元，因此稱之為<b>定長式編碼系統</b>。」</p>
+<div class="tip"><b>「定長」的意思是：每個字都剛好 16 位元，長度不變。</b>所以電腦不必猜「這個位元組是字還是半個字」——Big-5 的問題正是必須猜。</div>
+</div>
+
+<div class="card">
+<h3>字體 vs 字型（最愛考的兩個名詞）</h3>
+<table>
+<thead><tr><th style="width:120px">名詞</th><th style="width:120px">英文</th><th>定義</th></tr></thead>
+<tbody>
+<tr><td class="k">字體</td><td>Typeface</td><td>圖形化的字元（字的「長相」）</td></tr>
+<tr><td class="k">字型</td><td>Font</td><td><b>固定大小</b>的字元集合，大小以「點」（point）表示</td></tr>
+<tr><td class="k">樣式</td><td>Style</td><td>粗體、斜體、底線、框線</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>一句話分辨</b>：字體是「長相」，字型是「某一整套固定尺寸的長相」。說「新細明體」是在講<b>字體</b>；說「12 點新細明體」才是<b>字型</b>。</div>
+</div>
+
+<div class="card">
+<h3 class="t">點陣字 vs 描邊字（＋記憶體計算）</h3>
+<table>
+<thead><tr><th style="width:110px">項目</th><th>點陣字 Bitmap Font</th><th>描邊字 Outline Font（向量字型）</th></tr></thead>
+<tbody>
+<tr><td class="k">原理</td><td>用點陣圖案表示字形</td><td>用<b>數學公式算座標</b>產生文字</td></tr>
+<tr><td class="k">放大</td><td>會出現<b>鋸齒狀</b></td><td>任意縮放都保持平順</td></tr>
+<tr><td class="k">資料量</td><td>大（解析度越高越浪費空間）</td><td>小，節省記憶體</td></tr>
+<tr><td class="k">速度</td><td>顯示速度快</td><td>需要即時運算</td></tr>
+<tr><td class="k">常見用途</td><td>手機、PDA 等 LCD 螢幕</td><td>印刷、一般字型集（TrueType：細明體、新細明體、標楷體）</td></tr>
+</tbody>
+</table>
+<div class="eg"><span class="lb">計算</span>一個 <b>24×24 點矩陣</b>的中文字型佔多少記憶體？<br>24 × 24 = 576 個點，每個點 1 bit → 576 ÷ 8 = <b>72 bytes</b>。<br>（考題常換成 32×32：32×32÷8 = 128 bytes）</div>
+<div class="warn"><b>不要只記缺點。</b>點陣字的缺點是「放大有鋸齒、檔案大」；優點是「顯示速度快、小尺寸清楚」。描邊字的缺點是「需要運算」；優點是「放大不失真、檔案小」。題目問「哪一項不是點陣字的優點」時，別把優點當缺點。</div>
+</div>
+
+<div class="card">
+<h3>文字檔案格式</h3>
+<table>
+<thead><tr><th style="width:100px">格式</th><th>開發者／性質</th><th style="width:170px">能不能放多媒體</th></tr></thead>
+<tbody>
+<tr><td class="k">.TXT</td><td>Windows 的「純文字」格式</td><td>不能，只能純文字</td></tr>
+<tr><td class="k">.DOC</td><td>Microsoft Word 儲存的文件格式</td><td>可以，可搭配影像、圖表</td></tr>
+<tr><td class="k">.PDF</td><td>Adobe Acrobat 開發，需 Acrobat Reader 觀看</td><td>可以，同樣可加影像、圖表</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3 class="p">電子化文件的三個要求</h3>
+<div class="roles">
+<div class="rolecol b"><div class="rh">安全與限制</div><div class="ri">法定契約效力<em>文件不只是文字集合</em></div></div>
+<div class="rolecol t"><div class="rh">交換與傳遞</div><div class="ri">透過網路與資料庫<em>改善搜尋與傳遞效率</em></div></div>
+<div class="rolecol a"><div class="rh">可攜性與正確度</div><div class="ri">跨平台正確顯示<em>克服軟硬體限制</em></div></div>
+</div>
+<div class="note"><b>PDF 為什麼會贏</b>：教材原句「可以不受<b>平台、字體、軟體和版本</b>的影響，而能保有最初的檔案內容」。這四項就是 PDF 的價值，考簡答要寫全。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     CH3
+     ============================================================ -->
+<section id="ch3">
+<div class="chap"><span class="no">CH 03</span><h2>色彩學與數位影像</h2><span class="sub">色彩三屬性 → 色彩模式 → 像素與解析度 → 色彩深度 → 點陣／向量 → 壓縮與格式</span></div>
+
+<div class="card">
+<h3>色彩三屬性（每年必考）</h3>
+<table>
+<thead><tr><th style="width:110px">屬性</th><th style="width:120px">英文</th><th>定義</th><th style="width:180px">怎麼變</th></tr></thead>
+<tbody>
+<tr><td class="k">色相</td><td>Hue</td><td>區別色彩差異度而給的名稱：紅、橙、黃、綠、藍、紫</td><td>換顏色＝換色相</td></tr>
+<tr><td class="k">明度</td><td>Brightness</td><td>色彩的明暗程度，相當於色彩強度。<b>黑色最低、白色最高</b></td><td>混白↑、混黑↓</td></tr>
+<tr><td class="k">彩度</td><td>Saturation</td><td>色彩中純色的飽和度，也就是<b>鮮濁程度</b></td><td>混白→明度↑彩度↓<br>混黑→明度↓彩度↓</td></tr>
+</tbody>
+</table>
+<p class="small">教材補充：顏色分「<b>有彩色</b>」（其他所有顏色）、「<b>無彩色</b>」（黑、白、灰）、「<b>獨立色</b>」（<b>金與銀</b>兩種）。</p>
+<div class="tip"><b>唯一辨識點：混白只降彩度、不降明度；混黑兩個都降。</b><br>紅色加白 → 粉紅（明度↑、彩度↓）；紅色加黑 → 暗紅（明度↓、彩度↓）。</div>
+<div class="warn"><b>獨立色只有金、銀兩種</b>，不要寫成「金、銀、灰」。灰是無彩色。<br>另外「彩度」＝「飽和度」＝Saturation，是同一件事的三種叫法，不要當成兩個屬性。</div>
+</div>
+
+<div class="card">
+<h3 class="a">加色法 RGB vs 減色法 CMYK</h3>
+<svg class="svgbox" viewBox="0 0 680 210" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="210" rx="10" fill="#232329" stroke="#2d2d34"/>
+<rect x="20" y="24" width="300" height="160" rx="8" fill="#0d0d10" stroke="#3a3a42"/>
+<text x="170" y="46" font-family="sans-serif" font-size="13" fill="#B5D4F4" text-anchor="middle">加色法（光）：越混越亮</text>
+<circle cx="120" cy="105" r="38" fill="#E24B4B" opacity="0.75"/>
+<circle cx="170" cy="105" r="38" fill="#4BE27A" opacity="0.75"/>
+<circle cx="145" cy="145" r="38" fill="#4B7AE2" opacity="0.75"/>
+<text x="145" y="172" font-family="sans-serif" font-size="12" fill="#e9e9ec" text-anchor="middle">R＋G＋B → 白</text>
+<rect x="360" y="24" width="300" height="160" rx="8" fill="#f2f2f4" stroke="#3a3a42"/>
+<text x="510" y="46" font-family="sans-serif" font-size="13" fill="#1b1b1f" text-anchor="middle">減色法（色料）：越混越濁</text>
+<circle cx="460" cy="105" r="38" fill="#31C6DE" opacity="0.8"/>
+<circle cx="510" cy="105" r="38" fill="#DE31B0" opacity="0.8"/>
+<circle cx="485" cy="145" r="38" fill="#E8DE31" opacity="0.8"/>
+<text x="485" y="172" font-family="sans-serif" font-size="12" fill="#1b1b1f" text-anchor="middle">C＋M＋Y → 近黑</text>
+</svg>
+<div class="grid2">
+<div class="box"><div class="bt">RGB　加色法</div><div class="bv">光的三原色。黑底往上加光，<b>越加越亮</b>，三色全滿＝白。<br><span class="small">用在螢幕、電視、投影機、網站</span></div></div>
+<div class="box"><div class="bt">CMY(K)　減色法</div><div class="bv">色料三原色，各自吸收紅／綠／藍光波，<b>越混越濁</b>。<br><span class="small">用在印刷、印表機、傳統攝影</span></div></div>
+</div>
+<div class="tip"><b>K 是為什麼存在？</b> CMY 三色相混只能做出「深度不夠的灰色」，所以必須另外加<b>黑色油墨（K）</b>，才成為 CMYK 四色印刷。</div>
+</div>
+
+<div class="card">
+<h3 class="t">六種色彩模式總表</h3>
+<table>
+<thead><tr><th style="width:110px">模式</th><th>組成</th><th style="width:170px">關鍵特性</th></tr></thead>
+<tbody>
+<tr><td class="k">RGB</td><td>紅、綠、藍三色光，<b>加色法</b>。每色光 256 階（0–255）</td><td>24 位元全彩＝16,777,216 色；每像素 3 bytes</td></tr>
+<tr><td class="k">CMYK</td><td>C 青、M 洋紅、Y 黃、K 黑，<b>減色法</b>。用油墨濃度表示，0～100%</td><td>印刷輸出用。RGB→CMYK 會<b>損失顏色</b>，需再調校</td></tr>
+<tr><td class="k">HSB／HSL</td><td>色相、飽和度、亮度（明度）</td><td>在 Photoshop 中<b>不是色彩模式，而是校色方式</b></td></tr>
+<tr><td class="k">Lab</td><td>L 亮度 ＋ a（紅↔綠）＋ b（黃↔藍）三個色版</td><td><b>色域最廣</b>；常作為不同色彩模式間轉換的媒介</td></tr>
+<tr><td class="k">Indexed</td><td>索引色，最多 <b>256 色</b></td><td>檔案很小，用於網頁；照片不可用</td></tr>
+<tr><td class="k">Grayscale</td><td>單一色版，0～255 共 256 灰階</td><td>只剩明暗與反差，沒有色彩調整</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>色域大小順序：Lab ＞ RGB ＞ CMYK。</b>考「哪個色彩模式能表現的顏色領域最廣」→ <b>Lab</b>；「最窄」不是 CMYK 而是 Indexed（256 色）。<br>另一題：「HSB 是不是一種色彩模式？」→ 在 Photoshop 裡<b>不是</b>，它是校色方式。教材特別強調這句，就是在等你選錯。</div>
+<div class="note"><b>為什麼 Lab 要當「轉換媒介」？</b> 因為它包含所有肉眼可見的色彩，RGB 轉 CMYK 時先經過 Lab 中轉，損失最少。</div>
+</div>
+
+<div class="card">
+<h3 class="a">三個 P：ppi、dpi、ppm（極愛考）</h3>
+<table>
+<thead><tr><th style="width:110px">單位</th><th style="width:190px">全名</th><th>用在哪</th></tr></thead>
+<tbody>
+<tr><td class="k">ppi</td><td>pixel per inch</td><td><b>影像解析度</b>：每英吋幾個像素（螢幕上的像素單位）</td></tr>
+<tr><td class="k">dpi</td><td>dot per inch</td><td><b>輸出解析度</b>：每英吋幾個墨點（掃描器、印表機）</td></tr>
+<tr><td class="n">ppm</td><td>page per minute</td><td><b>列印速度</b>：每分鐘可印幾頁（不是解析度！）</td></tr>
+</tbody>
+</table>
+<p class="small">教材給的門檻：電腦／網路／電視等螢幕媒介 <b>72 ppi</b> 即可；要列印出照片至少 <b>300 ppi</b>。</p>
+<div class="warn"><b>教材有一處寫錯，這裡校正：</b>影像處理 p16 寫「影像解析度（ppi）的意思是指每<b>平方英寸</b>所包含的像素數量」。<br>→ 正確是「每<b>英吋</b>」（線性）。300 ppi 是「1 英吋裡有 300 個像素」，不是「1 平方英吋裡有 300 個」。考簡答請寫<b>每英吋</b>。</div>
+<div class="tip"><b>看到 ppm 就想「一分鐘幾頁」</b>，它跟畫質完全無關。考題把 ppm 混進解析度選項裡，就是陷阱。</div>
+</div>
+
+<div class="card">
+<h3 class="t">檔案大小怎麼算（計算題必背）</h3>
+<div class="flow">
+<span>像素總量</span><i>×</i><span>每像素位元組</span><i>＝</i><span>檔案大小</span>
+</div>
+<table>
+<thead><tr><th style="width:150px">模式</th><th style="width:170px">每像素</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td class="k">灰階</td><td>1 byte</td><td>8 bits，256 階</td></tr>
+<tr><td class="k">RGB</td><td>3 bytes</td><td>三個色版各 8 bits ＝ 24 bits</td></tr>
+<tr><td class="k">CMYK</td><td>4 bytes</td><td>四個色版各 8 bits ＝ 32 bits</td></tr>
+</tbody>
+</table>
+<div class="eg"><span class="lb">題型 1</span>800×600 像素的<b>全彩</b>影像佔多少記憶體？<br>800 × 600 × 3 = 1,440,000 bytes ≈ <b>1.44 MB</b></div>
+<div class="eg"><span class="lb">題型 2</span>3 MBytes 顯示卡設成全彩（24 bits/pixel），最高解析度？<br>3 MB ÷ 3 bytes = <b>1 M 像素</b> → 常見組合中約為 <b>1280×720</b></div>
+<div class="eg"><span class="lb">題型 3</span>256 Mb 記憶卡可存幾張 1024×768 的影像？<br>1024 × 768 × 3 ÷ 1024 = <b>2304 KB</b>／張；256 × 1024 ÷ 2304 ≈ <b>113 張</b></div>
+<div class="warn"><b>單位陷阱</b>：題目寫「Mb」（小寫 b＝bit）和「MB」（大寫 B＝byte）差 8 倍。看到小寫 b 要先 ÷8 再算。</div>
+</div>
+
+<div class="card">
+<h3>色彩深度階梯</h3>
+<svg class="svgbox" viewBox="0 0 680 230" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="230" rx="10" fill="#232329" stroke="#2d2d34"/>
+<rect x="40" y="180" width="60" height="20" fill="#4a4a55"/>
+<rect x="150" y="160" width="60" height="40" fill="#5a5a66"/>
+<rect x="260" y="130" width="60" height="70" fill="#6f6f80"/>
+<rect x="370" y="100" width="60" height="100" fill="#85B7EB"/>
+<rect x="480" y="62" width="60" height="138" fill="#5DCAA5"/>
+<rect x="590" y="30" width="60" height="170" fill="#FAC775"/>
+<text x="70" y="196" font-family="sans-serif" font-size="12" fill="#e9e9ec" text-anchor="middle" dominant-baseline="central">1 bit</text>
+<text x="180" y="180" font-family="sans-serif" font-size="12" fill="#e9e9ec" text-anchor="middle" dominant-baseline="central">4 bits</text>
+<text x="290" y="150" font-family="sans-serif" font-size="12" fill="#e9e9ec" text-anchor="middle" dominant-baseline="central">8 bits</text>
+<text x="400" y="120" font-family="sans-serif" font-size="12" fill="#131315" text-anchor="middle" dominant-baseline="central">16 bits</text>
+<text x="510" y="82" font-family="sans-serif" font-size="12" fill="#131315" text-anchor="middle" dominant-baseline="central">24 bits</text>
+<text x="620" y="50" font-family="sans-serif" font-size="12" fill="#131315" text-anchor="middle" dominant-baseline="central">32 bits</text>
+<text x="70" y="216" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">黑白</text>
+<text x="180" y="216" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">16 色</text>
+<text x="290" y="216" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">256 灰階</text>
+<text x="400" y="216" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">高彩</text>
+<text x="510" y="216" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">全彩</text>
+<text x="620" y="216" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">全彩+Alpha</text>
+</svg>
+<table>
+<thead><tr><th style="width:90px">深度</th><th style="width:130px">名稱</th><th style="width:150px">顏色數</th><th>配置</th></tr></thead>
+<tbody>
+<tr><td class="k">1 bit</td><td>黑白</td><td>2</td><td>只有黑與白，圖檔量最小</td></tr>
+<tr><td class="k">4 bits</td><td>16 色</td><td>16</td><td>色盤中沒有的顏色，用最接近的替代</td></tr>
+<tr><td class="k">8 bits</td><td>256 灰階／256 色</td><td>256</td><td>灰階：0＝黑、255＝白</td></tr>
+<tr><td class="k">16 bits</td><td>高彩</td><td>65,536</td><td>R5 ＋ G6 ＋ B5（32×64×32）</td></tr>
+<tr><td class="k">24 bits</td><td>全彩</td><td>16,777,216</td><td>R8 ＋ G8 ＋ B8；所有編輯工具都支援</td></tr>
+<tr><td class="n">32 bits</td><td>全彩＋Alpha</td><td>4,294,967,296</td><td>24 bits ＋ 8 bits 透明通道</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>高彩的位元分配是「綠色多 1 位元」（R5 G6 B5）</b>，因為人眼對綠色最敏感。教材寫「紅 5、藍 5、綠 6」，順序不同但意思一樣——不要因為順序不同就以為教材寫錯。</div>
+<div class="tip"><b>顏色數永遠是 2 的「位元數」次方。</b>16 bits → 2¹⁶＝65,536；24 bits → 2²⁴＝16,777,216；32 bits → 2³²＝4,294,967,296。</div>
+</div>
+
+<div class="card">
+<h3 class="t">點陣圖 vs 向量圖（四項對照）</h3>
+<table>
+<thead><tr><th style="width:110px">項目</th><th>點陣圖 Bitmap</th><th>向量圖 Vector</th></tr></thead>
+<tbody>
+<tr><td class="k">原理</td><td>以<b>像素</b>組成</td><td>以<b>數學程式</b>記錄座標、角度、距離</td></tr>
+<tr><td class="k">放大</td><td>解析度與品質變差、出現<b>鋸齒</b></td><td>品質不受影響，邊緣平順</td></tr>
+<tr><td class="k">檔案</td><td>較大，隨尺寸增加</td><td>極小，<b>只看圖形複雜度</b>不看尺寸</td></tr>
+<tr><td class="k">擅長</td><td>精緻細節、豐富色彩（照片、油畫）</td><td>線條、圖形、圖案（只能以色塊表現）</td></tr>
+<tr><td class="k">軟體</td><td>Photoshop、Painter、PhotoImpact、PaintShop Pro</td><td>Illustrator、CorelDRAW、Inkscape</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>向量圖的檔案大小決定於「圖形複雜度」而非「圖形大小」</b>——同一張圖放大一百倍，檔案一樣大。這句話是萬年考題。</div>
+</div>
+
+<div class="card">
+<h3 class="p">影像壓縮的原理</h3>
+<div class="quote">人類利用眼睛天生的限制，就是無法分辨高亮度變動下的確切強度，很難察覺兩張近似影像間的些許差異，因此部分影像資料在壓縮前後是容許有少許失真的。<em>影像處理關鍵技巧 3-2（原文）</em></div>
+<table>
+<thead><tr><th style="width:150px">類型</th><th style="width:150px">代表格式</th><th>特性</th></tr></thead>
+<tbody>
+<tr><td class="k">破壞性壓縮</td><td>JPEG</td><td>壓縮率大、<b>較易失真</b>，丟掉人眼不易察覺的資料</td></tr>
+<tr><td class="k">非破壞性壓縮</td><td>TIFF（LZW）</td><td>完整保留原始資料，<b>檔案大</b></td></tr>
+</tbody>
+</table>
+<p class="small">教材列的演算法：數位餘弦轉換法、向量量化、賀夫曼碼。</p>
+<div class="note"><b>為什麼「非破壞性」還能壓縮？</b> 因為它找的是「重複」而不是「不重要」。LZW 把重複出現的字串換成短代碼，還原後一字不差。</div>
+</div>
+
+<div class="card">
+<h3 class="a">八種圖像格式（考「哪個格式有什麼特性」）</h3>
+<table>
+<thead><tr><th style="width:90px">格式</th><th style="width:120px">壓縮</th><th style="width:130px">色彩</th><th>關鍵特性</th></tr></thead>
+<tbody>
+<tr><td class="k">GIF</td><td>索引色</td><td>256 色</td><td>檔案小、傳輸快；網頁 LOGO、小動畫</td></tr>
+<tr><td class="k">JPEG</td><td><b>破壞性</b></td><td>24 bits 全彩</td><td>數位照片通用；壓縮分低／中／高／最佳四級</td></tr>
+<tr><td class="k">TIFF</td><td>LZW <b>非破壞</b></td><td>全彩 ＋ Alpha</td><td>保留大部分原始資訊、高品質、<b>檔案大</b></td></tr>
+<tr><td class="k">RAW</td><td>未壓縮</td><td>原始資料</td><td>完全保留拍攝原始資料；檔案極大，需高階機身與電腦</td></tr>
+<tr><td class="k">PSD</td><td>—</td><td>全彩 ＋ Alpha</td><td>Photoshop 專用；<b>唯一可保留並存取所有圖層</b>的格式</td></tr>
+<tr><td class="k">BMP</td><td>—</td><td>24 bits 全彩</td><td>Microsoft 標準點陣圖；從黑白 2 色一路演進到 24-bit</td></tr>
+<tr><td class="k">PNG</td><td>非破壞</td><td>全彩 ＋ Alpha</td><td>為<b>取代 GIF 與 JPEG</b> 而開發；早期瀏覽器不支援</td></tr>
+<tr><td class="n">TGA</td><td>—</td><td>全彩 ＋ Alpha</td><td>與 TIFF 類似但檔案略小；<b>常用於視訊</b></td></tr>
+</tbody>
+</table>
+<div class="warn"><b>「支援 Alpha Channel 透明色版」的是：TIFF、PSD、TGA、PNG。</b><br>JPEG <b>完全不支援透明</b>；GIF 只有 1 位元的「全透明／不透明」，沒有半透明。考「哪個格式不能做透明背景」→ JPEG。</div>
+<div class="tip"><b>記法</b>：<b>GIF</b> 小又會動 → 網頁小圖；<b>JPEG</b> 拍照 → 破壞性；<b>TIFF／PSD</b> 要修圖 → 非破壞＋圖層；<b>RAW</b> 要後製 → 原始資料。</div>
+</div>
+
+<div class="card">
+<h3 class="p">補充：美的形式八項（考名詞配對）</h3>
+<table>
+<thead><tr><th style="width:100px">原則</th><th>一句話</th></tr></thead>
+<tbody>
+<tr><td class="k">平衡</td><td>以一個軸為中心，兩邊構成元素保持平均、相等的狀態</td></tr>
+<tr><td class="k">律動</td><td>造型單位<b>反覆構成</b>，使觀眾產生感受</td></tr>
+<tr><td class="k">統一</td><td>用色彩、造型、圖樣達成；作法為相近、重複、連續</td></tr>
+<tr><td class="k">對比</td><td>亮與暗、大與小、遠與近、粗糙與光滑、冷與暖</td></tr>
+<tr><td class="k">漸進</td><td>由淡到濃、由大到小，又叫<b>漸層</b></td></tr>
+<tr><td class="k">對稱</td><td>基本形式為<b>左右對稱</b>與<b>放射對稱</b></td></tr>
+<tr><td class="k">比例</td><td>部分與主體保持一定數量關係；最有名的是<b>黃金比例</b></td></tr>
+<tr><td class="n">圖與底</td><td>背景與圖形相互的關係；圖具有突出、明顯、具體的特質</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>「律動」與「漸進」最容易混</b>：律動＝<b>反覆</b>（同一個東西一直出現）；漸進＝<b>變化</b>（越來越大、越來越濃）。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     CH4
+     ============================================================ -->
+<section id="ch4">
+<div class="chap"><span class="no">CH 04</span><h2>聲音媒體</h2><span class="sub">聲波三量 → 數位化 → 品質對照 → 聲道 → 格式</span></div>
+
+<div class="card">
+<h3>三個基本物理量</h3>
+<table>
+<thead><tr><th style="width:110px">名詞</th><th style="width:100px">英文</th><th>定義</th><th style="width:110px">單位</th></tr></thead>
+<tbody>
+<tr><td class="k">聲波</td><td>Sound Wave</td><td>由空氣中的分子振動而形成</td><td>—</td></tr>
+<tr><td class="k">頻率</td><td>Frequency</td><td>聲波<b>每秒振動的次數</b>，越高聲音越尖</td><td>Hz</td></tr>
+<tr><td class="k">振幅</td><td>Amplitude</td><td>聲波的波紋；波形越高振幅越大，<b>音量越大</b></td><td>dB（分貝）</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>頻率管「音高」，振幅管「音量」</b>。題目給「波形變高」→ 振幅變大、音量變大，不是頻率變高。</div>
+</div>
+
+<div class="card">
+<h3 class="a">數位化的兩支箭頭</h3>
+<div class="grid2">
+<div class="box"><div class="bt">取樣頻率 Sampling Rate</div><div class="bv">每秒取<b>幾個點</b>。<br>越高越能忠實呈現原音。<br><span class="small">例：DVD 為 48000 Hz</span></div></div>
+<div class="box"><div class="bt">取樣解析度 Sampling Resolution</div><div class="bv">每個點用<b>幾個 bit</b> 記錄振幅強度。<br>8 bits ＝ 2⁸ ＝ 256 種強度。<br><span class="small">位元數越高，越能表現細微強弱</span></div></div>
+</div>
+<div class="tip"><b>一個管「橫軸密度」，一個管「縱軸精度」</b>：頻率決定曲線畫得多密，解析度決定曲線畫得多細。</div>
+</div>
+
+<div class="card">
+<h3 class="t">聲音品質對照表（四列必背）</h3>
+<table>
+<thead><tr><th style="width:110px">項目</th><th>DV／DVD</th><th>CD</th><th>收音機</th><th>電話</th></tr></thead>
+<tbody>
+<tr><td class="k">取樣頻率</td><td>48000 Hz</td><td>44100 Hz</td><td>22050 Hz</td><td>11025 Hz</td></tr>
+<tr><td class="k">位元數</td><td>16 bits</td><td>16 bits</td><td>8 bits</td><td>8 bits</td></tr>
+<tr><td class="k">呈現方式</td><td>Stereo／5.1 環場</td><td>Stereo</td><td>Mono</td><td>Mono</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>只記 CD＝44100 Hz／16 bits／Stereo，其他用推的</b>：往上一級（DVD）頻率升到 48000、聲道加環場；往下兩級（收音機、電話）位元數砍半成 8 bits、聲道變單聲道。<br>頻率序列：<b>48000 → 44100 → 22050 → 11025</b>（後兩個剛好是前兩個的一半）。</div>
+</div>
+
+<div class="card">
+<h3>三種聲道呈現</h3>
+<table>
+<thead><tr><th style="width:130px">形式</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td class="k">Mono 單音</td><td>單一聲道音軌</td></tr>
+<tr><td class="k">Stereo 立體聲</td><td>分為<b>左右兩軌</b></td></tr>
+<tr><td class="n">Surround 環場</td><td>5.1 環場：前左、前中、前右、後左、後右 ＋ <b>重低音 LFE</b>，共<b>六軌</b></td></tr>
+</tbody>
+</table>
+<div class="warn"><b>5.1 是「六個聲道」，不是五個。</b> 前面的 5 是五個全頻道，後面的 .1 是<b>重低音（LFE, Low-Frequency Effects）</b>。考「5.1 環場由幾個聲道組成」→ <b>6</b>。</div>
+</div>
+
+<div class="card">
+<h3 class="t">錄音的硬體流程（五步）</h3>
+<div class="flow">
+<span>聲學訊號<br>（空氣振動）</span><i>→</i><span>麥克風<br>（換能器）</span><i>→</i><span>前級放大器</span><i>→</i><span>ADC<br>類比／數位</span><i>→</i><span>數位音訊檔</span>
+</div>
+<p class="small" style="margin-top:10px">麥克風的角色是「<b>換能器</b>」——把空氣振動轉成類比電訊號。前級放大器負責把微弱訊號放大到 ADC 能處理的電平。</p>
+<div class="note"><b>另一條路：系統內錄。</b> 用虛擬音訊驅動（Soundflower、BlackHole，或 Windows 的「立體聲混音」）把系統輸出端直接導回輸入端，錄下電腦正在播的聲音。</div>
+</div>
+
+<div class="card">
+<h3>麥克風與耳機</h3>
+<table>
+<thead><tr><th style="width:130px">分類</th><th>種類與特性</th></tr></thead>
+<tbody>
+<tr><td class="k">麥克風</td><td><b>多向型</b>（Omni-Directional）— 立體聲麥克風；<b>指向型</b>（Directional）— Shotgun、小蜜蜂</td></tr>
+<tr><td class="k">耳罩式</td><td>完整包覆耳朵。<b>音場最寬、低音下潛深</b>、頻率響應最完整。錄音室、音樂製作</td></tr>
+<tr><td class="k">貼耳式</td><td>壓在耳廓上。體積小，但久戴壓迫、低頻易因漏音減少。通勤、辦公室</td></tr>
+<tr><td class="k">入耳式</td><td>深入耳道。<b>隔音極佳</b>、低音包圍感強。舞台監聽、運動</td></tr>
+<tr><td class="n">耳塞式</td><td>掛在耳廓邊緣。舒適無壓迫，但<b>隔音差、低頻易流失</b>。日常通話</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>「入耳式」與「耳塞式」不要顛倒。</b> 入耳式＝<b>塞進耳道</b>（有矽膠耳塞，隔音好）；耳塞式＝<b>掛在耳廓外</b>（像早期 AirPods，隔音差）。</div>
+</div>
+
+<div class="card">
+<h3 class="a">八種音訊格式（考「誰開發、壓不壓縮」）</h3>
+<table>
+<thead><tr><th style="width:90px">格式</th><th style="width:150px">開發者</th><th style="width:110px">壓縮</th><th>關鍵特性</th></tr></thead>
+<tbody>
+<tr><td class="k">WAV</td><td>Microsoft ＋ IBM</td><td>未壓縮</td><td>品質好、幾乎所有軟體支援、跨平台；<b>缺點檔案大</b></td></tr>
+<tr><td class="k">WMA</td><td>Microsoft</td><td>高壓縮</td><td>號稱媲美 CD 音質，<b>比 MP3 更小、品質更佳</b></td></tr>
+<tr><td class="k">AIFF／AIF</td><td>Apple（Macintosh）</td><td>未壓縮</td><td>與 WAV 同性質：品質好、跨平台、檔案龐大</td></tr>
+<tr><td class="k">AU</td><td>Sun ＆ NeXT</td><td>—</td><td>普遍使用於 <b>Unix</b> 作業系統</td></tr>
+<tr><td class="k">IFF</td><td>Amiga</td><td>—</td><td>性質與 Apple 的 AIFF 類似</td></tr>
+<tr><td class="k">MP3</td><td>MPEG-1 Layer 3</td><td><b>破壞性</b></td><td>壓縮比 <b>10～12 倍</b>、約 WAV 的 1/10；<b>省略人耳無法辨識的高低頻</b></td></tr>
+<tr><td class="k">MP4</td><td>MPEG-4（AAC）</td><td>破壞性</td><td>比 MP3 更有效率；但支援播放的軟體較少</td></tr>
+<tr><td class="n">MIDI</td><td>—</td><td>—</td><td>副檔名 .mid。<b>不是數位化的聲音</b>，是「音樂速記」的數字指令，所以檔案最小</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>MIDI 不是聲音檔。</b> 它存的是「用什麼樂器、彈哪個音、多長、多大力」，播放時才由音源合成。所以換一組音源，同一份 MIDI 聽起來完全不同。<br>考「下列何者不是數位化的音訊格式」→ <b>MIDI</b>。</div>
+<div class="tip"><b>MP3 的關鍵句</b>：「利用<b>簡化或省略人耳無法辨識的低頻與高頻</b>聲音」來縮小檔案。這句話同時解釋了「為什麼是破壞性」與「為什麼聽起來還行」。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     CH5
+     ============================================================ -->
+<section id="ch5">
+<div class="chap"><span class="no">CH 05</span><h2>視訊媒體</h2><span class="sub">視覺暫留 → 三大廣播標準 → HDTV → 視訊格式 → 製作流程</span></div>
+
+<div class="card">
+<h3>視覺暫留：視訊為什麼會「動」</h3>
+<div class="quote">當眼睛觀看物體時，會將正對著瞳孔的物體影像，投射在眼球後部的視網膜。不論物體是否仍留在原處，這個影像都能保留<b>十六分之一秒鐘</b>，過了十六分之一秒，影像會自動消失。<em>多媒體概論（原文）</em></div>
+<p>所以只要每秒播放超過 16 張連續影像，大腦就會把它接成「動」的。這也是動畫與視訊共同的原理。</p>
+<div class="tip"><b>1/16 秒（0.0625 秒）是考點</b>。換算成影格率就是「至少要 16 fps 才不會閃」——這也是為什麼早期電影用 24 fps、電視用 25／29.97 fps。</div>
+</div>
+
+<div class="card">
+<h3 class="a">三大廣播標準（每年必考，數字要全對）</h3>
+<svg class="svgbox" viewBox="0 0 680 190" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="190" rx="10" fill="#232329" stroke="#2d2d34"/>
+<text x="24" y="34" font-family="sans-serif" font-size="13" fill="#9b9ba4">掃描線數</text>
+<rect x="110" y="22" width="227" height="24" rx="4" fill="#85B7EB"/>
+<text x="120" y="34" font-family="sans-serif" font-size="12" fill="#131315" dominant-baseline="central">NTSC　525 條</text>
+<rect x="110" y="58" width="270" height="24" rx="4" fill="#5DCAA5"/>
+<text x="120" y="70" font-family="sans-serif" font-size="12" fill="#131315" dominant-baseline="central">PAL　625 條</text>
+<rect x="110" y="94" width="270" height="24" rx="4" fill="#5DCAA5"/>
+<text x="120" y="106" font-family="sans-serif" font-size="12" fill="#131315" dominant-baseline="central">SECAM　625 條</text>
+<rect x="110" y="130" width="467" height="24" rx="4" fill="#FAC775"/>
+<text x="120" y="142" font-family="sans-serif" font-size="12" fill="#131315" dominant-baseline="central">HDTV　1080 條（16:9）</text>
+<text x="24" y="170" font-family="sans-serif" font-size="12" fill="#9b9ba4">NTSC 29.97 fps／PAL·SECAM 25 fps／HDTV 25 或 29.97 fps</text>
+</svg>
+<table>
+<thead><tr><th style="width:90px">規格</th><th>使用地區</th><th style="width:100px">掃描線</th><th style="width:80px">每秒影格</th><th style="width:60px">比例</th></tr></thead>
+<tbody>
+<tr><td class="k">NTSC</td><td>台灣、日本、美國、加拿大、墨西哥</td><td>525 條水平</td><td>29.97</td><td>4:3</td></tr>
+<tr><td class="k">PAL</td><td>中國大陸、西歐、英國、南美洲、澳洲</td><td>625 條水平</td><td>25</td><td>4:3</td></tr>
+<tr><td class="k">SECAM</td><td>法國、東歐、前蘇聯</td><td>625 條水平</td><td>25</td><td>4:3</td></tr>
+<tr><td class="n">HDTV</td><td>已普及</td><td>1080 條／720 條循序</td><td>29.97 或 25</td><td>16:9</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>兩組密碼</b>：<b>525／29.97</b>＝美規（NTSC，台灣用這套）；<b>625／25</b>＝歐規（PAL 與 SECAM）。<br>PAL 與 SECAM 的掃描線與影格<b>完全相同</b>，差別只在「製作技術與播放方式」。</div>
+<div class="warn"><b>台灣是 NTSC，不是 PAL。</b> 很多人以為「台灣跟歐洲一樣」，剛好相反。<br>另外 NTSC 的 29.97 不是 30——這是因為早期彩色電視為了避免與聲音載波干擾而刻意調慢，考題就愛考這個小數。</div>
+</div>
+
+<div class="card">
+<h3 class="t">掃描方式：交錯 vs 循序</h3>
+<div class="grid2">
+<div class="box"><div class="bt">交錯掃描 Interlacing</div><div class="bv">一個畫面拆成上下兩個<b>圖場 Field</b> 輪流掃。<br>NTSC 用這個。<br><span class="small">省頻寬，但快速動態會有橫紋</span></div></div>
+<div class="box"><div class="bt">循序掃描 Progressive</div><div class="bv">一次掃完一整張。<br><b>液晶螢幕</b>用這個。<br><span class="small">畫面穩定，代號 p（720p／1080p）</span></div></div>
+</div>
+<div class="tip"><b>看代號就知道掃描方式</b>：<b>i</b>＝interlaced（交錯），<b>p</b>＝progressive（循序）。1080i 是交錯，1080p 是循序——數字一樣，畫質不一樣。</div>
+</div>
+
+<div class="card">
+<h3 class="p">HDTV 的兩種主流規格</h3>
+<table>
+<thead><tr><th style="width:130px">規格</th><th style="width:170px">掃描線</th><th style="width:170px">畫面大小</th><th>比例</th></tr></thead>
+<tbody>
+<tr><td class="k">1080i</td><td>1080 條垂直掃描線（<b>交錯</b>）</td><td>1920 × 1080</td><td>16:9</td></tr>
+<tr><td class="k">720p／1080p</td><td>720／1080 條<b>循序</b>掃描線</td><td>1280 × 720 ／ 1920 × 1080</td><td>16:9</td></tr>
+</tbody>
+</table>
+<div class="note"><b>「1080 條垂直掃描線」是什麼意思？</b> 指的是「畫面<b>垂直方向</b>有 1080 條線」，也就是水平掃描線共 1080 條——<b>不是</b>「垂直地掃 1080 條」。教材用「垂直掃描線」這個詞，答題時照抄即可，但理解上要抓對方向。</div>
+</div>
+
+<div class="card">
+<h3 class="a">八種視訊格式</h3>
+<table>
+<thead><tr><th style="width:110px">格式</th><th style="width:150px">開發者</th><th>關鍵特性</th></tr></thead>
+<tbody>
+<tr><td class="k">AVI</td><td>Microsoft（1992）</td><td>Audio Video Interleave。高相容、高品質，<b>檔案大</b>，不利網路傳輸</td></tr>
+<tr><td class="k">MPEG-1</td><td>MPEG 組織（1992）</td><td><b>VCD 與 MP3</b> 的主要規格，最佳解析度 352×240</td></tr>
+<tr><td class="k">MPEG-2</td><td>MPEG 組織</td><td>720×480，提升到 <b>DVD 與數位電視</b>，市場主流</td></tr>
+<tr><td class="k">MPEG-4</td><td>MPEG 組織</td><td>改善 MPEG-2 檔案過大；<b>聲音用 MP3 壓縮</b></td></tr>
+<tr><td class="k">MOV</td><td>Apple（QuickTime）</td><td>需 QuickTime Player；可做串流也可做 DVD 級畫質</td></tr>
+<tr><td class="k">ASF／WMV</td><td>Microsoft</td><td>以 Windows Media Player 為預設播放程式</td></tr>
+<tr><td class="k">RM</td><td>Real Networks</td><td><b>檔案小</b>，特別適合網路傳輸</td></tr>
+<tr><td class="n">SWF</td><td>Macromedia（Flash）</td><td>可做影音動畫，還能做<b>互動效果並加入程式設計</b></td></tr>
+</tbody>
+</table>
+<div class="warn"><b>MPEG-1／2／4 不要跟 MP3／MP4 混在一起。</b><br>MPEG 是「<b>組織</b>」也是「<b>規格家族</b>」；MP3 是 MPEG-1 的 <b>Layer 3 音訊層</b>；MP4 是 MPEG-4 的影音格式。<br>考「MP3 屬於哪個規格」→ <b>MPEG-1</b>。</div>
+</div>
+
+<div class="card">
+<h3 class="t">影片製作流程（三階段）</h3>
+<div class="flow">
+<span>前置作業<br>企劃→劇本→分鏡圖→製片設計</span><i>→</i><span>拍攝作業<br>排演→攝影／收音</span><i>→</i><span>後製作業<br>剪輯→特效→音樂與音效</span><i>→</i><span>出品發行</span>
+</div>
+<div class="tip"><b>分鏡圖在前置，剪輯在後製。</b> 考「分鏡圖屬於哪個階段」→ <b>前置作業</b>；考「配音配樂屬於哪個階段」→ <b>後製作業</b>。這兩個最容易被放錯。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     CH6
+     ============================================================ -->
+<section id="ch6">
+<div class="chap"><span class="no">CH 06</span><h2>動畫與虛擬實境</h2><span class="sub">動畫原理 → 2D／3D → VR 三要素 → 三種 VR</span></div>
+
+<div class="card">
+<h3>動畫的定義（與視訊的差別只有一句）</h3>
+<p>動畫（Animation）的概念<b>與視訊相似</b>，都是把一張張圖像連續放映產生「會動」的效果。差別在於：動畫特別指<b>單格方式拍攝或製作</b>的影片，包括平面圖像、立體模型、木偶，以及電腦製作的內容。</p>
+<p>俗稱的<b>卡通（Cartoon）</b>也是動畫的一種類型——以漫畫形式、<b>賽璐珞片</b>製作拍攝而成。</p>
+<div class="tip"><b>一句話分辨</b>：視訊是「<b>拍</b>連續的畫面」，動畫是「<b>做</b>連續的畫面」。卡通是動畫的一種，不是動畫的同義詞。</div>
+</div>
+
+<div class="card">
+<h3 class="t">2D 與 3D 動畫</h3>
+<table>
+<thead><tr><th style="width:130px">類型</th><th>作法</th><th style="width:190px">代表</th></tr></thead>
+<tbody>
+<tr><td class="k">2D 動畫</td><td>平面圖像逐格繪製</td><td>美國迪士尼、日本宮崎駿、網路 Flash 動畫</td></tr>
+<tr><td class="k">3D 動畫（傳統）</td><td>用<b>立體模型、木偶、泥偶</b>等實體素材拍攝</td><td>定格動畫</td></tr>
+<tr><td class="k">3D 動畫（電腦）</td><td>用軟體建置立體模型，創造<b>虛擬空間透視感</b></td><td>皮克斯</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>「3D 動畫」不等於「電腦動畫」。</b> 傳統 3D 是用真的模型一格一格拍；電腦 3D 是用軟體建模算圖。考題問「3D 動畫一定是用電腦做的嗎」→ <b>不一定</b>。</div>
+</div>
+
+<div class="card">
+<h3 class="a">VR 的定義與三要素（3I，必背）</h3>
+<div class="quote">虛擬實境（Virtual Reality）就是結合聲音、影像、繪圖及文字等多媒體技術，創造一個環境讓使用者有「身歷其境」的感覺。設計製作虛擬實境需要具備三個要素：<b>融入（Immersion）、互動（Interaction）及想像（Imagination）</b>。<em>多媒體概論（原文）</em></div>
+<svg class="svgbox" viewBox="0 0 680 250" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="250" rx="10" fill="#232329" stroke="#2d2d34"/>
+<path d="M340 30 L 500 180 L 180 180 Z" fill="none" stroke="#4a4a55" stroke-width="1.5"/>
+<circle cx="340" cy="34" r="34" fill="#1b1b1f" stroke="#85B7EB"/>
+<text x="340" y="34" font-family="sans-serif" font-size="13" fill="#B5D4F4" text-anchor="middle" dominant-baseline="central">融入</text>
+<text x="340" y="84" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">Immersion</text>
+<circle cx="180" cy="180" r="34" fill="#1b1b1f" stroke="#5DCAA5"/>
+<text x="180" y="180" font-family="sans-serif" font-size="13" fill="#9FE1CB" text-anchor="middle" dominant-baseline="central">互動</text>
+<text x="180" y="230" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">Interaction</text>
+<circle cx="500" cy="180" r="34" fill="#1b1b1f" stroke="#FAC775"/>
+<text x="500" y="180" font-family="sans-serif" font-size="13" fill="#FAC775" text-anchor="middle" dominant-baseline="central">想像</text>
+<text x="500" y="230" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">Imagination</text>
+<text x="340" y="140" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle">三者同時成立，才有「身歷其境」</text>
+</svg>
+<div class="tip"><b>3I 記法</b>：<b>融入</b>＝騙過感官（戴上頭盔就看不到外面）；<b>互動</b>＝你動它也動（轉頭畫面跟著轉）；<b>想像</b>＝你相信那是真的（沉浸到忘了在房間裡）。少一個就只是「看 3D 影片」。</div>
+</div>
+
+<div class="card">
+<h3 class="a">三種虛擬實境（最愛考的辨析題）</h3>
+<table>
+<thead><tr><th style="width:100px">類型</th><th style="width:130px">別名</th><th>能做什麼</th><th style="width:180px">製作方式</th></tr></thead>
+<tbody>
+<tr><td class="k">物件式</td><td>幾何式／圖形式<br>Objects VR</td><td>從上下左右四周以 <b>360 度</b>看「<b>一個物體</b>」。常用於<b>商品展示</b></td><td>各角度影像接合，或用 3D 軟體建模。代表格式 <b>QTVR</b></td></tr>
+<tr><td class="k">環場式</td><td>影像式<br>Panoramas VR</td><td>由<b>一個定點</b>迴轉觀看<b>周圍環境</b>，可 360 度操控並在範圍內 Zoom In／Out</td><td>定點拍 360° 全景照 → 修正歪斜、彎曲、縫合 → 接成環狀圓柱或球體</td></tr>
+<tr><td class="n">混合式</td><td>Hybrid VR</td><td>融合前兩者：先做環場場景，<b>再於場景中添加新物件</b>並賦予行為</td><td>用 Java、JavaScript、VRMLScript 設定物件特性與行為命令</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>一句話記</b>：物件式＝<b>繞著「東西」轉</b>；環場式＝<b>站在原地「轉頭」</b>；混合式＝<b>場景裡放東西，而且它會動</b>。</div>
+<div class="warn"><b>最容易錯的一題：「可以 360 度看一個商品」是哪一種？</b> → <b>物件式</b>。<br>「可以 360 度看一個房間、還能放大縮小」→ <b>環場式</b>。<br>關鍵字：<b>物體</b>→物件式；<b>環境</b>→環場式；<b>環境＋會動的物件</b>→混合式。</div>
+</div>
+
+<div class="card">
+<h3 class="p">VR 的軟體與輸出格式</h3>
+<table>
+<thead><tr><th style="width:150px">用途</th><th>軟體／格式</th></tr></thead>
+<tbody>
+<tr><td class="k">程式語言</td><td>VRML（Virtual Reality Modeling Language）、Division</td></tr>
+<tr><td class="k">場景編輯</td><td>REALVIZ Stitcher、360 One VR、VR Worx、CubicConverter</td></tr>
+<tr><td class="k">輸出格式</td><td>Apple QTVR、JAVA</td></tr>
+</tbody>
+</table>
+<div class="note"><b>QTVR 的地位</b>：教材說它是「目前網路上應用最多的一種虛擬實境播放格式」，由 Apple 開發，結合 QuickTime 播放器與互動式操控功能。看到 QTVR 就聯想<b>物件式 VR</b>。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     CH7
+     ============================================================ -->
+<section id="ch7">
+<div class="chap"><span class="no">CH 07</span><h2>AR／VR 的應用展望</h2><span class="sub">AR vs VR → AR 三特點 → 設備 → 四大應用 → 市場</span></div>
+
+<div class="card">
+<h3>AR vs VR：一句話分辨</h3>
+<svg class="svgbox" viewBox="0 0 680 170" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="170" rx="10" fill="#232329" stroke="#2d2d34"/>
+<defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0%" stop-color="#5DCAA5"/><stop offset="100%" stop-color="#AFA9EC"/>
+</linearGradient></defs>
+<rect x="40" y="60" width="600" height="18" rx="9" fill="url(#g1)"/>
+<text x="40" y="46" font-family="sans-serif" font-size="13" fill="#9FE1CB">真實世界</text>
+<text x="640" y="46" font-family="sans-serif" font-size="13" fill="#AFA9EC" text-anchor="end">完全虛擬</text>
+<circle cx="170" cy="69" r="10" fill="#131315" stroke="#9FE1CB" stroke-width="2"/>
+<text x="170" y="105" font-family="sans-serif" font-size="13" fill="#9FE1CB" text-anchor="middle">AR 擴增實境</text>
+<text x="170" y="126" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">虛擬疊在真實上</text>
+<circle cx="520" cy="69" r="10" fill="#131315" stroke="#AFA9EC" stroke-width="2"/>
+<text x="520" y="105" font-family="sans-serif" font-size="13" fill="#AFA9EC" text-anchor="middle">VR 虛擬實境</text>
+<text x="520" y="126" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">完全人造的世界</text>
+</svg>
+<div class="grid2">
+<div class="box"><div class="bt">VR 虛擬實境</div><div class="bv">把使用者置於<b>完全人為的虛擬世界</b>。<br>看不到真實環境。<br><span class="small">例：Eyemax</span></div></div>
+<div class="box"><div class="bt">AR 擴增實境</div><div class="bv">把<b>虛擬資訊直接添加到真實環境</b>中，所以仍然感覺自己在現實世界。<br><span class="small">例：Pokémon GO</span></div></div>
+</div>
+<div class="tip"><b>VR 是「換一個世界」，AR 是「在同一個世界加東西」。</b> 判斷題看到「使用者仍在現實環境中」→ 一定是 AR。</div>
+</div>
+
+<div class="card">
+<h3 class="a">AR 的定義與三特點（簡答必寫）</h3>
+<div class="quote">擴增實境（Augmented Reality，簡稱 AR）透過攝影機影像計算與圖像技術，在螢幕上將虛擬資訊重疊於真實世界進行互動，結合虛擬化技術來觀察世界。<em>Lesson AR/VR 的應用展望（原文）</em></div>
+<table>
+<thead><tr><th style="width:190px">特點</th><th>意思</th></tr></thead>
+<tbody>
+<tr><td class="k">結合真實與虛擬的物件</td><td>兩者同時存在於現實世界中，不是切換而是疊加</td></tr>
+<tr><td class="k">即時性的互動</td><td>你動它也動，沒有延遲感</td></tr>
+<tr><td class="k">在 3 維空間中呈現物件</td><td>虛擬物件有位置、大小、遮擋關係</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>三特點少寫「即時性」是最常見的失分。</b> 很多人只記得「虛實結合」與「3D」，但「<b>即時互動</b>」才是 AR 與「貼一張圖上去」的差別。</div>
+</div>
+
+<div class="card">
+<h3 class="t">四種 AR 互動設備</h3>
+<div class="roles">
+<div class="rolecol b"><div class="rh">運算裝置</div><div class="ri">手提電腦／電腦<em>早期 AR 卡片的搭配</em></div></div>
+<div class="rolecol t"><div class="rh">行動裝置</div><div class="ri">智慧型手機／平板<em>目前最普及</em></div></div>
+<div class="rolecol a"><div class="rh">穿戴裝置</div><div class="ri">頭戴式顯示器 HMD<em>沉浸感最強</em></div><div class="ri">智能眼鏡<em>最輕便</em></div></div>
+</div>
+</div>
+
+<div class="card">
+<h3 class="a">HMD 六大代表（考配對）</h3>
+<table>
+<thead><tr><th style="width:190px">產品</th><th style="width:150px">廠商</th><th>型態</th></tr></thead>
+<tbody>
+<tr><td class="k">HTC Vive</td><td>HTC</td><td>VR 頭盔（需外部定位）</td></tr>
+<tr><td class="n">Microsoft HoloLens</td><td>Microsoft</td><td><b>AR</b>（透視式，看得到外界）</td></tr>
+<tr><td class="k">Oculus Rift</td><td>Oculus（Meta）</td><td>VR 頭盔</td></tr>
+<tr><td class="k">Samsung GearVR</td><td>Samsung</td><td>手機插入式 VR</td></tr>
+<tr><td class="k">Sony PlayStation VR</td><td>Sony</td><td>遊戲主機 VR</td></tr>
+<tr><td class="k">Google Cardboard</td><td>Google</td><td>紙板 VR（最低成本）</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>HoloLens 是 AR，不是 VR。</b> 這是最好用的陷阱題——它是「透視式」頭盔，戴上還看得到房間，只是上面多了虛擬物件。看到 HoloLens 一律選 AR。</div>
+</div>
+
+<div class="card">
+<h3 class="t">四大應用領域（考「這個案例屬於哪一類」）</h3>
+<table>
+<thead><tr><th style="width:130px">領域</th><th>AR 在做什麼</th></tr></thead>
+<tbody>
+<tr><td class="k">汽車</td><td><b>抬頭顯示（HUD）</b>：速度、轉彎指示、地圖、電話警報疊在擋風玻璃上，確保行車安全</td></tr>
+<tr><td class="k">工業製造</td><td>讓員工<b>專注在工作本身</b>，不必瀏覽或閱讀靜態文件</td></tr>
+<tr><td class="k">醫療</td><td>專家外科醫師<b>遠端指導</b>當地醫生逐步完成手術，使遠端手術成為可能</td></tr>
+<tr><td class="k">軍事</td><td>透過<b>可穿戴眼鏡與耳機</b>，把衛星數據疊加到戰場上</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>四個領域各記一個關鍵字</b>：汽車＝<b>HUD</b>；工業＝<b>免翻文件</b>；醫療＝<b>遠端指導手術</b>；軍事＝<b>衛星數據疊加</b>。</div>
+</div>
+
+<div class="card">
+<h3 class="p">創新應用與市場數字</h3>
+<table>
+<thead><tr><th style="width:150px">案例</th><th>內容</th></tr></thead>
+<tbody>
+<tr><td class="k">IKEA</td><td>用 AR 應用幫助客戶<b>在家設想家具擺設</b>的方式</td></tr>
+<tr><td class="k">教育</td><td>利用 AR 應用<b>上化學課</b>（分子模型疊在實體桌面上）</td></tr>
+<tr><td class="k">觀光交通</td><td>旅遊導覽、路線指引疊加在實景上</td></tr>
+</tbody>
+</table>
+<div class="note"><b>市場數字</b>：教材指出「行動式 AR 在 <b>2021 年</b>推動 <b>1080 億美元</b>的 VR／AR 市場」。這組數字是投影片原話，考選擇題會直接考。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     CH8
+     ============================================================ -->
+<section id="ch8">
+<div class="chap"><span class="no">CH 08</span><h2>PS 實作一：選取與修補</h2><span class="sub">選取局部 → 局部調整 → 消除雜物 → 移動景物 → 輸出準備</span></div>
+
+<div class="card">
+<h3>本章五個學習提要（就是考題大綱）</h3>
+<ol>
+<li>選取局部範圍</li>
+<li>局部調整與修補影像</li>
+<li>快速消除雜物與填補畫面</li>
+<li>移動畫面中的景物，創造新的構圖</li>
+<li>輸出的準備：解析度與影像尺寸的調整</li>
+</ol>
+<div class="tip"><b>五項剛好對應五組工具</b>：選取工具組 → 調整圖層／修補 → 內容感知填滿 → 內容感知移動 → 影像尺寸對話框。看到題目問哪一項，就先想它屬於哪一組。</div>
+</div>
+
+<div class="card">
+<h3 class="a">選取工具三家族（快速鍵也要記）</h3>
+<svg class="svgbox" viewBox="0 0 680 200" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="200" rx="10" fill="#232329" stroke="#2d2d34"/>
+<rect x="240" y="20" width="200" height="38" rx="8" fill="#1b1b1f" stroke="#85B7EB"/>
+<text x="340" y="39" font-family="sans-serif" font-size="13" fill="#B5D4F4" text-anchor="middle" dominant-baseline="central">選取工具</text>
+<path d="M340 58 L 340 76" stroke="#4a4a55" stroke-width="1.5"/>
+<path d="M120 76 L 560 76" stroke="#4a4a55" stroke-width="1.5"/>
+<path d="M120 76 L 120 96" stroke="#4a4a55" stroke-width="1.5"/>
+<path d="M340 76 L 340 96" stroke="#4a4a55" stroke-width="1.5"/>
+<path d="M560 76 L 560 96" stroke="#4a4a55" stroke-width="1.5"/>
+<rect x="24" y="96" width="192" height="82" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="120" y="116" font-family="sans-serif" font-size="12" fill="#9FE1CB" text-anchor="middle">選取畫面類　M</text>
+<text x="120" y="138" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">矩形／橢圓</text>
+<text x="120" y="158" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">水平單線／垂直單線</text>
+<rect x="244" y="96" width="192" height="82" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="340" y="116" font-family="sans-serif" font-size="12" fill="#9FE1CB" text-anchor="middle">套索類　L</text>
+<text x="340" y="138" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">套索／多邊形套索</text>
+<text x="340" y="158" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">磁性套索</text>
+<rect x="464" y="96" width="192" height="82" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="560" y="116" font-family="sans-serif" font-size="12" fill="#9FE1CB" text-anchor="middle">快速選取／魔術棒　W</text>
+<text x="560" y="138" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">塗抹選取／點選同色</text>
+<text x="560" y="158" font-family="sans-serif" font-size="11" fill="#9b9ba4" text-anchor="middle">（同一組，按 Shift 切換）</text>
+</svg>
+<table>
+<thead><tr><th style="width:150px">家族</th><th>工具</th><th style="width:70px">鍵</th><th style="width:150px">判準</th></tr></thead>
+<tbody>
+<tr><td class="k">選取畫面類</td><td>矩形、橢圓、水平單線、垂直單線</td><td>M</td><td>幾何形狀</td></tr>
+<tr><td class="k">套索類</td><td>套索、多邊形套索、磁性套索</td><td>L</td><td>手繪／折線／吸附邊緣</td></tr>
+<tr><td class="k">快速選取類</td><td>快速選取、魔術棒</td><td>W</td><td>塗抹／點一下選同色</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>快速鍵記法</b>：M＝Marquee（框）、L＝Lasso（繩）、W＝Wand（魔杖）。<b>多邊形套索</b>適合直線邊緣（建築）；<b>磁性套索</b>會自動吸附對比邊緣（花瓣、人物輪廓）。</div>
+</div>
+
+<div class="card">
+<h3 class="t">魔術棒的三個關鍵設定</h3>
+<table>
+<thead><tr><th style="width:150px">設定</th><th>作用</th></tr></thead>
+<tbody>
+<tr><td class="k">容許度</td><td>決定「色彩多相近才算同一區」。設 15 只選到很接近的色；設 50 會連旁邊差一點的顏色一起吃進來</td></tr>
+<tr><td class="k">連續</td><td>只選<b>相連</b>的區域；取消勾選則整張圖同色都被選</td></tr>
+<tr><td class="k">取樣全部圖層</td><td>依所有圖層合併後的畫面判斷顏色，而不只看目前圖層</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>容許度是「門檻」不是「精度」。</b> 容許度<b>越高</b>＝容忍的色差<b>越大</b>＝選到的範圍<b>越大</b>。很多人以為數字大代表精準，剛好相反。</div>
+</div>
+
+<div class="card">
+<h3>局部調整：色相／飽和度</h3>
+<p>教材的例子：一張葉子該轉紅的水杉照片，因為相機誤判，拍起來<b>飽和度不夠、灰灰的</b>。</p>
+<div class="flow">
+<span>開啟「色相／飽和度」</span><i>→</i><span>編輯列選「紅色」</span><i>→</i><span>提高飽和度</span><i>→</i><span>紅葉變鮮明</span>
+</div>
+<div class="tip"><b>不知道該調哪個顏色？</b> 按面板上的「<b>手指</b>」鈕，再到影像上點一下要調整的顏色，Photoshop 會自動把「編輯」列設成對應色版。這是這個工具最實用的一招。</div>
+</div>
+
+<div class="card">
+<h3 class="a">修補三工具（考「該用哪一個」）</h3>
+<table>
+<thead><tr><th style="width:170px">工具</th><th>怎麼用</th><th style="width:150px">適用</th></tr></thead>
+<tbody>
+<tr><td class="k">污點修復筆刷</td><td>筆刷設得比瑕疵<b>稍大</b>（用 <b>[</b> <b>]</b> 縮放），點一下即可取樣周圍紋理修補</td><td>小瑕疵、髒點、痘痘</td></tr>
+<tr><td class="k">仿製印章</td><td>先按 <b>Alt</b> 設「取樣點」，再塗抹</td><td>有紋理的大面積</td></tr>
+<tr><td class="k">修補工具</td><td>圈選瑕疵後拖到乾淨處放開</td><td>有明顯紋理的區塊</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>仿製印章一定要先按 Alt 設取樣點。</b> 沒設就塗，會塗出目前圖層的空白或錯位的內容——這是操作題最常見的扣分點。<br>另外筆刷「稍大於瑕疵」是關鍵：太小取不到正確紋理，太大會把好地方也蓋掉。</div>
+</div>
+
+<div class="card">
+<h3 class="t">內容感知填滿：清掉畫面裡的遊客</h3>
+<div class="flow">
+<span>圈選要移除的物件</span><i>→</i><span>編輯 → 填滿</span><i>→</i><span>內容：內容感知</span><i>→</i><span>Photoshop 用周圍像素推理補滿</span>
+</div>
+<p class="small" style="margin-top:10px">教材的示範是櫻花小徑：遊客絡繹不絕、等不到沒人的畫面，用「內容感知填滿」把人物圈選後填掉，畫面馬上變清爽。<b>一次不乾淨就再執行一次</b>，教材明確寫了「再執行一次內容感知填滿做修補」。</p>
+<div class="tip"><b>「內容感知」＝看旁邊長什麼樣，就補成什麼樣。</b> 所以背景越單純（天空、草地、柏油路）效果越好；背景很複雜時要分次、小區塊處理。</div>
+</div>
+
+<div class="card">
+<h3 class="a">內容感知移動：換構圖不用重拍</h3>
+<table>
+<thead><tr><th style="width:150px">選項</th><th>設定與作用</th></tr></thead>
+<tbody>
+<tr><td class="k">模式</td><td><b>移動</b>（搬走並補原位）／<b>延伸</b>（複製一份並拉長）</td></tr>
+<tr><td class="k">適應</td><td>控制與周圍環境的貼合程度（教材示範用「中度」）</td></tr>
+<tr><td class="k">取樣全部圖層</td><td>在空白圖層上操作時<b>必須勾選</b>，否則取樣不到背景圖層的影像</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>在空白圖層上用內容感知移動，一定要勾「取樣全部圖層」。</b> 教材特別註明這點——沒勾的話工具只看得到透明圖層，等於沒有東西可以取樣。</div>
+</div>
+
+<div class="card">
+<h3 class="a">輸出前：影像尺寸對話框的五個區塊</h3>
+<svg class="svgbox" viewBox="0 0 680 200" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="200" rx="10" fill="#232329" stroke="#2d2d34"/>
+<rect x="24" y="24" width="300" height="72" rx="8" fill="#1b1b1f" stroke="#85B7EB"/>
+<text x="40" y="46" font-family="sans-serif" font-size="12" fill="#B5D4F4">像素尺寸（數位記錄方式）</text>
+<text x="40" y="70" font-family="sans-serif" font-size="12" fill="#9b9ba4">寬 2160 px　高 1440 px</text>
+<text x="40" y="88" font-family="sans-serif" font-size="11" fill="#9b9ba4">＝檔案大小</text>
+<rect x="24" y="108" width="300" height="72" rx="8" fill="#1b1b1f" stroke="#5DCAA5"/>
+<text x="40" y="130" font-family="sans-serif" font-size="12" fill="#9FE1CB">文件尺寸（實體呈現方式）</text>
+<text x="40" y="154" font-family="sans-serif" font-size="12" fill="#9b9ba4">寬 76.2 cm　高 50.8 cm</text>
+<text x="40" y="172" font-family="sans-serif" font-size="11" fill="#9b9ba4">解析度 72 Pixels/Inch</text>
+<rect x="348" y="24" width="308" height="156" rx="8" fill="#1b1b1f" stroke="#3a3a42"/>
+<text x="364" y="46" font-family="sans-serif" font-size="12" fill="#FAC775">三個勾選項</text>
+<text x="364" y="74" font-family="sans-serif" font-size="12" fill="#dcdce2">縮放樣式</text>
+<text x="364" y="92" font-family="sans-serif" font-size="11" fill="#9b9ba4">圖層樣式（陰影、光暈）跟著縮</text>
+<text x="364" y="118" font-family="sans-serif" font-size="12" fill="#dcdce2">強制等比例</text>
+<text x="364" y="136" font-family="sans-serif" font-size="11" fill="#9b9ba4">鎖住寬高比，影像不變形</text>
+<text x="364" y="162" font-family="sans-serif" font-size="12" fill="#dcdce2">影像重新取樣</text>
+<text x="364" y="178" font-family="sans-serif" font-size="11" fill="#9b9ba4">勾＝增刪像素；不勾＝只改列印尺寸</text>
+</svg>
+<div class="tip"><b>只在螢幕上看 → 取消「影像重新取樣」。</b> 這樣改解析度只是改「列印時多大」，像素完全不變、檔案不變、畫質不掉。要真的改變像素數量才勾它。</div>
+<div class="warn"><b>「縮放樣式」預設是取消的。</b> 如果不勾，影像縮小後圖層樣式（例如陰影的模糊半徑）還是原來的大小，看起來就會比例不對。這是細節題。</div>
+</div>
+
+<div class="card">
+<h3 class="a">重新取樣六種演算法（考「哪個適合放大／縮小」）</h3>
+<table>
+<thead><tr><th style="width:180px">運算方式</th><th>原理</th><th style="width:140px">最適合</th></tr></thead>
+<tbody>
+<tr><td class="k">最接近像素（保留硬邊）</td><td>直接取捨或複製鄰近像素</td><td>運算<b>最快</b>；像素藝術</td></tr>
+<tr><td class="k">縱橫增值法</td><td>取上、下、左、右 <b>4 個</b>像素平均</td><td>品質居中</td></tr>
+<tr><td class="k">環迴增值法</td><td>取周圍 <b>8 個</b>像素<b>加權</b>平均，速度較慢但色彩連續性最好</td><td><b>平順漸層</b></td></tr>
+<tr><td class="k">環迴增值法-更平滑</td><td>同環迴，但色彩連續性再加強</td><td><b>放大</b></td></tr>
+<tr><td class="k">環迴增值法-更銳利</td><td>同環迴，但降低連續性、邊緣變銳利</td><td><b>縮小</b></td></tr>
+<tr><td class="n">環迴增值法（自動）</td><td>由 Photoshop 自行判斷用哪一種</td><td>不確定時</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>記法</b>：<b>放大要平滑</b>（不然會一格一格）、<b>縮小要銳利</b>（不然會糊掉）。所以「更平滑」配放大、「更銳利」配縮小。</div>
+</div>
+
+<div class="card">
+<h3 class="t">輸出解析度對照表（必背）</h3>
+<table>
+<thead><tr><th style="width:230px">輸出裝置</th><th>輸出解析度</th></tr></thead>
+<tbody>
+<tr><td class="k">電腦螢幕</td><td>72～100 ppi</td></tr>
+<tr><td class="k">噴墨印表機</td><td>240～360 ppi</td></tr>
+<tr><td class="k">雷射印表機／平面印刷</td><td>266～300 ppi</td></tr>
+<tr><td class="k">相紙沖印</td><td>200～400 ppi</td></tr>
+<tr><td class="n">報紙</td><td>125～250 ppi</td></tr>
+<tr><td class="k">模造紙</td><td>200～265 ppi</td></tr>
+<tr><td class="k">銅板紙</td><td>250～350 ppi</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>規律：紙越粗糙（報紙），需要的解析度越低；紙越光滑（銅板紙），需要越高。</b> 因為粗糙的紙本身就會把墨點糊開，給太高解析度只是浪費。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     CH9
+     ============================================================ -->
+<section id="ch9">
+<div class="chap"><span class="no">CH 09</span><h2>PS 實作二：色彩調整與圖層模式</h2><span class="sub">動態模糊 → 混合模式 → 網點 → 去背 → 色階 → 放射模糊</span></div>
+
+<div class="card">
+<h3>這個練習在做什麼（一句話）</h3>
+<p>把一張<b>靜態的單車照片</b>，用「<b>動態模糊 ＋ 彩色網屏 ＋ 圖層混合模式 ＋ 圖層遮色片 ＋ 純色填滿</b>」做成一張有速度感的視覺創作，最後加上文字並輸出成網頁用 JPG。</p>
+<div class="tip"><b>整份流程的邏輯</b>：<b>模糊</b>製造動感 → <b>網點</b>製造質感 → <b>混合模式</b>把圖層疊出層次 → <b>遮色片</b>把主角挖回來 → <b>色階</b>把主角拉亮 → <b>純色塊</b>補畫面 → <b>文字</b>收尾。</div>
+</div>
+
+<div class="card">
+<h3 class="a">圖層混合模式（考「哪個模式讓什麼變亮／變暗」）</h3>
+<table>
+<thead><tr><th style="width:130px">模式</th><th>效果</th><th style="width:190px">本練習用在哪</th></tr></thead>
+<tbody>
+<tr><td class="k">變暗 Darken</td><td>只保留<b>較暗</b>的像素，亮的被蓋掉</td><td>彩色網屏層</td></tr>
+<tr><td class="k">色彩增值 Multiply</td><td>整體<b>變暗</b>；白色等於透明</td><td>模糊層壓暗畫面</td></tr>
+<tr><td class="k">覆蓋 Overlay</td><td>暗的更暗、亮的更亮，<b>保留對比</b></td><td>綠色色塊疊在主角上</td></tr>
+<tr><td class="n">加亮顏色 Color Dodge</td><td>整體<b>變亮</b>、飽和度提高</td><td>黃色色塊、車輪放射光暈</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>按「亮暗」排序記</b>：變暗 → 色彩增值 → 覆蓋 → 加亮顏色。越往右越亮。<br>其中<b>覆蓋</b>是唯一「同時保留亮部與暗部對比」的模式，所以做色塊疊圖最常用它。</div>
+</div>
+
+<div class="card">
+<h3 class="t">兩個濾鏡：動態模糊與彩色網屏</h3>
+<table>
+<thead><tr><th style="width:210px">濾鏡路徑</th><th style="width:210px">設定值</th><th>作用</th></tr></thead>
+<tbody>
+<tr><td class="k">濾鏡 → 模糊 → 動態模糊</td><td>角度 <b>-9</b>、間距像素 <b>169</b></td><td>做出水平方向的拖影，產生速度感</td></tr>
+<tr><td class="k">濾鏡 → 像素 → 彩色網屏</td><td>最大強度 <b>8</b>、色版 <b>108, 162, 90, 45</b></td><td>把影像轉成印刷四色網點，並讓四色<b>錯位</b>，產生復古印刷質感</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>「動態模糊」的角度決定方向。</b> 角度 -9 幾乎是水平，所以畫面看起來是「往左右衝」。若角度設 90 就變成上下晃——速度感的方向完全相反。</div>
+</div>
+
+<div class="card">
+<h3 class="p">黑白調整圖層的六個色版數值</h3>
+<table>
+<thead><tr><th style="width:110px">色版</th><th style="width:110px">數值</th><th>作用</th></tr></thead>
+<tbody>
+<tr><td class="k">色調</td><td>0 / 255 / 252</td><td>整體的黑、白、中間調</td></tr>
+<tr><td class="k">紅</td><td>115</td><td rowspan="6">控制「各顏色轉成灰階後的明暗」。<br>數值越高，該顏色在黑白畫面裡越亮</td></tr>
+<tr><td class="k">黃</td><td>60</td></tr>
+<tr><td class="k">綠</td><td>153</td></tr>
+<tr><td class="k">青</td><td>172</td></tr>
+<tr><td class="k">藍</td><td>31</td></tr>
+<tr><td class="k">洋紅</td><td>109</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>黑白調整圖層不是「把彩色關掉」，是「重新分配亮度」。</b> 同一個灰階，可以讓紅花很亮、藍天很暗，也可以反過來——這就是它的價值。</div>
+</div>
+
+<div class="card">
+<h3 class="a">鋼筆去背五步（考流程順序）</h3>
+<div class="flow">
+<span>鋼筆描封閉路徑</span><i>→</i><span>直接選取工具修錨點</span><i>→</i><span>路徑視窗存「路徑 1」</span><i>→</i><span>製作選取範圍（羽化 1）</span><i>→</i><span>選取並遮住</span><i>→</i><span>輸出至圖層遮色片</span>
+</div>
+<table>
+<thead><tr><th style="width:190px">步驟</th><th>關鍵設定</th></tr></thead>
+<tbody>
+<tr><td class="k">描路徑</td><td>先用鋼筆直接描封閉路徑。<b>最後一點接上第一點會出現「O」提示</b>，代表封閉成功</td></tr>
+<tr><td class="k">修錨點</td><td>搭配「直接選取」、「錨點增加／減少」、「轉換錨點」三個工具微調</td></tr>
+<tr><td class="k">存路徑</td><td>視窗 → 路徑，在工作路徑上點兩下，存為「路徑 1」</td></tr>
+<tr><td class="k">轉選取範圍</td><td>路徑視窗選「製作選取範圍」，羽化強度 <b>1</b></td></tr>
+<tr><td class="k">選取並遮住</td><td>半徑 <b>2.5</b>、平滑 <b>5</b>、羽化 <b>0.5</b>，輸出至「圖層遮色片」</td></tr>
+</tbody>
+</table>
+<div class="note"><b>「選取並遮住」的價值</b>：教材說它「增強了在原本選取時細部影像的偵測」——也就是在頭髮、毛邊、半透明邊緣這種地方，比純路徑準得多。背景單純時，也可以直接用快速選取或磁性套索，再進「選取並遮住」修邊。</div>
+</div>
+
+<div class="card">
+<h3 class="t">色階與放射狀模糊</h3>
+<table>
+<thead><tr><th style="width:190px">項目</th><th style="width:180px">設定</th><th>作用</th></tr></thead>
+<tbody>
+<tr><td class="k">色階調整圖層</td><td><b>15 / 1.56 / 230</b></td><td>三個數字＝暗場／中間調（Gamma）／亮場。把暗部壓深、亮部拉高，主角對比與亮度提升</td></tr>
+<tr><td class="k">放射狀模糊</td><td>總量 <b>22</b>、迴轉</td><td>從中心往外放射的模糊，做出<b>車輪轉動</b>的感覺</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>色階三個數字的位置要記對</b>：左＝暗場（黑點）、中＝Gamma（中間調亮度）、右＝亮場（白點）。中間那個 1.56 大於 1，代表<b>中間調變亮</b>。</div>
+</div>
+
+<div class="card">
+<h3 class="p">純色填滿圖層做色塊</h3>
+<div class="flow">
+<span>圖層 → 新增填滿圖層 → 純色</span><i>→</i><span>移到目標圖層下方</span><i>→</i><span>混合模式改覆蓋／加亮顏色</span><i>→</i><span>用路徑選取工具調形狀</span>
+</div>
+<p class="small" style="margin-top:10px">教材的作法是：先建一個<b>黑色</b>純色圖層墊在最底（壓暗整體），再用「路徑 1」建一個<b>綠色</b>（G:255）純色圖層，混合模式設<b>覆蓋</b>，移到主角下方；複製一份改成<b>黃色</b>（R:255, G:255），模式設<b>加亮顏色</b>。</p>
+<div class="warn"><b>純色填滿圖層不是「用筆刷塗」。</b> 它是「一整層顏色 ＋ 遮色片」，好處是<b>隨時能改顏色、改形狀</b>，而且不會破壞原圖。這也是為什麼教材用「填滿圖層」而不是直接畫。</div>
+</div>
+
+<div class="card">
+<h3>存檔流程</h3>
+<table>
+<thead><tr><th style="width:190px">步驟</th><th>動作</th></tr></thead>
+<tbody>
+<tr><td class="k">1</td><td>檔案 → 另存新檔 → <b>.psd</b>（保留所有圖層，可再編輯）</td></tr>
+<tr><td class="k">2</td><td>用<b>裁切工具</b>設定要保留的圖像範圍</td></tr>
+<tr><td class="k">3</td><td>再一次另存新檔 <b>.psd</b>（保留裁切後的可編輯版）</td></tr>
+<tr><td class="k">4</td><td>檔案 → <b>轉存為網頁用</b> → <b>.jpg</b>（給人看的最終檔）</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>兩個檔案各有用途</b>：<b>PSD</b> 是「工作檔」（有圖層、能改）；<b>JPG</b> 是「成品檔」（檔案小、能上傳）。交作業或上網用 JPG，要再修就用 PSD。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     CH10
+     ============================================================ -->
+<section id="ch10">
+<div class="chap"><span class="no">CH 10</span><h2>PS 實作三：製作 GIF 動畫</h2><span class="sub">準備素材 → 疊圖層 → 時間軸 → 設定秒數 → 轉存 GIF</span></div>
+
+<div class="card">
+<h3 class="a">八個步驟（考流程順序）</h3>
+<svg class="svgbox" viewBox="0 0 680 250" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="680" height="250" rx="10" fill="#232329" stroke="#2d2d34"/>
+<rect x="24" y="24" width="150" height="44" rx="8" fill="#1b1b1f" stroke="#85B7EB"/>
+<text x="99" y="46" font-family="sans-serif" font-size="12" fill="#B5D4F4" text-anchor="middle" dominant-baseline="central">1 準備同尺寸圖</text>
+<rect x="196" y="24" width="150" height="44" rx="8" fill="#1b1b1f" stroke="#85B7EB"/>
+<text x="271" y="46" font-family="sans-serif" font-size="12" fill="#B5D4F4" text-anchor="middle" dominant-baseline="central">2 移動工具+Shift</text>
+<rect x="368" y="24" width="150" height="44" rx="8" fill="#1b1b1f" stroke="#85B7EB"/>
+<text x="443" y="46" font-family="sans-serif" font-size="12" fill="#B5D4F4" text-anchor="middle" dominant-baseline="central">3 三個圖層</text>
+<rect x="540" y="24" width="116" height="44" rx="8" fill="#1b1b1f" stroke="#85B7EB"/>
+<text x="598" y="46" font-family="sans-serif" font-size="12" fill="#B5D4F4" text-anchor="middle" dominant-baseline="central">4 開時間軸</text>
+<rect x="540" y="96" width="116" height="44" rx="8" fill="#1b1b1f" stroke="#5DCAA5"/>
+<text x="598" y="118" font-family="sans-serif" font-size="12" fill="#9FE1CB" text-anchor="middle" dominant-baseline="central">5 建立視訊軸</text>
+<rect x="368" y="96" width="150" height="44" rx="8" fill="#1b1b1f" stroke="#5DCAA5"/>
+<text x="443" y="118" font-family="sans-serif" font-size="12" fill="#9FE1CB" text-anchor="middle" dominant-baseline="central">6 設每張秒數</text>
+<rect x="196" y="96" width="150" height="44" rx="8" fill="#1b1b1f" stroke="#5DCAA5"/>
+<text x="271" y="118" font-family="sans-serif" font-size="12" fill="#9FE1CB" text-anchor="middle" dominant-baseline="central">7 轉存為網頁用</text>
+<rect x="24" y="96" width="150" height="44" rx="8" fill="#1b1b1f" stroke="#FAC775"/>
+<text x="99" y="118" font-family="sans-serif" font-size="12" fill="#FAC775" text-anchor="middle" dominant-baseline="central">8 選 GIF＋永遠</text>
+<text x="340" y="176" font-family="sans-serif" font-size="12" fill="#9b9ba4" text-anchor="middle">前三步＝把圖疊成圖層；後五步＝把圖層變成影格</text>
+<text x="340" y="206" font-family="sans-serif" font-size="13" fill="#9FE1CB" text-anchor="middle">關鍵：重複播放選「永遠」→ 無限循環</text>
+</svg>
+<table>
+<thead><tr><th style="width:60px">步驟</th><th>動作</th></tr></thead>
+<tbody>
+<tr><td class="k">1</td><td>準備<b>幾張長寬尺寸相同、解析度相同、內容不同</b>的圖片</td></tr>
+<tr><td class="k">2</td><td>用<b>移動工具 ＋ Shift 鍵</b>，把第 2、3 張複製到第 1 張的檔案中</td></tr>
+<tr><td class="k">3</td><td>在第 1 張的檔案裡，圖層面板總共會有<b>三個圖層</b></td></tr>
+<tr><td class="k">4</td><td>視窗 → <b>時間軸</b></td></tr>
+<tr><td class="k">5</td><td>在時間軸視窗中<b>建立視訊時間軸</b></td></tr>
+<tr><td class="k">6</td><td>設定<b>每張照片的時間長度</b></td></tr>
+<tr><td class="k">7</td><td><b>轉存為網頁用</b></td></tr>
+<tr><td class="k">8</td><td>設定 GIF 檔格式，確認<b>重複播放選項為「永遠」</b>，最後播放測試</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3 class="t">三個關鍵設定（為什麼一定要這樣做）</h3>
+<table>
+<thead><tr><th style="width:190px">設定</th><th>為什麼</th></tr></thead>
+<tbody>
+<tr><td class="k">長寬、解析度相同</td><td>動畫是「同一個畫框換內容」，尺寸不同會對不齊、畫面會跳</td></tr>
+<tr><td class="k">移動工具 ＋ Shift</td><td>按住 Shift 拖曳會<b>自動置中對齊</b>，三張圖才會完全疊在同一位置</td></tr>
+<tr><td class="n">重複播放＝永遠</td><td>沒設的話 GIF <b>只播一次就停住</b>，看起來像一張靜圖</td></tr>
+</tbody>
+</table>
+<div class="warn"><b>忘記設「永遠」是這個練習最常見的失敗。</b> 轉存時如果只顧著選 GIF 格式，很容易漏掉下面那個「重複播放」下拉選單。</div>
+</div>
+
+<div class="card">
+<h3 class="p">GIF 為什麼能做動畫？</h3>
+<table>
+<thead><tr><th style="width:150px">項目</th><th>GIF</th><th>MP4／MPEG</th></tr></thead>
+<tbody>
+<tr><td class="k">本質</td><td><b>多張圖片 ＋ 每張的延遲時間</b></td><td>視訊壓縮（有影格間預測）</td></tr>
+<tr><td class="k">色彩</td><td>256 索引色</td><td>全彩</td></tr>
+<tr><td class="k">檔案</td><td>小（適合網頁）</td><td>可大可小，看壓縮設定</td></tr>
+<tr><td class="k">透明</td><td>支援 1 位元透明</td><td>不支援（需用其他格式）</td></tr>
+</tbody>
+</table>
+<div class="tip"><b>GIF 的「動畫」其實是「翻頁」</b>——它不預測、不補間，就是一張一張照順序播。所以格數越多檔案越大，這也是為什麼 GIF 動畫通常很短、尺寸很小。</div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     附錄 A：數字總表
+     ============================================================ -->
+<section id="numbers">
+<div class="chap"><span class="no">附錄 A</span><h2>數字考點總表</h2><span class="sub">所有會考的數字，一次背完</span></div>
+
+<div class="card">
+<h3 class="a">編碼與字元</h3>
+<table>
+<thead><tr><th style="width:200px">項目</th><th>數字</th></tr></thead>
+<tbody>
+<tr><td class="k">ASCII</td><td><b>7</b> 位元、<b>128</b> 個符號；A=65（41h）、a=97、b=98、@=64、$=36、?=63</td></tr>
+<tr><td class="k">EBCDIC</td><td><b>8</b> 位元、<b>256</b> 個字元（IBM）</td></tr>
+<tr><td class="k">ISO8859</td><td><b>8</b> 位元；0～127 與 ASCII 相同</td></tr>
+<tr><td class="k">Big-5</td><td>每字 <b>2 bytes</b>；資策會 <b>1985</b> 年公布</td></tr>
+<tr><td class="k">GB 國標碼</td><td>每字 2 bytes；<b>1981/5/1</b> 實施；<b>7445</b> 字符＝<b>6763</b> 漢字＋<b>709</b> 符號</td></tr>
+<tr><td class="k">Unicode</td><td><b>16</b> 位元、<b>65,536</b> 個字；前 128 個與 ASCII 相同</td></tr>
+<tr><td class="n">知識來源</td><td>約 <b>80%</b> 來自閱讀</td></tr>
+<tr><td class="n">24×24 點矩陣</td><td>24×24÷8 ＝ <b>72 bytes</b></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3 class="a">色彩與影像</h3>
+<table>
+<thead><tr><th style="width:200px">項目</th><th>數字</th></tr></thead>
+<tbody>
+<tr><td class="k">RGB 每色光</td><td><b>256</b> 階（0～255）</td></tr>
+<tr><td class="k">24 位元全彩</td><td>2²⁴ ＝ <b>16,777,216</b> 色；每像素 <b>3 bytes</b></td></tr>
+<tr><td class="k">16 位元高彩</td><td>2¹⁶ ＝ <b>65,536</b> 色；R5＋G6＋B5</td></tr>
+<tr><td class="k">32 位元</td><td>2³² ＝ <b>4,294,967,296</b>；多 8 bits 透明通道</td></tr>
+<tr><td class="k">8 位元</td><td><b>256</b> 色／256 灰階</td></tr>
+<tr><td class="k">4 位元</td><td><b>16</b> 色</td></tr>
+<tr><td class="k">Indexed／GIF</td><td><b>256</b> 色上限</td></tr>
+<tr><td class="k">螢幕解析度門檻</td><td><b>72</b> ppi</td></tr>
+<tr><td class="k">列印照片門檻</td><td>至少 <b>300</b> ppi</td></tr>
+<tr><td class="k">灰階／RGB／CMYK 每像素</td><td><b>1／3／4</b> bytes</td></tr>
+<tr><td class="n">800×600 全彩</td><td>800×600×3 ＝ <b>1.44 MB</b></td></tr>
+<tr><td class="n">3 MB 顯卡全彩</td><td>3M÷3 ＝ 1M 像素 → 約 <b>1280×720</b></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3 class="a">聲音</h3>
+<table>
+<thead><tr><th style="width:120px">規格</th><th style="width:130px">取樣頻率</th><th style="width:110px">位元數</th><th>聲道</th></tr></thead>
+<tbody>
+<tr><td class="k">DV／DVD</td><td><b>48000</b> Hz</td><td>16 bits</td><td>Stereo／5.1 環場</td></tr>
+<tr><td class="k">CD</td><td><b>44100</b> Hz</td><td>16 bits</td><td>Stereo</td></tr>
+<tr><td class="k">收音機</td><td><b>22050</b> Hz</td><td>8 bits</td><td>Mono</td></tr>
+<tr><td class="k">電話</td><td><b>11025</b> Hz</td><td>8 bits</td><td>Mono</td></tr>
+</tbody>
+</table>
+<p class="small">其他數字：8 bits 取樣解析度 ＝ <b>2⁸＝256</b> 種強度；5.1 環場 ＝ <b>6</b> 個聲道；MP3 壓縮比 <b>10～12 倍</b>、約 WAV 的 <b>1/10</b>。</p>
+</div>
+
+<div class="card">
+<h3 class="a">視訊</h3>
+<table>
+<thead><tr><th style="width:120px">規格</th><th style="width:110px">掃描線</th><th style="width:100px">每秒影格</th><th style="width:70px">比例</th><th>地區</th></tr></thead>
+<tbody>
+<tr><td class="k">NTSC</td><td><b>525</b> 條水平</td><td><b>29.97</b></td><td>4:3</td><td>台灣、日本、美國、加拿大、墨西哥</td></tr>
+<tr><td class="k">PAL</td><td><b>625</b> 條水平</td><td><b>25</b></td><td>4:3</td><td>中國大陸、西歐、英國、南美洲、澳洲</td></tr>
+<tr><td class="k">SECAM</td><td><b>625</b> 條水平</td><td><b>25</b></td><td>4:3</td><td>法國、東歐、前蘇聯</td></tr>
+<tr><td class="k">1080i</td><td><b>1080</b> 條（交錯）</td><td>29.97／25</td><td>16:9</td><td>1920×1080</td></tr>
+<tr><td class="k">720p／1080p</td><td>720／1080 條（循序）</td><td>29.97／25</td><td>16:9</td><td>1280×720／1920×1080</td></tr>
+</tbody>
+</table>
+<p class="small">其他數字：視覺暫留 <b>1/16 秒</b>；MPEG-1 最佳解析度 <b>352×240</b>；MPEG-2 為 <b>720×480</b>。</p>
+</div>
+
+<div class="card">
+<h3 class="a">AR／VR</h3>
+<table>
+<thead><tr><th style="width:200px">項目</th><th>內容</th></tr></thead>
+<tbody>
+<tr><td class="k">VR 三要素</td><td>融入 Immersion、互動 Interaction、想像 Imagination（<b>3I</b>）</td></tr>
+<tr><td class="k">AR 三特點</td><td>結合虛實物件、<b>即時性</b>互動、<b>3 維空間</b>呈現</td></tr>
+<tr><td class="k">AR 四大應用</td><td>汽車（HUD）、工業製造、醫療、軍事</td></tr>
+<tr><td class="n">市場數字</td><td>2021 年行動式 AR 推動 <b>1080 億美元</b>市場</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ============================================================
+     附錄 B：易錯清單
+     ============================================================ -->
+<section id="errors">
+<div class="chap"><span class="no">附錄 B</span><h2>易錯清單</h2><span class="sub">考前掃這一頁</span></div>
+
+<div class="final">
+<h3>高頻陷阱（依章節排序）</h3>
+<ol>
+<li><b>WWW 是「超媒體」</b>，不是超文件。超文件是零件（文件內的文字當索引），超媒體是成品。</li>
+<li><b>ASCII 是 7 位元、128 個符號</b>；佔用空間才是 1 byte。教材兩處寫法不同，考「位元」答 7。</li>
+<li><b>Big-5 是 1985 年資策會公布</b>，GB 國標碼是 <b>1981/5/1</b> 實施。兩個年份不要互換。</li>
+<li><b>Unicode 是「定長式」編碼</b>：16 位元一次處理，不切高低位元組，所以不會像 Big-5 那樣衝碼。</li>
+<li><b>字音輸入＝注音，字根輸入＝倉頡／大易</b>。方向反了就是錯。</li>
+<li><b>字體 Typeface 是長相，字型 Font 是固定大小的集合</b>。講「新細明體」是字體，「12 點新細明體」才是字型。</li>
+<li><b>獨立色只有金、銀</b>。灰是無彩色，不是獨立色。</li>
+<li><b>混白只降彩度、不降明度；混黑兩者都降</b>。這是色相／明度／彩度唯一的辨識點。</li>
+<li><b>色域大小：Lab ＞ RGB ＞ CMYK</b>。能表現最廣顏色的是 Lab，不是 RGB。</li>
+<li><b>HSB 在 Photoshop 裡不是色彩模式，是校色方式</b>。教材特別強調這句。</li>
+<li><b>ppi 是「每英吋」不是「每平方英吋」</b>。教材寫「平方英寸」是錯的。</li>
+<li><b>ppm 是列印速度（每分鐘頁數），不是解析度</b>。看到 ppm 就排除「畫質」選項。</li>
+<li><b>高彩 16 bits 是 R5＋G6＋B5</b>，綠色多 1 位元，因為人眼對綠色最敏感。</li>
+<li><b>5.1 環場是 6 個聲道</b>，不是 5 個。.1 是重低音 LFE。</li>
+<li><b>MIDI 不是聲音檔</b>，是音符指令，所以檔案最小。問「何者不是數位化音訊」選它。</li>
+<li><b>MP3 屬於 MPEG-1 的 Layer 3</b>。MPEG 是組織／規格家族，不要跟 MP3、MP4 混為一談。</li>
+<li><b>台灣用 NTSC（525 條／29.97 fps）</b>，中國大陸用 PAL（625 條／25 fps）。</li>
+<li><b>PAL 與 SECAM 掃描線、影格完全相同</b>，差別在製作技術與播放方式。</li>
+<li><b>1080i 的 i 是交錯，1080p 的 p 是循序</b>。數字一樣，畫質不一樣。</li>
+<li><b>液晶螢幕用循序掃描</b>（Progressive），不是交錯。</li>
+<li><b>分鏡圖屬於「前置作業」</b>，剪輯屬於「後製作業」。</li>
+<li><b>物件式 VR＝繞著一個「物體」轉；環場式＝站在原地「轉頭」</b>。關鍵字是物體 vs 環境。</li>
+<li><b>HoloLens 是 AR 不是 VR</b>。它是透視式頭盔，戴上還看得到房間。</li>
+<li><b>AR 三特點不能漏「即時性互動」</b>。少了它就跟「貼一張圖」沒差別。</li>
+<li><b>魔術棒的容許度越高，選取範圍越大</b>（容忍的色差越大），不是越精準。</li>
+<li><b>仿製印章要先按 Alt 設取樣點</b>，否則會塗出空白或錯位內容。</li>
+<li><b>在空白圖層上用內容感知移動，必須勾「取樣全部圖層」</b>。</li>
+<li><b>重新取樣：「更平滑」配放大，「更銳利」配縮小</b>。方向反了就變糊。</li>
+<li><b>只在螢幕上看就取消「影像重新取樣」</b>，這樣改解析度不會改變像素與檔案大小。</li>
+<li><b>紙越粗糙解析度需求越低</b>：報紙 125～250 ppi，銅板紙 250～350 ppi。</li>
+<li><b>GIF 動畫一定要設「重複播放＝永遠」</b>，否則只播一次就停住。</li>
+<li><b>存檔要分兩個</b>：PSD 是工作檔（有圖層），JPG 是成品檔（能上傳）。</li>
+</ol>
+</div>
+</section>
+
+<!-- ============================================================
+     附錄 C：快速小卡
+     ============================================================ -->
+<section id="cards">
+<div class="chap"><span class="no">附錄 C</span><h2>快速重點小卡</h2><span class="sub">考前 10 分鐘，只掃這一頁</span></div>
+
+<div class="qkrow"><span class="qn"><b>A</b></span><span class="qd">概念與規格：只記數字與對應關係</span></div>
+<div class="qk">
+<div class="qkc"><div class="qt">編碼</div><div class="qb">ASCII <b>7 位元／128</b>；EBCDIC 8／256；Big-5 <b>2 bytes</b>；Unicode <b>16 位元／65536</b></div></div>
+<div class="qkc c2"><div class="qt">色彩三屬性</div><div class="qb">色相（名稱）、明度（明暗）、彩度（鮮濁）。混白降彩度，混黑降兩者</div></div>
+<div class="qkc c3"><div class="qt">色彩模式</div><div class="qb">RGB 加色（螢幕）、CMYK 減色（印刷）、Lab <b>色域最廣</b>、Indexed 256 色</div></div>
+<div class="qkc c4"><div class="qt">解析度三 P</div><div class="qb"><b>ppi</b> 影像、<b>dpi</b> 輸出、<b>ppm</b> 列印速度</div></div>
+<div class="qkc"><div class="qt">色彩深度</div><div class="qb">8→256；16 高彩→65536；<b>24 全彩→1677 萬</b>；32→加 Alpha</div></div>
+<div class="qkc c2"><div class="qt">廣播標準</div><div class="qb">NTSC <b>525／29.97</b>；PAL·SECAM <b>625／25</b>；HDTV 1080／16:9</div></div>
+<div class="qkc c3"><div class="qt">聲音四級</div><div class="qb">DVD <b>48000/16</b>、CD <b>44100/16</b>、收音機 22050/8、電話 11025/8</div></div>
+<div class="qkc c4"><div class="qt">壓縮</div><div class="qb"><b>破壞性</b>：JPEG、MP3；<b>非破壞性</b>：TIFF（LZW）、PNG</div></div>
+</div>
+
+<div class="qkrow"><span class="qn"><b>B</b></span><span class="qd">辨析：一句話分兩邊</span></div>
+<div class="qk">
+<div class="qkc"><div class="qt">點陣 vs 向量</div><div class="qb">點陣＝像素、放大鋸齒；向量＝數學、放大不失真、<b>檔案只看複雜度</b></div></div>
+<div class="qkc c2"><div class="qt">物件式 vs 環場式 VR</div><div class="qb">繞著<b>物體</b>轉 vs 站在原地<b>轉頭</b>看環境</div></div>
+<div class="qkc c3"><div class="qt">VR vs AR</div><div class="qb">VR＝換一個世界；AR＝在同一個世界<b>加東西</b></div></div>
+<div class="qkc c4"><div class="qt">視訊 vs 動畫</div><div class="qb">視訊是<b>拍</b>連續畫面；動畫是<b>做</b>連續畫面（單格製作）</div></div>
+<div class="qkc"><div class="qt">點陣字 vs 描邊字</div><div class="qb">點陣＝顯示快、放大鋸齒；描邊＝數學式、任意縮放</div></div>
+<div class="qkc c2"><div class="qt">超媒體 vs 超文件</div><div class="qb">超媒體＝有連結架構的整體；超文件＝其中的文件，文字當索引</div></div>
+<div class="qkc c3"><div class="qt">取樣頻率 vs 解析度</div><div class="qb">頻率管<b>橫軸多密</b>；解析度管<b>縱軸多細</b></div></div>
+<div class="qkc c4"><div class="qt">4 種混合模式</div><div class="qb">暗→亮：變暗 ＜ 色彩增值 ＜ 覆蓋 ＜ 加亮顏色</div></div>
+</div>
+
+<div class="qkrow"><span class="qn"><b>C</b></span><span class="qd">Photoshop 實作：記順序與關鍵設定</span></div>
+<div class="qk">
+<div class="qkc"><div class="qt">選取三家族</div><div class="qb">M 框選、L 套索、W 快速選取／魔術棒</div></div>
+<div class="qkc c2"><div class="qt">修補三工具</div><div class="qb">污點修復筆刷（小瑕疵）、仿製印章（<b>Alt 取樣</b>）、修補工具</div></div>
+<div class="qkc c3"><div class="qt">消除雜物</div><div class="qb">圈選 → 編輯 → 填滿 → <b>內容感知</b>；不乾淨就再執行一次</div></div>
+<div class="qkc c4"><div class="qt">換構圖</div><div class="qb">內容感知移動：模式 移動／延伸、適應 中度、<b>取樣全部圖層</b></div></div>
+<div class="qkc"><div class="qt">重新取樣</div><div class="qb">放大配<b>更平滑</b>、縮小配<b>更銳利</b>；不確定選「自動」</div></div>
+<div class="qkc c2"><div class="qt">輸出解析度</div><div class="qb">螢幕 72–100、噴墨 240–360、雷射 266–300、報紙 125–250</div></div>
+<div class="qkc c3"><div class="qt">去背五步</div><div class="qb">鋼筆描路徑 → 修錨點 → 存路徑 → 轉選取 → <b>選取並遮住</b> → 遮色片</div></div>
+<div class="qkc c4"><div class="qt">GIF 八步</div><div class="qb">同尺寸圖 → Shift 疊圖層 → 時間軸 → 設秒數 → 轉存網頁用 → <b>永遠</b></div></div>
+</div>
+
+<div class="final">
+<h3>三個最容易在考場失分的「一句話」</h3>
+<ol>
+<li><b>「WWW 是由超文件組成的超媒體」</b>——問 WWW 是什麼，答超媒體。</li>
+<li><b>「HoloLens 是 AR」</b>——透視式頭盔，不是 VR。</li>
+<li><b>「GIF 要設重複播放＝永遠」</b>——不然只播一次。</li>
+</ol>
+</div>
+</section>
+
+</div>
+
+<!-- ============================================================
+     頁尾腳本：自動把每個 table 包進 .tw、每個 svg.svgbox 包進 .svgwrap
+     ⚠ 不要刪，也不要手動包；新增表格／SVG 會自動接管
+     ============================================================ -->
+<script>
+(function(){
+  document.querySelectorAll('table').forEach(function(t){
+    if(t.parentElement && t.parentElement.classList.contains('tw'))return;
+    var head=t.querySelector('thead tr');
+    var cols=head?head.children.length:0;
+    if(cols>=4)t.classList.add('wide');
+    var w=document.createElement('div');w.className='tw';
+    t.parentNode.insertBefore(w,t);w.appendChild(t);
+  });
+  document.querySelectorAll('svg.svgbox').forEach(function(s){
+    if(s.parentElement && s.parentElement.classList.contains('svgwrap'))return;
+    var w=document.createElement('div');w.className='svgwrap';
+    s.parentNode.insertBefore(w,s);w.appendChild(s);
+  });
+})();
+</script>
+</body>
+</html>
